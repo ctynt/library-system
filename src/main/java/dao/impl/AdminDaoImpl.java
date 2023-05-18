@@ -1,12 +1,15 @@
 package dao.impl;
 
 import dao.AdminDao;
+<<<<<<< HEAD
 import domain.Admin;
 import utils.JDBCUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+=======
+>>>>>>> d1facc06bd46a5154b97cfb5e9e5124dbf67cb9d
 
 /**
  * @Author ctynt
@@ -15,6 +18,7 @@ import java.sql.ResultSet;
  */
 
 public class AdminDaoImpl implements AdminDao {
+<<<<<<< HEAD
     private Connection conn;
     private PreparedStatement ps;
     private ResultSet resultSet;
@@ -50,3 +54,6 @@ public class AdminDaoImpl implements AdminDao {
     }
 
 }
+=======
+}
+>>>>>>> d1facc06bd46a5154b97cfb5e9e5124dbf67cb9d

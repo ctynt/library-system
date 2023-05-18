@@ -1,6 +1,7 @@
 package dao.impl;
 
 import dao.ReaderDao;
+<<<<<<< HEAD
 import domain.Reader;
 import utils.JDBCUtil;
 import utils.StuTableModel;
@@ -8,6 +9,8 @@ import utils.StuTableModel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+=======
+>>>>>>> d1facc06bd46a5154b97cfb5e9e5124dbf67cb9d
 
 /**
  * @Author ctynt
@@ -15,6 +18,7 @@ import java.sql.ResultSet;
  * @Description
  */
 
+<<<<<<< HEAD
 public class ReaderDaoImpl extends StuTableModel implements ReaderDao {
     private Connection conn;
     private PreparedStatement ps;
@@ -51,4 +55,7 @@ public class ReaderDaoImpl extends StuTableModel implements ReaderDao {
         }
         return message;
     }
+=======
+public class ReaderDaoImpl implements ReaderDao {
+>>>>>>> d1facc06bd46a5154b97cfb5e9e5124dbf67cb9d
 }
