@@ -1,5 +1,7 @@
 package dao;
 
+import domain.Reader;
+
 /**
  * @Author ctynt
  * @Date 2023/5/18
@@ -7,4 +9,5 @@ package dao;
  */
 
 public interface ReaderDao {
+    boolean checkLogin(Reader user);
 }

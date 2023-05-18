@@ -13,6 +13,9 @@ public class Reader {
     private String readerPassword;
     private int readerLend;
 
+    public Reader(int readerId, String readerPassword) {
+    }
+
     public int getReaderId() {
         return readerId;
     }
