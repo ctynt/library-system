@@ -1,4 +1,4 @@
-package dao;
+package factory;
 
 /**
  * @Author ctynt
@@ -6,5 +6,5 @@ package dao;
  * @Description
  */
 
-public class Admin {
+public class factory {
 }

@@ -6,5 +6,5 @@ package dao;
  * @Description
  */
 
-public class Book {
+public interface ReaderDao {
 }
