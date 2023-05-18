@@ -1,4 +1,4 @@
-package model;
+package domain;
 
 /**
  * @Author ctynt

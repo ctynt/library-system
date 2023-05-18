@@ -14,7 +14,7 @@ class JDBCUtilTest {
     @Test
     public void dbTest() {
         JDBCUtil dbConnection = new JDBCUtil();
-        dbConnection.setupConn();
+        dbConnection.getConnection();
     }
 
 }
