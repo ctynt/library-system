@@ -1,3 +1,4 @@
+
 package dao.impl;
 
 import dao.ReaderDao;
@@ -28,7 +29,7 @@ public class ReaderDaoImpl extends StuTableModel implements ReaderDao {
         Connection conn = null;
         try {
             // 取得数据库连接
-            conn = db.getConnection();
+            conn = JDBCUtil.getConnection();
             // 创建数据表的查询SQL语句
             String sql = "select * from reader where readerId = ? and readerPassword = ? ";
             // 创建数据集
@@ -40,8 +41,9 @@ public class ReaderDaoImpl extends StuTableModel implements ReaderDao {
             queryPs.setString(2, user.getReaderPassword());
             // 执行查询操作
             rs = queryPs.executeQuery();
-            if (rs.next())
+            if (rs.next()) {
                 message = true;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

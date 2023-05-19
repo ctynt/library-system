@@ -52,4 +52,5 @@ public class Book {
     public void setState(String state) {
         this.state = state;
     }
+
 }

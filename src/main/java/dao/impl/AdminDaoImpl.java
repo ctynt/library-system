@@ -1,3 +1,4 @@
+
 package dao.impl;
 
 import dao.AdminDao;
@@ -26,7 +27,7 @@ public class AdminDaoImpl implements AdminDao {
         boolean message = false;
         try {
             // 取得数据库连接
-            conn = db.getConnection();
+            conn = JDBCUtil.getConnection();
             // 创建数据表的查询SQL语句
             String sql = "select * from admin where adminId = ? and adminPassword = ? ";
 
@@ -52,3 +53,6 @@ public class AdminDaoImpl implements AdminDao {
     }
 
 }
+
+
+
