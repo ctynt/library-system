@@ -27,7 +27,7 @@ public class BookDaoImpl implements BookDao {
             // 取得数据库连接
             conn = JDBCUtil.getConnection();
             // 创建数据表的查询SQL语句
-            String sql = "insert into book"
+            String sql = "insert into book values"
                     // 编号、书名、作者、分类、借阅状态
 
                     /*
@@ -104,20 +104,20 @@ public class BookDaoImpl implements BookDao {
             // 取得数据库连接
             conn = JDBCUtil.getConnection();
             // 创建数据表的查询SQL语句
-            String sql="update book "
-                    + " bookName = ?, Author = ?, category = ?"
+            String sql="UPDATE book SET"
+                    + " bookName = ?, author = ?, category = ?"
                     + ",state = ? "
                     // 参数用?表示，相当于占位符
-                    + "where bookId = ?";
+                    + "WHERE bookId = ?";
             // 创建查询的PreparedStatement类
             ps = conn.prepareStatement(sql);
             // 设置查询类的5个参数
-            ps.setInt(1, book.getBookId());
-            ps.setString(2, book.getBookName());
-            ps.setString(3, book.getAuthor());
-            ps.setString(4, book.getCategory());
-            ps.setString(5, book.getState());
-            // 执行查询操作
+            ps.setInt(5, book.getBookId());
+            ps.setString(1, book.getBookName());
+            ps.setString(2, book.getAuthor());
+            ps.setString(3, book.getCategory());
+            ps.setString(4, book.getState());
+
             result = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
