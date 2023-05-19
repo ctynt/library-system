@@ -114,7 +114,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 				}
 
 			}  else {
-				Admin user = new Admin(parseInt(id), password);
+				Admin user = new Admin();
 				message = adminDAO.checkLogin(user);
 				if(message) {
 					JOptionPane.showMessageDialog(null, "登录成功！");
