@@ -14,6 +14,8 @@ public class Reader {
     private int readerLend;
 
     public Reader(int readerId, String readerPassword) {
+        this.readerId = readerId;
+        this.readerPassword = readerPassword;
     }
 
     public int getReaderId() {
