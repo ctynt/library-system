@@ -1,7 +1,6 @@
 package dao.impl;
 
 import dao.ReaderDao;
-import domain.Book;
 import domain.Reader;
 import utils.JDBCUtil;
 import utils.StuTableModel;
@@ -58,14 +57,17 @@ public class ReaderDaoImpl extends StuTableModel implements ReaderDao {
 
     /**
      * 添加读者信息
+     *
+     * @return
      */
-
-    public void addReader(Reader user) {
+@Override
+    public int addReader(Reader user) {
+    int result = 0;
         try {
             // 取得数据库连接
             conn = JDBCUtil.getConnection();
             // 创建数据表的查询SQL语句
-            String sql = "insert into reader"
+            String sql = "insert into reader values "
                     // 读者编号，读者姓名，借书限额，用户密码，已借读书编号
 
                     /*
@@ -82,7 +84,7 @@ public class ReaderDaoImpl extends StuTableModel implements ReaderDao {
             ps.setString(4, user.getReaderPassword());
             ps.setInt(5, user.getReaderLend());
             // 执行查询操作
-            resultSet = ps.executeQuery();
+            result = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -91,7 +93,8 @@ public class ReaderDaoImpl extends StuTableModel implements ReaderDao {
             } catch (Exception e) {
             }
         }
-    }
+    return result;
+}
 
     /**
      * 删除读者信息

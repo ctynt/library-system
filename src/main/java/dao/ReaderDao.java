@@ -10,4 +10,6 @@ import domain.Reader;
 
 public interface ReaderDao {
     boolean checkLogin(Reader user);
+
+    int addReader(Reader reader);
 }

@@ -1,5 +1,6 @@
 package dao.impl;
 
+import dao.ReaderDao;
 import domain.Reader;
 import org.junit.jupiter.api.Test;
 
@@ -12,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @Description
  */
 class ReaderDaoImplTest {
+ReaderDao readerDao = new ReaderDaoImpl();
 
     @Test
     void addReader() {
@@ -21,6 +23,9 @@ class ReaderDaoImplTest {
         reader.setReaderLimit(2);
         reader.setReaderLend(1);
         reader.setReaderPassword("888");
+
+        int i = readerDao.addReader(reader);
+        assertEquals(1,i);
 
     }
 }
