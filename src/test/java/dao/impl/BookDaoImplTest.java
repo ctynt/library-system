@@ -21,5 +21,6 @@ class BookDaoImplTest {
         book.setAuthor("二狗");
         book.setCategory("农业");
         book.setState("在馆");
+
     }
 }

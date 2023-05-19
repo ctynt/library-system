@@ -30,10 +30,10 @@ public interface BookDao {
      * 增加图书信息
      */
 
-    void addBook(Book book);
+    int addBook(Book book);
 
-    void changeBook(Book book);
+    int changeBook(Book book);
 
-    void delBook(int bookId);
+    int delBook(int bookId);
     }
 

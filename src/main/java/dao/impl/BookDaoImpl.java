@@ -21,7 +21,8 @@ public class BookDaoImpl implements BookDao {
     private ResultSet resultSet;
     private JDBCUtil db = new JDBCUtil();
     @Override
-    public void addBook(Book book){
+    public int addBook(Book book){
+        int result = 0;
         try {
             // 取得数据库连接
             conn = JDBCUtil.getConnection();
@@ -44,7 +45,8 @@ public class BookDaoImpl implements BookDao {
             ps.setString(4, book.getCategory());
             ps.setString(5, book.getState());
             // 执行查询操作
-            resultSet = ps.executeQuery();
+            result = ps.executeUpdate();
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -53,6 +55,7 @@ public class BookDaoImpl implements BookDao {
             } catch (Exception e) {
             }
         }
+       return result;
 
     }
 
@@ -61,8 +64,8 @@ public class BookDaoImpl implements BookDao {
      * 删除图书信息
      */
     @Override
-    public void delBook(int bookId) {
-
+    public int delBook(int bookId) {
+        int result = 0;
         try {
             // 取得数据库连接
             conn = JDBCUtil.getConnection();
@@ -77,7 +80,7 @@ public class BookDaoImpl implements BookDao {
             // 设置查询类的1个参数
             ps.setInt(1, bookId);
             // 执行查询操作
-            resultSet = ps.executeQuery();
+            result = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -86,6 +89,7 @@ public class BookDaoImpl implements BookDao {
             } catch (Exception e) {
             }
         }
+        return result;
 
     }
 
@@ -94,8 +98,8 @@ public class BookDaoImpl implements BookDao {
      * 更新图书信息
      */
     @Override
-    public void changeBook(Book book){
-
+    public int changeBook(Book book){
+        int result = 0;
         try {
             // 取得数据库连接
             conn = JDBCUtil.getConnection();
@@ -114,7 +118,7 @@ public class BookDaoImpl implements BookDao {
             ps.setString(4, book.getCategory());
             ps.setString(5, book.getState());
             // 执行查询操作
-            resultSet = ps.executeQuery();
+            result = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -123,6 +127,7 @@ public class BookDaoImpl implements BookDao {
             } catch (Exception e) {
             }
         }
+        return result;
 
     }
 }
