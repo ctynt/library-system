@@ -18,6 +18,10 @@ public class Reader {
         this.readerPassword = readerPassword;
     }
 
+    public Reader() {
+
+    }
+
     public int getReaderId() {
         return readerId;
     }

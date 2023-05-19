@@ -103,7 +103,10 @@ public class LoginFrame extends JFrame implements ActionListener {
 				if(message) {
 					JOptionPane.showMessageDialog(null, "登录成功！");
 					this.dispose();
+					new ReaderPage();
+
 					new HomeFrame();
+
 				}
 				else{
 					JOptionPane.showMessageDialog(null, "登录失败！");
@@ -111,12 +114,13 @@ public class LoginFrame extends JFrame implements ActionListener {
 				}
 
 			}  else {
-				Admin user = new Admin(parseInt(id), password);
+				Admin user = new Admin();
 				message = adminDAO.checkLogin(user);
 				if(message) {
 					JOptionPane.showMessageDialog(null, "登录成功！");
 					this.dispose();
 					new HomeFrame();
+
 				}
 				else{
 					JOptionPane.showMessageDialog(null, "登录失败！");
