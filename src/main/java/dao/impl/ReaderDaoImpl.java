@@ -1,17 +1,4 @@
-<<<<<<< HEAD
-package dao.impl;
 
-import dao.ReaderDao;
-
-/**
- * @Author ctynt
- * @Date 2023/5/18
- * @Description
- */
-
-public class ReaderDaoImpl implements ReaderDao {
-}
-=======
 package dao.impl;
 
 import dao.ReaderDao;
@@ -23,12 +10,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-
 /**
  * @Author ctynt
  * @Date 2023/5/18
  * @Description
  */
+
 
 public class ReaderDaoImpl extends StuTableModel implements ReaderDao {
     private Connection conn;
@@ -42,7 +29,7 @@ public class ReaderDaoImpl extends StuTableModel implements ReaderDao {
         Connection conn = null;
         try {
             // 取得数据库连接
-            conn = db.getConnection();
+            conn = JDBCUtil.getConnection();
             // 创建数据表的查询SQL语句
             String sql = "select * from reader where readerId = ? and readerPassword = ? ";
             // 创建数据集
@@ -67,4 +54,3 @@ public class ReaderDaoImpl extends StuTableModel implements ReaderDao {
         return message;
     }}
 
->>>>>>> 483ea73253c139aa7cf197e4b4ea48c9d0f777e3
