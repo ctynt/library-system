@@ -1,3 +1,5 @@
+
+
 package frame;
 
 import dao.AdminDao;
@@ -101,7 +103,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 				if(message) {
 					JOptionPane.showMessageDialog(null, "登录成功！");
 					this.dispose();
-                    new MainFrame(0, user.getReaderId());
+                    new ReaderMainFrame(0, user.getReaderId());
 				}
 				else{
 					JOptionPane.showMessageDialog(null, "登录失败！");
@@ -114,7 +116,9 @@ public class LoginFrame extends JFrame implements ActionListener {
 				if(message) {
 					JOptionPane.showMessageDialog(null, "登录成功！");
 					this.dispose();
-                    new MainFrame(2, user.getAdminId());
+                    new ReaderMainFrame(2, user.getAdminId());
+
+
 				}
 				else{
 					JOptionPane.showMessageDialog(null, "登录失败！");
@@ -135,3 +139,4 @@ public class LoginFrame extends JFrame implements ActionListener {
 
 	}
 }
+

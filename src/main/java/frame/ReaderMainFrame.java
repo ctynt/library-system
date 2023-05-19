@@ -6,9 +6,9 @@ package frame;
  * @Description
  */
 
-public class MainFrame {
+public class ReaderMainFrame {
 
-    public MainFrame(int state, int Id) {
+    public ReaderMainFrame(int state, int Id) {
 
     }
 }
