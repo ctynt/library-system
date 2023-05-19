@@ -7,8 +7,9 @@ package domain;
  */
 
 public class Admin {
+    public static String adminName;
     private int adminId;
-    private String adminName;
+//    private String adminName;
     private String adminPassword;
 
     public Admin(int adminId, String adminPassword) {
@@ -29,7 +30,7 @@ public class Admin {
     }
 
     public void setAdminName(String adminName) {
-        this.adminName = adminName;
+        Admin.adminName = adminName;
     }
 
     public String getAdminPassword() {
