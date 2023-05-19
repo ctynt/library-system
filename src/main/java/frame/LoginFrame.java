@@ -101,7 +101,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 				if(message) {
 					JOptionPane.showMessageDialog(null, "登录成功！");
 					this.dispose();
-//					new MainFrame(0, user.getReaderId());
+                    new MainFrame(0, user.getReaderId());
 				}
 				else{
 					JOptionPane.showMessageDialog(null, "登录失败！");
@@ -114,7 +114,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 				if(message) {
 					JOptionPane.showMessageDialog(null, "登录成功！");
 					this.dispose();
-//					new MainFrame(2, user.getName());
+                    new MainFrame(2, user.getAdminId());
 				}
 				else{
 					JOptionPane.showMessageDialog(null, "登录失败！");

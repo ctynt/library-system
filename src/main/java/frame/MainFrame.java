@@ -8,4 +8,7 @@ package frame;
 
 public class MainFrame {
 
+    public MainFrame(int state, int Id) {
+
+    }
 }
