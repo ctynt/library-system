@@ -13,6 +13,11 @@ public class Reader {
     private String readerPassword;
     private int readerLend;
 
+    public Reader(int readerId, String readerPassword) {
+        this.readerId = readerId;
+        this.readerPassword = readerPassword;
+    }
+
     public int getReaderId() {
         return readerId;
     }
