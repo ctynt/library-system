@@ -13,17 +13,37 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 
 class BookDaoImplTest {
-BookDao bookDao= new BookDaoImpl();
+
+    BookDao bookDao=new BookDaoImpl();
+//@Test
+//    void addBook() {
+//        Book book =new Book();
+//        book.setBookId(6);
+//        book.setBookName("母猪的产后护理");
+//        book.setAuthor("二狗");
+//        book.setCategory("农业");
+//        book.setState("在馆");
+//
+//        int i = bookDao.addBook(book);
+//        assertEquals(1,i);
+//    }
+
     @Test
-    void addBook() {
+    void delBook() {
+        int i = bookDao.delBook(6);
+//        assertEquals(1,i);
+
+    }
+
+    @Test
+    void changeBook(){
         Book book =new Book();
         book.setBookId(6);
         book.setBookName("母猪的产后护理");
-        book.setAuthor("二狗");
+        book.setAuthor("王二狗");
         book.setCategory("农业");
-        book.setState("在馆");
+        book.setState("借阅");
+        int i = bookDao.changeBook(book);
 
-        int i = bookDao.addBook(book);
-        assertEquals(1,i);
     }
 }

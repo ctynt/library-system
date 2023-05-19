@@ -60,9 +60,9 @@ public class ReaderDaoImpl extends StuTableModel implements ReaderDao {
      *
      * @return
      */
-@Override
+    @Override
     public int addReader(Reader user) {
-    int result = 0;
+        int result = 0;
         try {
             // 取得数据库连接
             conn = JDBCUtil.getConnection();
@@ -93,20 +93,20 @@ public class ReaderDaoImpl extends StuTableModel implements ReaderDao {
             } catch (Exception e) {
             }
         }
-    return result;
-}
+        return result;
+    }
 
     /**
      * 删除读者信息
      */
-    public void delReader(int readerId) {
-
+    @Override
+    public int delReader(int readerId) {
+        int result = 0;
         try {
             // 取得数据库连接
             conn = JDBCUtil.getConnection();
             // 创建数据表的查询SQL语句
-            String sql = "" +
-                    "DELETE FROM reader " +
+            String sql = "" + "DELETE FROM reader " +
                     // 参数用?表示，相当于占位符
                     "WHERE readerId = ?";
 
@@ -115,7 +115,7 @@ public class ReaderDaoImpl extends StuTableModel implements ReaderDao {
             // 设置查询类的1个参数
             ps.setInt(1, readerId);
             // 执行查询操作
-            resultSet = ps.executeQuery();
+            result = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -124,33 +124,32 @@ public class ReaderDaoImpl extends StuTableModel implements ReaderDao {
             } catch (Exception e) {
             }
         }
-
+        return result;
     }
 
     /**
      * 更新读者信息
      */
-    public void changeReader(Reader user) {
-
+    @Override
+    public int changeReader(Reader user) {
+        int result = 0;
         try {
             // 取得数据库连接
             conn = JDBCUtil.getConnection();
             // 创建数据表的查询SQL语句
-            String sql = "update reader "
-                    + " readerName = ?, readerLimit= ?,readerPassword = ?"
-                    + ",readerLend = ? "
+            String sql = "update reader set" + " readerName = ?, readerLimit= ?,readerPassword = ?" + ",readerLend = ? "
                     // 参数用?表示，相当于占位符
                     + "where readerId = ?";
             // 创建查询的PreparedStatement类
             ps = conn.prepareStatement(sql);
             // 设置查询类的5个参数
-            ps.setInt(1, user.getReaderId());
-            ps.setString(2, user.getReaderName());
-            ps.setInt(3, user.getReaderLimit());
-            ps.setString(4, user.getReaderPassword());
-            ps.setInt(5, user.getReaderLend());
+            ps.setInt(5, user.getReaderId());
+            ps.setString(1, user.getReaderName());
+            ps.setInt(2, user.getReaderLimit());
+            ps.setString(3, user.getReaderPassword());
+            ps.setInt(4, user.getReaderLend());
             // 执行查询操作
-            resultSet = ps.executeQuery();
+            result= ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -159,7 +158,7 @@ public class ReaderDaoImpl extends StuTableModel implements ReaderDao {
             } catch (Exception e) {
             }
         }
-
+        return result;
     }
 }
 

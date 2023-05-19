@@ -22,7 +22,9 @@ public class BookDaoImpl implements BookDao {
     private JDBCUtil db = new JDBCUtil();
 
     @Override
-    public int addBook(Book book) {
+
+    public int addBook(Book book){
+
         int result = 0;
         try {
             // 取得数据库连接
@@ -46,7 +48,8 @@ public class BookDaoImpl implements BookDao {
             ps.setString(4, book.getCategory());
             ps.setString(5, book.getState());
             // 执行查询操作
-            resultSet = ps.executeQuery();
+            result = ps.executeUpdate();
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -55,8 +58,7 @@ public class BookDaoImpl implements BookDao {
             } catch (Exception e) {
             }
         }
-
-        return 0;
+       return result;
     }
 
 
@@ -64,8 +66,8 @@ public class BookDaoImpl implements BookDao {
      * 删除图书信息
      */
     @Override
-    public void delBook(int bookId) {
-
+    public int delBook(int bookId) {
+        int result = 0;
         try {
             // 取得数据库连接
             conn = JDBCUtil.getConnection();
@@ -80,7 +82,7 @@ public class BookDaoImpl implements BookDao {
             // 设置查询类的1个参数
             ps.setInt(1, bookId);
             // 执行查询操作
-            resultSet = ps.executeQuery();
+            result = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -89,6 +91,7 @@ public class BookDaoImpl implements BookDao {
             } catch (Exception e) {
             }
         }
+        return result;
 
     }
 
@@ -97,27 +100,29 @@ public class BookDaoImpl implements BookDao {
      * 更新图书信息
      */
     @Override
-    public void changeBook(Book book) {
+
+    public int changeBook(Book book){
+        int result = 0;
 
         try {
             // 取得数据库连接
             conn = JDBCUtil.getConnection();
             // 创建数据表的查询SQL语句
-            String sql = "update book "
-                    + " bookName = ?, Author = ?, category = ?"
+            String sql="UPDATE book SET"
+                    + " bookName = ?, author = ?, category = ?"
                     + ",state = ? "
                     // 参数用?表示，相当于占位符
-                    + "where bookId = ?";
+                    + "WHERE bookId = ?";
             // 创建查询的PreparedStatement类
             ps = conn.prepareStatement(sql);
             // 设置查询类的5个参数
-            ps.setInt(1, book.getBookId());
-            ps.setString(2, book.getBookName());
-            ps.setString(3, book.getAuthor());
-            ps.setString(4, book.getCategory());
-            ps.setString(5, book.getState());
-            // 执行查询操作
-            resultSet = ps.executeQuery();
+            ps.setInt(5, book.getBookId());
+            ps.setString(1, book.getBookName());
+            ps.setString(2, book.getAuthor());
+            ps.setString(3, book.getCategory());
+            ps.setString(4, book.getState());
+
+            result = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -126,6 +131,7 @@ public class BookDaoImpl implements BookDao {
             } catch (Exception e) {
             }
         }
+        return result;
 
     }
 }

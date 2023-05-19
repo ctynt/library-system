@@ -1,6 +1,7 @@
 package dao.impl;
 
 import dao.ReaderDao;
+import domain.Book;
 import domain.Reader;
 import org.junit.jupiter.api.Test;
 
@@ -26,6 +27,24 @@ ReaderDao readerDao = new ReaderDaoImpl();
 
         int i = readerDao.addReader(reader);
         assertEquals(1,i);
+
+    }
+
+    @Test
+    void delReader() {
+        int i = readerDao.delReader(6);
+//        assertEquals(1,i);
+
+    }
+    @Test
+    void changeReader(){
+        Reader reader = new Reader();
+        reader.setReaderId(6);
+        reader.setReaderName("血板");
+        reader.setReaderLimit(2);
+        reader.setReaderLend(1);
+        reader.setReaderPassword("888");
+        int i = readerDao.changeReader(reader);
 
     }
 }
