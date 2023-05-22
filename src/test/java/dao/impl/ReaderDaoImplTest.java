@@ -40,11 +40,10 @@ ReaderDao readerDao = new ReaderDaoImpl();
     void changeReader(){
         Reader reader = new Reader();
         reader.setReaderId(6);
-        reader.setReaderName("血板");
+        reader.setReaderName("血小板");
         reader.setReaderLimit(2);
         reader.setReaderLend(1);
-        reader.setReaderPassword("888");
+        reader.setReaderPassword("777");
         int i = readerDao.changeReader(reader);
-
     }
 }

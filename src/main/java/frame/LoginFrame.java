@@ -104,7 +104,6 @@ public class LoginFrame extends JFrame implements ActionListener {
 					JOptionPane.showMessageDialog(null, "登录成功！");
 					this.dispose();
 					new ReaderPage();
-
 					new HomeFrame();
 
 				}
