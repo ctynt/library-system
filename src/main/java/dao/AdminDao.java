@@ -11,9 +11,9 @@ import domain.Book;
 
 public interface AdminDao {
     boolean checkLogin(Admin user);
-    void addAdmin(Admin admin);
+    int addAdmin(Admin admin);
 
-    void changeAdmin(Admin admin);
+    int changeAdmin(Admin admin);
 
-    void delAdmin(int AdminId);
+    int delAdmin(int AdminId);
 }
