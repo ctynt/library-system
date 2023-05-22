@@ -20,14 +20,17 @@ public class BookDaoImpl implements BookDao {
     private PreparedStatement ps;
     private ResultSet resultSet;
     private JDBCUtil db = new JDBCUtil();
+
     @Override
+
     public int addBook(Book book){
+
         int result = 0;
         try {
             // 取得数据库连接
             conn = JDBCUtil.getConnection();
             // 创建数据表的查询SQL语句
-            String sql = "insert into book values"
+            String sql = "insert into book values "
                     // 编号、书名、作者、分类、借阅状态
 
                     /*
@@ -56,7 +59,6 @@ public class BookDaoImpl implements BookDao {
             }
         }
        return result;
-
     }
 
 
@@ -71,7 +73,7 @@ public class BookDaoImpl implements BookDao {
             conn = JDBCUtil.getConnection();
             // 创建数据表的查询SQL语句
             String sql = "" +
-                    "DELETE FROM book "+
+                    "DELETE FROM book " +
                     // 参数用?表示，相当于占位符
                     "WHERE bookId = ?";
 
@@ -98,8 +100,10 @@ public class BookDaoImpl implements BookDao {
      * 更新图书信息
      */
     @Override
+
     public int changeBook(Book book){
         int result = 0;
+
         try {
             // 取得数据库连接
             conn = JDBCUtil.getConnection();
