@@ -21,7 +21,6 @@ public class AdminLendFrame extends JFrame {
     // 内部类中的变量
 
     JLabel[] label;
-    //	JLabel idLabel,titleLabel,authorLabel,typeLable,pressLable,storageTimeLabel,stateLabel,campuNameLabel;
     JComboBox typeBox,pressBox;
     JCheckBox campuNameCheck1,campuNameCheck2;
     JRadioButton stateRadio1,stateRadio2;
@@ -29,16 +28,10 @@ public class AdminLendFrame extends JFrame {
     CheckboxGroup cg;
     ButtonGroup bg;
 
-//    JLabel year,mon,day;
-//    JComboBox yearText,monText,dayText;
-
     JPanel panel,panelSouth;
     JButton button;
     String[] str=null;
     JPanel[] panelLeft,panelRight;
-
-    private String database = "library-system";
-    private String tablesName;
 
     public AdminLendFrame(String title){
 //		tablesName = tableName;
@@ -63,13 +56,6 @@ public class AdminLendFrame extends JFrame {
         Vector rowData = null;
         Vector columnNames = null;
 
-//        if(title.equals("图书入库管理")){
-//            rowData = PutinStorage.getRows("books");
-//            columnNames = PutinStorage.getHead("books");
-//        }else{
-//            rowData = PutinStorage.getRows("lendInfo");
-//            columnNames = PutinStorage.getHead("lendInfo");
-//        }
 
         // 新建表格
         tableModel = new DefaultTableModel(rowData,columnNames);

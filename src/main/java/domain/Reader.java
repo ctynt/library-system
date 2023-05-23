@@ -19,7 +19,14 @@ public class Reader {
     }
 
     public Reader() {
+    }
 
+    public Reader(int readerId, String readerName, int readerLimit, String readerPassword, int readerLend) {
+        this.readerId = readerId;
+        this.readerName = readerName;
+        this.readerLimit = readerLimit;
+        this.readerPassword = readerPassword;
+        this.readerLend = readerLend;
     }
 
     public int getReaderId() {
@@ -61,4 +68,5 @@ public class Reader {
     public void setReaderLend(int readerLend) {
         this.readerLend = readerLend;
     }
+
 }

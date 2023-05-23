@@ -146,9 +146,9 @@ public class PutinStorage {
     // 得到数据库表数据
     public static Vector getRows(String tableName){
 
-        String sql_url = "jdbc:mysql://localhost:3306/bookstorage";	//数据库路径（一般都是这样写），test是数据库名称
+        String sql_url = "jdbc:mysql://localhost:3306/db_library";	//数据库路径（一般都是这样写），test是数据库名称
         String name = "root";		//用户名
-        String password = "123456";	//密码
+        String password = "password";	//密码
         Connection conn;
         PreparedStatement preparedStatement = null;
 
@@ -195,9 +195,9 @@ public class PutinStorage {
 
     // 得到数据库表头
     public static Vector getHead(String tableName){
-        String sql_url = "jdbc:mysql://localhost:3306/bookstorage";	//数据库路径（一般都是这样写），test是数据库名称
+        String sql_url = "jdbc:mysql://localhost:3306/db_library";	//数据库路径（一般都是这样写），test是数据库名称
         String name = "root";		//用户名
-        String password = "123456";	//密码
+        String password = "password";	//密码
         Connection conn;
         PreparedStatement preparedStatement = null;
 
@@ -214,13 +214,15 @@ public class PutinStorage {
             ResultSet result1 = preparedStatement.executeQuery();
 
             boolean moreRecords = result1.next();
-            if(!moreRecords)
+            if(!moreRecords) {
                 JOptionPane.showMessageDialog(null, "结果集中无记录");
+            }
 
             columnHeads = new Vector();
             ResultSetMetaData rsmd = result1.getMetaData();
-            for(int i = 1; i <= rsmd.getColumnCount(); i++)
+            for(int i = 1; i <= rsmd.getColumnCount(); i++) {
                 columnHeads.addElement(rsmd.getColumnName(i));
+            }
 
             preparedStatement.close();
             conn.close();

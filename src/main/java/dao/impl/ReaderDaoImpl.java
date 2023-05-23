@@ -1,6 +1,7 @@
 package dao.impl;
 
 import dao.ReaderDao;
+import domain.Book;
 import domain.Reader;
 import utils.JDBCUtil;
 import utils.StuTableModel;
@@ -8,6 +9,8 @@ import utils.StuTableModel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 
 /**
@@ -16,7 +19,7 @@ import java.sql.ResultSet;
  * @Description
  */
 
-public class ReaderDaoImpl extends StuTableModel implements ReaderDao {
+public  class ReaderDaoImpl implements ReaderDao {
     private Connection conn;
     private PreparedStatement ps;
     private ResultSet resultSet;
@@ -127,6 +130,42 @@ public class ReaderDaoImpl extends StuTableModel implements ReaderDao {
         return result;
     }
 
+    @Override
+    public Object[][] getReaderInfo() {
+
+        ArrayList<Reader> list = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM reader";
+            conn = JDBCUtil.getConnection();
+            ps = conn.prepareStatement(sql);
+            resultSet = ps.executeQuery();
+            while (resultSet.next()) {
+                Reader reader = new Reader(resultSet.getInt(1), resultSet.getString(2), resultSet.getInt(3), resultSet.getString(4),
+                        resultSet.getInt(5));
+                list.add(reader);
+            }
+
+        } catch (SQLException e1) {
+            e1.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        Object[][] objects = new Object[list.size()][5];
+        for (int i = 0; i < list.size(); i++) {
+            objects[i][0] = list.get(i).getReaderId();
+            objects[i][1] = list.get(i).getReaderName();
+            objects[i][2] = list.get(i).getReaderLimit();
+            objects[i][3] = list.get(i).getReaderPassword();
+            objects[i][4] = list.get(i).getReaderLend();
+        }
+
+        return objects;
+    }
+
     /**
      * 更新读者信息
      */
@@ -149,7 +188,7 @@ public class ReaderDaoImpl extends StuTableModel implements ReaderDao {
             ps.setString(3, user.getReaderPassword());
             ps.setInt(4, user.getReaderLend());
             // 执行查询操作
-            result= ps.executeUpdate();
+            result = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -161,4 +200,3 @@ public class ReaderDaoImpl extends StuTableModel implements ReaderDao {
         return result;
     }
 }
-

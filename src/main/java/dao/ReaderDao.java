@@ -16,4 +16,5 @@ public interface ReaderDao {
     int changeReader(Reader reader);
 
     int delReader(int readerId);
+    Object[][] getReaderInfo();
 }

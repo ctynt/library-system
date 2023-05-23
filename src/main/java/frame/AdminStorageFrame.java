@@ -55,6 +55,7 @@ public class AdminStorageFrame extends JFrame {
 
     public AdminStorageFrame(String title) {
         this.setBounds(300, 200, 850, 450);
+        this.setLocationRelativeTo(null);
         this.setTitle(title);
         this.setLayout(new BorderLayout());
 
@@ -75,13 +76,6 @@ public class AdminStorageFrame extends JFrame {
         Vector rowData = null;
         Vector columnNames = null;
 
-        if (title.equals("图书信息管理")) {
-            rowData = PutinStorage.getRows("books");
-            columnNames = PutinStorage.getHead("books");
-        } else {
-            rowData = PutinStorage.getRows("lendInfo");
-            columnNames = PutinStorage.getHead("lendInfo");
-        }
         data = bookDaoImpl.getBookInfo();
         tableModel = new DefaultTableModel(data,header);
         table = new JTable(tableModel);
@@ -130,17 +124,16 @@ public class AdminStorageFrame extends JFrame {
 
 
         public AddFrame() {
+            this.setTitle("添加图书");
             this.setBounds(300, 200, 500, 350);
+            this.setLocationRelativeTo(null);
             panel = new JPanel();
             panel.setLayout(new GridLayout(8, 2));
-
             panelSouth = new JPanel();
             panelSouth.setLayout(new FlowLayout(FlowLayout.CENTER));
             button = new JButton("OK");
             panelSouth.add(button);
-
             label = new JLabel[5];
-
             label[0] = new JLabel("图书编号：");
             label[1] = new JLabel("图书名称：");
             label[2] = new JLabel("图书作者：");
@@ -150,7 +143,7 @@ public class AdminStorageFrame extends JFrame {
             idText = new JTextField(10);
             titleText = new JTextField(10);
             authorText = new JTextField(10);
-            String[] types = {"外国文学", "哲学", "历史", "中国历史"};
+            String[] types = {"外国文学", "哲学", "历史", "中国文学"};
 
             typeBox = new JComboBox(types);
             cg = new CheckboxGroup();
