@@ -12,9 +12,12 @@ public class Admin {
 //    private String adminName;
     private String adminPassword;
 
-    public Admin() {
+    public Admin(int adminId,String adminPassword) {
         this.adminId = adminId;
         this.adminPassword = adminPassword;
+    }
+
+    public Admin() {
     }
 
     public int getAdminId() {
