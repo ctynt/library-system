@@ -11,6 +11,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Vector;
 
 import javax.swing.*;
@@ -33,6 +36,7 @@ public class AdminStorageFrame extends JFrame {
     /* *
      *内部类中的变量*/
     JLabel[] label;
+    //    JLabel idLabel,titleLabel,authorLabel,typeLable,stateLabel;
     JComboBox typeBox;
     JRadioButton stateRadio1, stateRadio2;
     JTextField idText, titleText, authorText;
@@ -45,7 +49,7 @@ public class AdminStorageFrame extends JFrame {
 
     Object[] header = {"图书编号","书名","作者","类型","状态"};
 
-    Object[][] data ;
+    Object[][] data = null;
 
     BookDaoImpl bookDaoImpl = new BookDaoImpl();
 
@@ -53,7 +57,6 @@ public class AdminStorageFrame extends JFrame {
         this.setBounds(300, 200, 850, 450);
         this.setTitle(title);
         this.setLayout(new BorderLayout());
-        this.setLocationRelativeTo(null);
 
         add = new JButton("增加");
         del = new JButton("删除");
@@ -80,7 +83,8 @@ public class AdminStorageFrame extends JFrame {
         table.getTableHeader().setFont(new Font(null, Font.BOLD, 14));
         // 设置表头名称字体样式
         table.getTableHeader().setForeground(Color.black);
-        table.getTableHeader().setResizingAllowed(false);
+        // 设置表头名称字体颜色
+        // jTable.getTableHeader().setResizingAllowed(false);
         // 设置不允许手动改变列宽
         table.getTableHeader().setReorderingAllowed(false);
         // 设置表头不允许拖动
@@ -98,12 +102,10 @@ public class AdminStorageFrame extends JFrame {
         JScrollPane jsp = new JScrollPane(table, v, h);
         jsp.setBounds(26, 105, 778, 131);
         this.add(jsp);
-
-
 //         新建表格
         tableModel = new DefaultTableModel(rowData, columnNames);
         table = new JTable(tableModel);
-        table.setRowHeight(2);
+        table.setRowHeight(22);
 
         JScrollPane s = new JScrollPane(table);
 
@@ -112,8 +114,10 @@ public class AdminStorageFrame extends JFrame {
 
         MyEvent();
 
-        this.setVisible(true);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        this.setVisible(true);
+//        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();//子窗口销毁
+        setVisible(true);//父窗口变可见
     }
 
     // 添加单元格的内部类
@@ -121,9 +125,10 @@ public class AdminStorageFrame extends JFrame {
 
 
         public AddFrame() {
-            this.setTitle("添加图书");
-            this.setBounds(300, 200, 500, 350);
+
             this.setLocationRelativeTo(null);
+
+            this.setBounds(300, 200, 500, 350);
             panel = new JPanel();
             panel.setLayout(new GridLayout(8, 2));
 
@@ -143,7 +148,7 @@ public class AdminStorageFrame extends JFrame {
             idText = new JTextField(10);
             titleText = new JTextField(10);
             authorText = new JTextField(10);
-            String[] types = {"外国文学", "中国文学", "历史", "哲学"};
+            String[] types = {"外国文学", "哲学", "历史", "中国历史"};
 
             typeBox = new JComboBox(types);
             cg = new CheckboxGroup();
@@ -324,14 +329,7 @@ public class AdminStorageFrame extends JFrame {
         });
 
         // 修改
-        change.addActionListener(new ActionListener() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-
-        });
 
         // 查找
         find.addActionListener(new ActionListener() {
