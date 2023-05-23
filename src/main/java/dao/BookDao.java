@@ -35,5 +35,6 @@ public interface BookDao {
     int changeBook(Book book);
 
     int delBook(int bookId);
+    Object[][] getBookInfo();
     }
 

@@ -6,31 +6,20 @@ package frame;
  * @Description
  */
 
-import java.awt.BorderLayout;
-import java.awt.CheckboxGroup;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
 
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenuBar;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import dao.impl.BookDaoImpl;
 import storage.PutinStorage;
 
 public class AdminStorageFrame extends JFrame {
@@ -58,11 +47,14 @@ public class AdminStorageFrame extends JFrame {
     String[] str = null;
     JPanel[] panelLeft, panelRight;
 
-    private String database = "library-system";
-    private String tablesName;
+    Object[] header = {"图书编号","书名","作者","类型","状态"};
+
+    Object[][] data = null;
+
+    BookDaoImpl bookDaoImpl = new BookDaoImpl();
 
     public AdminStorageFrame(String title) {
-        this.setBounds(300, 200, 600, 450);
+        this.setBounds(300, 200, 850, 450);
         this.setTitle(title);
         this.setLayout(new BorderLayout());
 
@@ -90,8 +82,34 @@ public class AdminStorageFrame extends JFrame {
             rowData = PutinStorage.getRows("lendInfo");
             columnNames = PutinStorage.getHead("lendInfo");
         }
+        data = bookDaoImpl.getBookInfo();
+        tableModel = new DefaultTableModel(data,header);
+        table = new JTable(tableModel);
 
-        // 新建表格
+        // 创建表格
+        table.getTableHeader().setFont(new Font(null, Font.BOLD, 14));
+        // 设置表头名称字体样式
+        table.getTableHeader().setForeground(Color.black);
+        // 设置表头名称字体颜色
+        // jTable.getTableHeader().setResizingAllowed(false);
+        // 设置不允许手动改变列宽
+        table.getTableHeader().setReorderingAllowed(false);
+        // 设置表头不允许拖动
+        int v = ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED;
+        // 水平滚动条
+        int h = ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED;
+        // 垂直滚动条
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                new AdminMainFrame().setVisible(true);
+            }
+        });
+        JScrollPane jsp = new JScrollPane(table, v, h);
+        jsp.setBounds(26, 105, 778, 131);
+        this.add(jsp);
+//         新建表格
         tableModel = new DefaultTableModel(rowData, columnNames);
         table = new JTable(tableModel);
         table.setRowHeight(22);
@@ -132,7 +150,7 @@ public class AdminStorageFrame extends JFrame {
             idText = new JTextField(10);
             titleText = new JTextField(10);
             authorText = new JTextField(10);
-            String[] types = {"计算机", "英语", "电气", "机械", "材料"};
+            String[] types = {"外国文学", "哲学", "历史", "中国历史"};
 
             typeBox = new JComboBox(types);
             cg = new CheckboxGroup();

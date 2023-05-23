@@ -53,4 +53,14 @@ public class Book {
         this.state = state;
     }
 
+    public Book(int bookId, String bookName, String author, String category, String state) {
+        this.bookId = bookId;
+        this.bookName = bookName;
+        this.author = author;
+        this.category = category;
+        this.state = state;
+    }
+    public Book(){
+
+    }
 }

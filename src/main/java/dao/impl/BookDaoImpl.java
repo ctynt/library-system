@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * @Author ctynt
@@ -134,4 +135,40 @@ public class BookDaoImpl implements BookDao {
         return result;
 
     }
+    @Override
+    public Object[][] getBookInfo(){
+
+        ArrayList<Book> list = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM book";
+            conn = JDBCUtil.getConnection();
+            ps = conn.prepareStatement(sql);
+            resultSet = ps.executeQuery();
+            while (resultSet.next()) {
+                Book book= new Book(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4),
+                        resultSet.getString(5));
+                list.add(book);
+            }
+
+        } catch (SQLException e1) {
+            e1.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        Object[][] objects = new Object[list.size()][5];
+        for (int i = 0; i < list.size(); i++) {
+            objects[i][0] = list.get(i).getBookId();
+            objects[i][1] = list.get(i).getBookName();
+            objects[i][2] = list.get(i).getAuthor();
+            objects[i][3] = list.get(i).getCategory();
+            objects[i][4] = list.get(i).getState();
+        }
+
+        return objects;
+    }
+
 }
