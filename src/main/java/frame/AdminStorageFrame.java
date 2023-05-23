@@ -20,7 +20,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import dao.impl.BookDaoImpl;
-import storage.PutinStorage;
+
 
 public class AdminStorageFrame extends JFrame {
 
@@ -115,8 +115,10 @@ public class AdminStorageFrame extends JFrame {
 
         MyEvent();
 
-        this.setVisible(true);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        this.setVisible(true);
+//        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();//子窗口销毁
+        setVisible(true);//父窗口变可见
     }
 
     // 添加单元格的内部类
@@ -125,6 +127,7 @@ public class AdminStorageFrame extends JFrame {
 
         public AddFrame() {
             this.setTitle("添加图书");
+            this.setLocationRelativeTo(null);
             this.setBounds(300, 200, 500, 350);
             this.setLocationRelativeTo(null);
             panel = new JPanel();
@@ -324,14 +327,7 @@ public class AdminStorageFrame extends JFrame {
         });
 
         // 修改
-        change.addActionListener(new ActionListener() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new PutinStorage().saveData(table);
-            }
-
-        });
 
         // 查找
         find.addActionListener(new ActionListener() {
