@@ -21,7 +21,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 
-public class AdminTableFrame extends JFrame{
+public class AdminStorageFrame extends JFrame{
 
     DefaultTableModel tableModel;
     Vector vector;
@@ -55,7 +55,7 @@ public class AdminTableFrame extends JFrame{
     //	private String database = "haha";
     private String tablesName;
 
-    public AdminTableFrame(String title){
+    public AdminStorageFrame(String title){
 //		tablesName = tableName;
         this.setBounds(300, 200, 600, 450);
         this.setTitle(title);
@@ -345,7 +345,7 @@ public class AdminTableFrame extends JFrame{
             public void actionPerformed(ActionEvent arg0) {
                 // 增加一行空白区域
 //				tableModel.addRow(new Vector());
-                new AddFrame().show();
+                new AddFrame();
 
                 int rowNum = table.getSelectedRow();
 
@@ -420,6 +420,6 @@ public class AdminTableFrame extends JFrame{
     }
 
     public static void main(String[] args){
-        new AdminTableFrame("图书入库管理");
+        new AdminStorageFrame("图书入库管理");
     }
 }

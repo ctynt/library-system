@@ -45,9 +45,11 @@ public class StuTableModel extends AbstractTableModel {
 	// 当鼠标点击表格中的第row行时，把该行的数据保存到数组set中
 	public String[] getString(int row) {
 		set=new String[columnNames.length];
-		if (row >= 0)
-			for (int i = 0; i < columnNames.length; i++)
+		if (row >= 0) {
+			for (int i = 0; i < columnNames.length; i++) {
 				set[i] = getValueAt(row, i).toString();
+			}
+		}
 		return set;
 	}
 
