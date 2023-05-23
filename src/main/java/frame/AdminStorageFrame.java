@@ -11,16 +11,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.Vector;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import dao.impl.BookDaoImpl;
-import storage.PutinStorage;
+
 
 public class AdminStorageFrame extends JFrame {
 
@@ -36,7 +33,6 @@ public class AdminStorageFrame extends JFrame {
     /* *
      *内部类中的变量*/
     JLabel[] label;
-    //    JLabel idLabel,titleLabel,authorLabel,typeLable,stateLabel;
     JComboBox typeBox;
     JRadioButton stateRadio1, stateRadio2;
     JTextField idText, titleText, authorText;
@@ -49,7 +45,7 @@ public class AdminStorageFrame extends JFrame {
 
     Object[] header = {"图书编号","书名","作者","类型","状态"};
 
-    Object[][] data = null;
+    Object[][] data ;
 
     BookDaoImpl bookDaoImpl = new BookDaoImpl();
 
@@ -57,6 +53,7 @@ public class AdminStorageFrame extends JFrame {
         this.setBounds(300, 200, 850, 450);
         this.setTitle(title);
         this.setLayout(new BorderLayout());
+        this.setLocationRelativeTo(null);
 
         add = new JButton("增加");
         del = new JButton("删除");
@@ -75,13 +72,6 @@ public class AdminStorageFrame extends JFrame {
         Vector rowData = null;
         Vector columnNames = null;
 
-        if (title.equals("图书信息管理")) {
-            rowData = PutinStorage.getRows("books");
-            columnNames = PutinStorage.getHead("books");
-        } else {
-            rowData = PutinStorage.getRows("lendInfo");
-            columnNames = PutinStorage.getHead("lendInfo");
-        }
         data = bookDaoImpl.getBookInfo();
         tableModel = new DefaultTableModel(data,header);
         table = new JTable(tableModel);
@@ -90,8 +80,7 @@ public class AdminStorageFrame extends JFrame {
         table.getTableHeader().setFont(new Font(null, Font.BOLD, 14));
         // 设置表头名称字体样式
         table.getTableHeader().setForeground(Color.black);
-        // 设置表头名称字体颜色
-        // jTable.getTableHeader().setResizingAllowed(false);
+        table.getTableHeader().setResizingAllowed(false);
         // 设置不允许手动改变列宽
         table.getTableHeader().setReorderingAllowed(false);
         // 设置表头不允许拖动
@@ -109,10 +98,12 @@ public class AdminStorageFrame extends JFrame {
         JScrollPane jsp = new JScrollPane(table, v, h);
         jsp.setBounds(26, 105, 778, 131);
         this.add(jsp);
+
+
 //         新建表格
         tableModel = new DefaultTableModel(rowData, columnNames);
         table = new JTable(tableModel);
-        table.setRowHeight(22);
+        table.setRowHeight(2);
 
         JScrollPane s = new JScrollPane(table);
 
@@ -130,7 +121,9 @@ public class AdminStorageFrame extends JFrame {
 
 
         public AddFrame() {
+            this.setTitle("添加图书");
             this.setBounds(300, 200, 500, 350);
+            this.setLocationRelativeTo(null);
             panel = new JPanel();
             panel.setLayout(new GridLayout(8, 2));
 
@@ -150,7 +143,7 @@ public class AdminStorageFrame extends JFrame {
             idText = new JTextField(10);
             titleText = new JTextField(10);
             authorText = new JTextField(10);
-            String[] types = {"外国文学", "哲学", "历史", "中国历史"};
+            String[] types = {"外国文学", "中国文学", "历史", "哲学"};
 
             typeBox = new JComboBox(types);
             cg = new CheckboxGroup();
@@ -335,7 +328,7 @@ public class AdminStorageFrame extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                new PutinStorage().saveData(table);
+
             }
 
         });
