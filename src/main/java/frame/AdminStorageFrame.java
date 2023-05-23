@@ -12,9 +12,6 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.Vector;
 
 import javax.swing.*;
@@ -26,7 +23,7 @@ public class AdminStorageFrame extends JFrame{
     DefaultTableModel tableModel;
     Vector vector;
     JMenuBar menuBar;
-    JButton add,del,exit,find,save;
+    JButton add,del,exit,find,change;
     JTable table;
 
     JPanel panelUP,panelDown;	//增加信息的面板
@@ -62,7 +59,7 @@ public class AdminStorageFrame extends JFrame{
 
         add = new JButton("增加");
         del = new JButton("删除");
-        save = new JButton("保存");
+        change = new JButton("修改");
         find = new JButton("查找");
         exit = new JButton("退出");
 
@@ -71,7 +68,7 @@ public class AdminStorageFrame extends JFrame{
 
         panelUP.add(add);
         panelUP.add(del);
-        panelUP.add(save);
+        panelUP.add(change);
         panelUP.add(find);
         panelUP.add(exit);
         Vector rowData = null;
@@ -389,8 +386,8 @@ public class AdminStorageFrame extends JFrame{
 
         });
 
-        // 保存
-        save.addActionListener(new ActionListener(){
+        // 修改
+        change.addActionListener(new ActionListener(){
 
             @Override
             public void actionPerformed(ActionEvent e) {

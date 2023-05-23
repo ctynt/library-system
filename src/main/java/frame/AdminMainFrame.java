@@ -13,8 +13,9 @@ import java.awt.event.ActionListener;
 
 public class AdminMainFrame extends JFrame {
     JPanel panel;
-    JButton storage,lendInfo,userInfo;
-    public AdminMainFrame(){
+    JButton storage, lendInfo, userInfo;
+
+    public AdminMainFrame() {
 //        this.setTitle("管理员");
 //        this.setBounds(500,200,400,400);
 //        this.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -33,7 +34,7 @@ public class AdminMainFrame extends JFrame {
 //        this.setVisible(true);
 //        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        super("水电费管理系统--管理员后台");
+        super("图书管理系统--管理员后台");
         setFont(new Font("宋体", Font.PLAIN, 35));
         this.setBounds(0, 0, 760, 400);
         this.setLocationRelativeTo(null);
@@ -69,9 +70,9 @@ public class AdminMainFrame extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public void MyEvent(){
-        // 图书入库管理
-        storage.addActionListener(new ActionListener(){
+    public void MyEvent() {
+        // 图书信息管理
+        storage.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent arg0) {
@@ -81,29 +82,29 @@ public class AdminMainFrame extends JFrame {
 
         });
 
-        // 用户借阅信息管理
-        lendInfo.addActionListener(new ActionListener(){
+        // 借阅信息管理
+        lendInfo.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                new AdminLendFrame();
+                new AdminLendFrame(lendInfo.getText());
                 dispose();
             }
 
         });
-
-        userInfo.addActionListener(new ActionListener(){
+//用户信息管理
+        userInfo.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                new AdminUserFrame();
+                new AdminUserFrame(userInfo.getText());
                 dispose();
             }
 
         });
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         new AdminMainFrame().setVisible(true);
     }
 }
