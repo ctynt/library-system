@@ -19,10 +19,17 @@ import java.util.Vector;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import dao.BookDao;
 import dao.impl.BookDaoImpl;
+import domain.Book;
+
+import static java.lang.Integer.parseInt;
+
 
 
 public class AdminStorageFrame extends JFrame {
+
+    BookDao bookDao = new BookDaoImpl();
 
     DefaultTableModel tableModel;
     Vector vector;
@@ -39,7 +46,7 @@ public class AdminStorageFrame extends JFrame {
     //    JLabel idLabel,titleLabel,authorLabel,typeLable,stateLabel;
     JComboBox typeBox;
     JRadioButton stateRadio1, stateRadio2;
-    JTextField idText, titleText, authorText;
+    JTextField idText, nameText, authorText;
     CheckboxGroup cg;
     ButtonGroup bg;
     JPanel panel, panelSouth;
@@ -49,7 +56,7 @@ public class AdminStorageFrame extends JFrame {
 
     Object[] header = {"图书编号","书名","作者","类型","状态"};
 
-    Object[][] data = null;
+    Object[][] data;
 
     BookDaoImpl bookDaoImpl = new BookDaoImpl();
 
@@ -79,7 +86,6 @@ public class AdminStorageFrame extends JFrame {
         data = bookDaoImpl.getBookInfo();
         tableModel = new DefaultTableModel(data,header);
         table = new JTable(tableModel);
-
         // 创建表格
         table.getTableHeader().setFont(new Font(null, Font.BOLD, 14));
         // 设置表头名称字体样式
@@ -144,7 +150,7 @@ public class AdminStorageFrame extends JFrame {
             label[4] = new JLabel("借阅状态：");
 
             idText = new JTextField(10);
-            titleText = new JTextField(10);
+            nameText = new JTextField(10);
             authorText = new JTextField(10);
             String[] types = {"外国文学", "哲学", "历史", "中国文学"};
 
@@ -175,7 +181,7 @@ public class AdminStorageFrame extends JFrame {
             }
 
             panelRight[0].add(idText);
-            panelRight[1].add(titleText);
+            panelRight[1].add(nameText);
             panelRight[2].add(authorText);
             panelRight[3].add(typeBox);
             panelRight[4].add(stateRadio1);
@@ -198,77 +204,105 @@ public class AdminStorageFrame extends JFrame {
             this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         }
 
+
+        public void refresh() {
+            Object[][] data = bookDaoImpl.getBookInfo();
+            tableModel.setDataVector(data, header);
+        }
+
         public void MyEvent() {
             button.addActionListener(new ActionListener() {
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     // TODO Auto-generated method stub
+//
+//                    String str1 = idText.getText();
+//                    String str2 = nameText.getText();
+//                    String str3 = authorText.getText();
+//                    String str4 = typeBox.getSelectedItem().toString();
+//                    String str5 = null;
+//                    String first = null, second = null;
+//                    String cam;
+//                    if (stateRadio1.isSelected()) {
+//                        str5 = stateRadio1.getText();
+//                    } else if (stateRadio2.isSelected()) {
+//                        str5 = stateRadio2.getText();
+//                    }
+//
+//                    if (first == null && second != null) {
+//                        cam = second;
+//                    } else if (first != null && second == null) {
+//                        cam = first;
+//                    } else {
+//                        cam = first + "," + second;
+//                    }
+//
+//                    String[] str = {str1, str2, str3, str4,
+//                            str5, cam};
+//
+//                    vector = new Vector();
+//                    vector.add(str1);
+//                    vector.add(str2);
+//                    vector.add(str3);
+//                    vector.add(str4);
+//                    vector.add(str5);
+//                    vector.add(cam);
+//
+//
+//                    int rowNum = table.getSelectedRow();
+//
+//                    if (rowNum == -1) {
+//                        String aa1 = str1.substring(0, 1);
+//                        String aa = str1.substring(1, str1.length());
+//                        long bb = Long.parseLong(aa) + 1;
+//
+//                        String cc = aa1 + String.valueOf(bb);
+//
+//                        tableModel.addRow(vector);
+//
+//                        //加入表格后清除源数据
+//                        idText.setText(cc);
+//                        nameText.setText("");
+//                        authorText.setText("");
+//                    }
+//
+//                    if (rowNum != -1) {
+//                        String aa = table.getValueAt(rowNum, 0).toString();
+//                        String aa1 = aa.substring(0, 1);
+//                        tableModel.insertRow(rowNum + 1, vector);
+//
+//                        for (int i = rowNum + 2; i < table.getRowCount(); i++) {
+//                            if (table.getValueAt(i, 0).toString().startsWith(aa1)) {
+//                                String ee = table.getValueAt(i, 0).toString();
+//                                String ee1 = aa1 + String.valueOf(Long.parseLong(ee.substring(1, ee.length())) + 1);
+//                                table.setValueAt(ee1, i, 0);
+//                            }
+//                        }
+//                    }
 
-                    String str1 = idText.getText();
-                    String str2 = titleText.getText();
-                    String str3 = authorText.getText();
-                    String str4 = typeBox.getSelectedItem().toString();
-                    String str5 = null;
-                    String first = null, second = null;
-                    String cam;
+
+                    int bookId = parseInt(idText.getText());
+                    String bookName = nameText.getText();
+                    String author = authorText.getText();
+                    String category = (String) typeBox.getSelectedItem();
+                    String state =null;
                     if (stateRadio1.isSelected()) {
-                        str5 = stateRadio1.getText();
+                        state = stateRadio1.getText();
                     } else if (stateRadio2.isSelected()) {
-                        str5 = stateRadio2.getText();
+                        state= stateRadio2.getText();
                     }
 
-                    if (first == null && second != null) {
-                        cam = second;
-                    } else if (first != null && second == null) {
-                        cam = first;
-                    } else {
-                        cam = first + "," + second;
-                    }
+                    Book book  = new Book(bookId,bookName,author, category, state);
 
-                    String[] str = {str1, str2, str3, str4,
-                            str5, cam};
-
-                    vector = new Vector();
-                    vector.add(str1);
-                    vector.add(str2);
-                    vector.add(str3);
-                    vector.add(str4);
-                    vector.add(str5);
-                    vector.add(cam);
-
-
-                    int rowNum = table.getSelectedRow();
-
-                    if (rowNum == -1) {
-                        String aa1 = str1.substring(0, 1);
-                        String aa = str1.substring(1, str1.length());
-                        long bb = Long.parseLong(aa) + 1;
-
-                        String cc = aa1 + String.valueOf(bb);
-
-                        tableModel.addRow(vector);
-
-                        //加入表格后清除源数据
-                        idText.setText(cc);
-                        titleText.setText("");
-                        authorText.setText("");
-                    }
-
-                    if (rowNum != -1) {
-                        String aa = table.getValueAt(rowNum, 0).toString();
-                        String aa1 = aa.substring(0, 1);
-                        tableModel.insertRow(rowNum + 1, vector);
-
-                        for (int i = rowNum + 2; i < table.getRowCount(); i++) {
-                            if (table.getValueAt(i, 0).toString().startsWith(aa1)) {
-                                String ee = table.getValueAt(i, 0).toString();
-                                String ee1 = aa1 + String.valueOf(Long.parseLong(ee.substring(1, ee.length())) + 1);
-                                table.setValueAt(ee1, i, 0);
-                            }
-                        }
-                    }
-
+                    int i = bookDao.addBook(book);
+                if (i > 0) {
+                    JOptionPane.showMessageDialog(null, "添加成功！");
+                    refresh();
+                    dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "添加失败！");
+                }
                 }
 
             });
@@ -297,6 +331,10 @@ public class AdminStorageFrame extends JFrame {
                     String cc = aa1 + String.valueOf(bb);
                     idText.setText(cc);
                 }
+
+
+
+
             }
 
         });

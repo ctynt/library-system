@@ -7,20 +7,29 @@ package domain;
  */
 
 public class Borrow {
+
+    private int borrowId;
     private int bookId;
     private String bookName;
-    private int userId;
-    private String userName;
+    private int readerId;
+    private String readerName;
 
-    public Borrow(int bookId, String bookName, int userId, String userName) {
+    public Borrow(int borrowId, int bookId, String bookName, int readerId, String readerName) {
+        this.borrowId = borrowId;
         this.bookId = bookId;
         this.bookName = bookName;
-        this.userId = userId;
-        this.userName = userName;
+        this.readerId = readerId;
+        this.readerName = readerName;
     }
 
-    public Borrow(){
+    public Borrow(){}
 
+    public int getBorrowId() {
+        return borrowId;
+    }
+
+    public void setBorrowId(int borrowId) {
+        this.borrowId = borrowId;
     }
 
     public int getBookId() {
@@ -39,19 +48,19 @@ public class Borrow {
         this.bookName = bookName;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getReaderId() {
+        return readerId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setReaderId(int readerId) {
+        this.readerId = readerId;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getReaderName() {
+        return readerName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setReaderName(String readerName) {
+        this.readerName = readerName;
     }
 }
