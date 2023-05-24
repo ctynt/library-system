@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
 
-public class AdminLendFrame extends JFrame {
+public class AdminBorrowFrame extends JFrame {
 
     DefaultTableModel tableModel;
     Vector vector;
@@ -33,7 +33,7 @@ public class AdminLendFrame extends JFrame {
     String[] str=null;
     JPanel[] panelLeft,panelRight;
 
-    public AdminLendFrame(String title){
+    public AdminBorrowFrame(String title){
 //		tablesName = tableName;
         this.setBounds(300, 200, 600, 450);
         this.setTitle(title);
@@ -389,7 +389,7 @@ public class AdminLendFrame extends JFrame {
         });
     }
     public static void main(String[] args){
-        new AdminLendFrame("借阅信息管理");
+        new AdminBorrowFrame("借阅信息管理");
     }
 
 }

@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 
 public class AdminMainFrame extends JFrame {
     JPanel panel;
-    JButton storage, lendInfo, userInfo;
+    JButton storage, borrowInfo, userInfo;
 
     public AdminMainFrame() {
 //        this.setTitle("管理员");
@@ -54,11 +54,11 @@ public class AdminMainFrame extends JFrame {
 
         this.add(storage);
 
-        lendInfo = new JButton("借阅信息管理");
-        lendInfo.setFont(new Font("宋体", Font.BOLD, 20));
-        lendInfo.setBounds(292, 192, 166, 59);
+        borrowInfo = new JButton("借阅信息管理");
+        borrowInfo.setFont(new Font("宋体", Font.BOLD, 20));
+        borrowInfo.setBounds(292, 192, 166, 59);
 
-        this.add(lendInfo);
+        this.add(borrowInfo);
 
         userInfo = new JButton("用户信息管理");
         userInfo.setFont(new Font("宋体", Font.BOLD, 20));
@@ -83,11 +83,11 @@ public class AdminMainFrame extends JFrame {
         });
 
         // 借阅信息管理
-        lendInfo.addActionListener(new ActionListener() {
+        borrowInfo.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                new AdminLendFrame(lendInfo.getText());
+                new AdminBorrowFrame(borrowInfo.getText());
                 dispose();
             }
 
