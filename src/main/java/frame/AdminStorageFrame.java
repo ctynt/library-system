@@ -208,6 +208,7 @@ public class AdminStorageFrame extends JFrame {
         public void refresh() {
             Object[][] data = bookDaoImpl.getBookInfo();
             tableModel.setDataVector(data, header);
+
         }
 
         public void MyEvent() {

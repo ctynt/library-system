@@ -315,6 +315,6 @@ public class AdminUserFrame extends JFrame {
         });
     }
     public static void main(String[] args) {
-        new AdminUserFrame("用户信息管理");
+        new AdminUserFrame("读者信息管理");
     }
 }
