@@ -1,9 +1,9 @@
 package frame;
 
-import dao.impl.BookDaoImpl;
+import dao.ReaderDao;
 import dao.impl.ReaderDaoImpl;
+import domain.Reader;
 import storage.PutinStorage;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -12,8 +12,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Vector;
+import static java.lang.Integer.parseInt;
 
 public class AdminUserFrame extends JFrame {
+    ReaderDao readerDao = new ReaderDaoImpl();
     DefaultTableModel tableModel;
     Vector vector;
     JMenuBar menuBar;
@@ -26,7 +28,7 @@ public class AdminUserFrame extends JFrame {
     /* *
      *内部类中的变量*/
     JLabel[] label;
-    JTextField idText, titleText, authorText,passwordText,lendText;
+    JTextField idText, nameText, limitText,passwordText,lendText;
     JPanel panel, panelSouth;
     JButton button;
     String[] str = null;
@@ -126,8 +128,8 @@ public class AdminUserFrame extends JFrame {
             label[4] = new JLabel("已借图书编号：");
 
             idText = new JTextField(10);
-            titleText = new JTextField(10);
-            authorText = new JTextField(10);
+            nameText = new JTextField(10);
+            limitText = new JTextField(10);
             passwordText = new JTextField(10);
             lendText= new JTextField(10);
 
@@ -150,8 +152,8 @@ public class AdminUserFrame extends JFrame {
             }
 
             panelRight[0].add(idText);
-            panelRight[1].add(titleText);
-            panelRight[2].add(authorText);
+            panelRight[1].add(nameText);
+            panelRight[2].add(limitText);
             panelRight[3].add(passwordText);
             panelRight[4].add(lendText);
 
@@ -172,61 +174,33 @@ public class AdminUserFrame extends JFrame {
             this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         }
 
+
+        public void refresh() {
+            Object[][] data = readerDaoImpl.getReaderInfo();
+            tableModel.setDataVector(data, header);
+        }
+
         public void MyEvent() {
             button.addActionListener(new ActionListener() {
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     // TODO Auto-generated method stub
+                    int readerId = parseInt(idText.getText());
+                    String readerName = nameText.getText();
+                    int readerLimit = Integer.parseInt(limitText.getText());
+                   String readerPassword = passwordText.getText();
+                   int readerLend = parseInt(lendText.getText());
+                    Reader reader  = new Reader(readerId,readerName,readerLimit,readerPassword,readerLend);
 
-                    String str1 = idText.getText();
-                    String str2 = titleText.getText();
-                    String str3 = authorText.getText();
-                    String str4 = passwordText.getText();
-                    String str5 = lendText.getText();
-
-
-                    String[] str = {str1, str2, str3, str4, str5};
-
-                    vector = new Vector();
-                    vector.add(str1);
-                    vector.add(str2);
-                    vector.add(str3);
-                    vector.add(str4);
-                    vector.add(str5);
-
-
-                    int rowNum = table.getSelectedRow();
-
-                    if (rowNum == -1) {
-                        String aa1 = str1.substring(0, 1);
-                        String aa = str1.substring(1, str1.length());
-                        long bb = Long.parseLong(aa) + 1;
-
-                        String cc = aa1 + String.valueOf(bb);
-
-                        tableModel.addRow(vector);
-
-                        //加入表格后清除源数据
-                        idText.setText(cc);
-                        titleText.setText("");
-                        authorText.setText("");
+                    int i = readerDao.addReader(reader);
+                    if (i > 0) {
+                        JOptionPane.showMessageDialog(null, "添加成功！");
+                        refresh();
+                        dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "添加失败！");
                     }
-
-                    if (rowNum != -1) {
-                        String aa = table.getValueAt(rowNum, 0).toString();
-                        String aa1 = aa.substring(0, 1);
-                        tableModel.insertRow(rowNum + 1, vector);
-
-                        for (int i = rowNum + 2; i < table.getRowCount(); i++) {
-                            if (table.getValueAt(i, 0).toString().startsWith(aa1)) {
-                                String ee = table.getValueAt(i, 0).toString();
-                                String ee1 = aa1 + String.valueOf(Long.parseLong(ee.substring(1, ee.length())) + 1);
-                                table.setValueAt(ee1, i, 0);
-                            }
-                        }
-                    }
-
                 }
 
             });
