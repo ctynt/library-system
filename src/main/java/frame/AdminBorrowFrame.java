@@ -26,6 +26,7 @@ public class AdminBorrowFrame extends JFrame {
     /*增加信息的面板*/
     JPanel panelUP,panelDown;
 
+
     // 内部类中的变量
     JLabel[] label;
     JTextField borrowIdText,bookIdText,bookNameText,readerIdText,readerNameText;
@@ -109,6 +110,8 @@ public class AdminBorrowFrame extends JFrame {
         this.dispose();
         //父窗口变可见
         setVisible(true);
+
+        this.setLocationRelativeTo(null);//窗口在屏幕中间显示
     }
     class AddFrame extends JFrame{
 
