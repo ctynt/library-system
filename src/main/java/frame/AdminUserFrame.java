@@ -108,6 +108,9 @@ public class AdminUserFrame extends JFrame {
 
         this.dispose();//子窗口销毁
         setVisible(true);//父窗口变可见
+
+        //窗口大小不可变
+        setResizable(false);
     }
 
     /*增加读者信息*/
