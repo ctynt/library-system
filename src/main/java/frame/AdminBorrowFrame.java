@@ -214,6 +214,107 @@ public class AdminBorrowFrame extends JFrame {
 
     }
 
+    class DelFrame extends JFrame{
+
+
+        public DelFrame(){
+            this.setTitle("删除借阅信息");
+            this.setLocationRelativeTo(null);
+            this.setBounds(300,200,500,350);
+            this.setLocationRelativeTo(null);
+            panel = new JPanel();
+            panel.setLayout(new GridLayout(8,2));
+            panelSouth = new JPanel();
+            panelSouth.setLayout(new FlowLayout(FlowLayout.CENTER));
+            button = new JButton("OK");
+            panelSouth.add(button);
+            label = new JLabel[5];
+            label[0] = new JLabel("借阅编号：");
+            label[1] = new JLabel("图书编号：");
+            label[2] = new JLabel("图书名称：");
+            label[3] = new JLabel("读者编号：");
+            label[4] = new JLabel("读者姓名：");
+
+            borrowIdText = new JTextField(10);
+            bookIdText = new JTextField(10);
+            bookNameText = new JTextField(10);
+            readerIdText = new JTextField(10);
+            readerNameText = new JTextField(10);
+
+
+            panelRight = new JPanel[5];
+            panelLeft = new JPanel[5];
+            for(int i = 0; i < panelRight.length; i++){
+                panelRight[i] = new JPanel();
+                panelRight[i].setLayout(new FlowLayout(FlowLayout.LEFT));
+            }
+
+            for(int i = 0; i < panelLeft.length; i++){
+                panelLeft[i] = new JPanel();
+                panelLeft[i].setLayout(new FlowLayout(FlowLayout.RIGHT));
+            }
+
+            for(int i = 0; i < panelLeft.length; i++) {
+                for(int j = i; j < label.length; j++) {
+                    panelLeft[i].add(label[j]);
+                }
+            }
+
+            panelRight[0].add(borrowIdText);
+            panelRight[1].add(bookIdText);
+            panelRight[2].add(bookNameText);
+            panelRight[3].add(readerIdText);
+            panelRight[4].add(readerNameText);
+
+            panel.add(panelLeft[0]);
+            panel.add(panelRight[0]);
+            panel.add(panelLeft[1]);
+            panel.add(panelRight[1]);
+            panel.add(panelLeft[2]);
+            panel.add(panelRight[2]);
+            panel.add(panelLeft[3]);
+            panel.add(panelRight[3]);
+            panel.add(panelLeft[4]);
+            panel.add(panelRight[4]);
+            this.add(panelSouth,BorderLayout.SOUTH);
+            this.add(panel);
+            MyEvent();
+//			this.setVisible(true);
+//			this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            this.dispose();//子窗口销毁
+            setVisible(true);//父窗口变可见
+        }
+        public void refresh() {
+            Object[][] data = borrowDaoImpl.getBorrowInfo();
+            tableModel.setDataVector(data, header);
+        }
+        public void MyEvent(){
+            button.addActionListener(new ActionListener(){
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // TODO Auto-generated method stub
+                    int borrowId = parseInt(borrowIdText.getText());
+                    int bookId = parseInt(bookIdText.getText());
+                    String bookName = bookNameText.getText();
+                    int readerId = parseInt(readerIdText.getText());
+                    String readerName = readerNameText.getText();
+                    Borrow borrow = new Borrow(borrowId,bookId,bookName,readerId,readerName);
+                    int i = borrowDao.delBorrow(borrowId);
+                    if (i > 0) {
+                        JOptionPane.showMessageDialog(null, "删除成功！");
+                        refresh();
+                        dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "删除失败！");
+                    }
+                }
+            });
+        }
+
+
+    }
+
 
     public void MyEvent(){
 
@@ -222,9 +323,8 @@ public class AdminBorrowFrame extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                // 增加一行空白区域
-				tableModel.addRow(new Vector());
-                new AddFrame();
+
+                new DelFrame();
 
                 int rowNum = table.getSelectedRow();
 
@@ -247,22 +347,21 @@ public class AdminBorrowFrame extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                // TODO Auto-generated method stub
-                // 按照从下到上逐行删除（需添加鼠标事件）
-                int rowcount = table.getSelectedRow();
-//				System.out.println(rowcount);
-                if(rowcount >= 0){
-                    tableModel.removeRow(rowcount);
-                    String aa = table.getValueAt(rowcount, 0).toString().substring(0, 1);
-                    for(int i = rowcount; i < table.getRowCount(); i++){
-                        if(table.getValueAt(i, 0).toString().startsWith(aa)){
-                            String ee = table.getValueAt(i, 0).toString();
-                            String ee1 = aa + String.valueOf(Long.parseLong(ee.substring(1, ee.length())) - 1);
-                            table.setValueAt(ee1, i, 0);
-                        }
-                    }
+
+                new DelFrame();
+
+                int rowNum = table.getSelectedRow();
+
+                if(rowNum != -1){
+                    String aa = table.getValueAt(rowNum, 0).toString();
+                    String aa1 = aa.substring(0, 1);
+                    String aa2 = aa.substring(1, aa.length());
+
+                    long bb = Long.parseLong(aa2) + 1;
+
+                    String cc = aa1 + String.valueOf(bb);
+                    borrowIdText.setText(cc);
                 }
-//				table.revalidate();
             }
 
         });
