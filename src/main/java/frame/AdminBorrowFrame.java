@@ -3,6 +3,8 @@ package frame;
 import dao.BorrowDao;
 import dao.impl.BorrowDaoImpl;
 import domain.Borrow;
+import domain.Reader;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -113,6 +115,8 @@ public class AdminBorrowFrame extends JFrame {
 
         this.setLocationRelativeTo(null);//窗口在屏幕中间显示
     }
+
+    /*增加借阅信息*/
     class AddFrame extends JFrame{
 
 
@@ -189,7 +193,6 @@ public class AdminBorrowFrame extends JFrame {
         }
         public void MyEvent(){
             button.addActionListener(new ActionListener(){
-
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     // TODO Auto-generated method stub
@@ -262,7 +265,6 @@ public class AdminBorrowFrame extends JFrame {
                         }
                     }
                 }
-//				table.revalidate();
             }
 
         });
@@ -298,11 +300,6 @@ public class AdminBorrowFrame extends JFrame {
         });
     }
 
-    public void refresh() {
-        data = borrowDaoImpl.getBorrowInfo();
-        tableModel.setDataVector(data, header);
-
-    }
 
     public static void main(String[] args){
         new AdminBorrowFrame("借阅信息管理");
