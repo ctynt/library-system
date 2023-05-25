@@ -1,10 +1,8 @@
 package dao.impl;
 
 import dao.ReaderDao;
-import domain.Book;
 import domain.Reader;
 import utils.JDBCUtil;
-import utils.StuTableModel;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

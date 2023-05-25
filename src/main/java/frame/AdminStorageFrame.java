@@ -11,27 +11,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.Vector;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-
 import dao.BookDao;
 import dao.impl.BookDaoImpl;
 import domain.Book;
-
 import static java.lang.Integer.parseInt;
 
 
 
 public class AdminStorageFrame extends JFrame {
 
-    BookDao bookDao = new BookDaoImpl();
 
+
+    BookDao bookDao = new BookDaoImpl();
     DefaultTableModel tableModel;
     Vector vector;
     JMenuBar menuBar;
@@ -62,6 +57,8 @@ public class AdminStorageFrame extends JFrame {
     BookDaoImpl bookDaoImpl = new BookDaoImpl();
 
     public AdminStorageFrame(String title) {
+
+
         this.setBounds(300, 200, 850, 450);
         this.setLocationRelativeTo(null);
         this.setTitle(title);
@@ -126,10 +123,9 @@ public class AdminStorageFrame extends JFrame {
         this.add(s);
 
         MyEvent();
-
-//        this.setVisible(true);
-//        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();//子窗口销毁
+        this.setVisible(true);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       this.dispose();//子窗口销毁
         setVisible(true);//父窗口变可见
     }
 
@@ -208,10 +204,14 @@ public class AdminStorageFrame extends JFrame {
             MyEvent();
             this.dispose();//子窗口销毁
             setVisible(true);//父窗口变可见
+
+
         }
 
-
-
+        public void refresh() {
+            Object[][] data = bookDaoImpl.getBookInfo();
+            tableModel.setDataVector(data, header);
+        }
 
         public void MyEvent() {
             button.addActionListener(new ActionListener() {
@@ -219,72 +219,6 @@ public class AdminStorageFrame extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     // TODO Auto-generated method stub
-//
-//                    String str1 = idText.getText();
-//                    String str2 = nameText.getText();
-//                    String str3 = authorText.getText();
-//                    String str4 = typeBox.getSelectedItem().toString();
-//                    String str5 = null;
-//                    String first = null, second = null;
-//                    String cam;
-//                    if (stateRadio1.isSelected()) {
-//                        str5 = stateRadio1.getText();
-//                    } else if (stateRadio2.isSelected()) {
-//                        str5 = stateRadio2.getText();
-//                    }
-//
-//                    if (first == null && second != null) {
-//                        cam = second;
-//                    } else if (first != null && second == null) {
-//                        cam = first;
-//                    } else {
-//                        cam = first + "," + second;
-//                    }
-//
-//                    String[] str = {str1, str2, str3, str4,
-//                            str5, cam};
-//
-//                    vector = new Vector();
-//                    vector.add(str1);
-//                    vector.add(str2);
-//                    vector.add(str3);
-//                    vector.add(str4);
-//                    vector.add(str5);
-//                    vector.add(cam);
-//
-//
-//                    int rowNum = table.getSelectedRow();
-//
-//                    if (rowNum == -1) {
-//                        String aa1 = str1.substring(0, 1);
-//                        String aa = str1.substring(1, str1.length());
-//                        long bb = Long.parseLong(aa) + 1;
-//
-//                        String cc = aa1 + String.valueOf(bb);
-//
-//                        tableModel.addRow(vector);
-//
-//                        //加入表格后清除源数据
-//                        idText.setText(cc);
-//                        nameText.setText("");
-//                        authorText.setText("");
-//                    }
-//
-//                    if (rowNum != -1) {
-//                        String aa = table.getValueAt(rowNum, 0).toString();
-//                        String aa1 = aa.substring(0, 1);
-//                        tableModel.insertRow(rowNum + 1, vector);
-//
-//                        for (int i = rowNum + 2; i < table.getRowCount(); i++) {
-//                            if (table.getValueAt(i, 0).toString().startsWith(aa1)) {
-//                                String ee = table.getValueAt(i, 0).toString();
-//                                String ee1 = aa1 + String.valueOf(Long.parseLong(ee.substring(1, ee.length())) + 1);
-//                                table.setValueAt(ee1, i, 0);
-//                            }
-//                        }
-//                    }
-
-
                     int bookId = parseInt(idText.getText());
                     String bookName = nameText.getText();
                     String author = authorText.getText();
@@ -306,6 +240,228 @@ public class AdminStorageFrame extends JFrame {
                 } else {
                     JOptionPane.showMessageDialog(null, "添加失败！");
                 }
+                }
+            });
+        }
+    }
+
+    class DelFrame extends JFrame {
+
+
+        public DelFrame() {
+            this.setTitle("删除图书");
+            this.setLocationRelativeTo(null);
+            this.setBounds(300, 200, 500, 350);
+            this.setLocationRelativeTo(null);
+            panel = new JPanel();
+            panel.setLayout(new GridLayout(8, 2));
+            panelSouth = new JPanel();
+            panelSouth.setLayout(new FlowLayout(FlowLayout.CENTER));
+            button = new JButton("OK");
+            panelSouth.add(button);
+            label = new JLabel[5];
+            label[0] = new JLabel("图书编号：");
+            label[1] = new JLabel("图书名称：");
+            label[2] = new JLabel("图书作者：");
+            label[3] = new JLabel("图书类型：");
+            label[4] = new JLabel("借阅状态：");
+
+            idText = new JTextField(10);
+            nameText = new JTextField(10);
+            authorText = new JTextField(10);
+            String[] types = {"外国文学", "哲学", "历史", "中国文学"};
+
+            typeBox = new JComboBox(types);
+            cg = new CheckboxGroup();
+            stateRadio1 = new JRadioButton("借阅");
+            stateRadio2 = new JRadioButton("在馆");
+            bg = new ButtonGroup();
+            bg.add(stateRadio1);
+            bg.add(stateRadio2);
+
+            panelRight = new JPanel[5];
+            panelLeft = new JPanel[5];
+            for (int i = 0; i < panelRight.length; i++) {
+                panelRight[i] = new JPanel();
+                panelRight[i].setLayout(new FlowLayout(FlowLayout.LEFT));
+            }
+
+            for (int i = 0; i < panelLeft.length; i++) {
+                panelLeft[i] = new JPanel();
+                panelLeft[i].setLayout(new FlowLayout(FlowLayout.RIGHT));
+            }
+
+            for (int i = 0; i < panelLeft.length; i++) {
+                for (int j = i; j < label.length; j++) {
+                    panelLeft[i].add(label[j]);
+                }
+            }
+
+            panelRight[0].add(idText);
+            panelRight[1].add(nameText);
+            panelRight[2].add(authorText);
+            panelRight[3].add(typeBox);
+            panelRight[4].add(stateRadio1);
+            panelRight[4].add(stateRadio2);
+
+            panel.add(panelLeft[0]);
+            panel.add(panelRight[0]);
+            panel.add(panelLeft[1]);
+            panel.add(panelRight[1]);
+            panel.add(panelLeft[2]);
+            panel.add(panelRight[2]);
+            panel.add(panelLeft[3]);
+            panel.add(panelRight[3]);
+            panel.add(panelLeft[4]);
+            panel.add(panelRight[4]);
+            this.add(panelSouth, BorderLayout.SOUTH);
+            this.add(panel);
+            MyEvent();
+            this.dispose();//子窗口销毁
+            setVisible(true);//父窗口变可见
+
+        }
+
+        public void MyEvent() {
+            button.addActionListener(new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // TODO Auto-generated method stub
+
+                    int bookId = parseInt(idText.getText());
+                    String bookName = nameText.getText();
+                    String author = authorText.getText();
+                    String category = (String) typeBox.getSelectedItem();
+                    String state =null;
+                    if (stateRadio1.isSelected()) {
+                        state = stateRadio1.getText();
+                    } else if (stateRadio2.isSelected()) {
+                        state= stateRadio2.getText();
+                    }
+
+                    Book book  = new Book(bookId,bookName,author, category, state);
+
+                    int i = bookDao.delBook(bookId);
+                    if (i > 0) {
+                        JOptionPane.showMessageDialog(null, "删除成功！");
+                        refresh();
+                        dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "删除失败！");
+                    }
+                }
+
+            });
+        }
+    }
+
+
+    class ChangeFrame extends JFrame {
+
+
+        public ChangeFrame() {
+            this.setTitle("修改图书");
+            this.setLocationRelativeTo(null);
+            this.setBounds(300, 200, 500, 350);
+            this.setLocationRelativeTo(null);
+            panel = new JPanel();
+            panel.setLayout(new GridLayout(8, 2));
+            panelSouth = new JPanel();
+            panelSouth.setLayout(new FlowLayout(FlowLayout.CENTER));
+            button = new JButton("OK");
+            panelSouth.add(button);
+            label = new JLabel[5];
+            label[0] = new JLabel("图书编号：");
+            label[1] = new JLabel("图书名称：");
+            label[2] = new JLabel("图书作者：");
+            label[3] = new JLabel("图书类型：");
+            label[4] = new JLabel("借阅状态：");
+
+            idText = new JTextField(10);
+            nameText = new JTextField(10);
+            authorText = new JTextField(10);
+            String[] types = {"外国文学", "哲学", "历史", "中国文学"};
+
+            typeBox = new JComboBox(types);
+            cg = new CheckboxGroup();
+            stateRadio1 = new JRadioButton("借阅");
+            stateRadio2 = new JRadioButton("在馆");
+            bg = new ButtonGroup();
+            bg.add(stateRadio1);
+            bg.add(stateRadio2);
+
+            panelRight = new JPanel[5];
+            panelLeft = new JPanel[5];
+            for (int i = 0; i < panelRight.length; i++) {
+                panelRight[i] = new JPanel();
+                panelRight[i].setLayout(new FlowLayout(FlowLayout.LEFT));
+            }
+
+            for (int i = 0; i < panelLeft.length; i++) {
+                panelLeft[i] = new JPanel();
+                panelLeft[i].setLayout(new FlowLayout(FlowLayout.RIGHT));
+            }
+
+            for (int i = 0; i < panelLeft.length; i++) {
+                for (int j = i; j < label.length; j++) {
+                    panelLeft[i].add(label[j]);
+                }
+            }
+
+            panelRight[0].add(idText);
+            panelRight[1].add(nameText);
+            panelRight[2].add(authorText);
+            panelRight[3].add(typeBox);
+            panelRight[4].add(stateRadio1);
+            panelRight[4].add(stateRadio2);
+
+            panel.add(panelLeft[0]);
+            panel.add(panelRight[0]);
+            panel.add(panelLeft[1]);
+            panel.add(panelRight[1]);
+            panel.add(panelLeft[2]);
+            panel.add(panelRight[2]);
+            panel.add(panelLeft[3]);
+            panel.add(panelRight[3]);
+            panel.add(panelLeft[4]);
+            panel.add(panelRight[4]);
+            this.add(panelSouth, BorderLayout.SOUTH);
+            this.add(panel);
+            MyEvent();
+            this.dispose();//子窗口销毁
+            setVisible(true);//父窗口变可见
+
+        }
+
+        public void MyEvent() {
+            button.addActionListener(new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // TODO Auto-generated method stub
+
+                    int bookId = parseInt(idText.getText());
+                    String bookName = nameText.getText();
+                    String author = authorText.getText();
+                    String category = (String) typeBox.getSelectedItem();
+                    String state =null;
+                    if (stateRadio1.isSelected()) {
+                        state = stateRadio1.getText();
+                    } else if (stateRadio2.isSelected()) {
+                        state= stateRadio2.getText();
+                    }
+
+                    Book book  = new Book(bookId,bookName,author, category, state);
+
+                    int i = bookDao.changeBook(book);
+                    if (i > 0) {
+                        JOptionPane.showMessageDialog(null, "修改成功！");
+                        refresh();
+                        dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "修改失败！");
+                    }
                 }
 
             });
@@ -334,41 +490,66 @@ public class AdminStorageFrame extends JFrame {
                     String cc = aa1 + String.valueOf(bb);
                     idText.setText(cc);
                 }
-
-
-
-
             }
 
         });
 
         // 删除
+
         del.addActionListener(new ActionListener() {
+
+
 
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                // TODO Auto-generated method stub
-                // 按照从下到上逐行删除（需添加鼠标事件）
-                int rowcount = table.getSelectedRow();
-//				System.out.println(rowcount);
-                if (rowcount >= 0) {
-                    tableModel.removeRow(rowcount);
-                    String aa = table.getValueAt(rowcount, 0).toString().substring(0, 1);
-                    for (int i = rowcount; i < table.getRowCount(); i++) {
-                        if (table.getValueAt(i, 0).toString().startsWith(aa)) {
-                            String ee = table.getValueAt(i, 0).toString();
-                            String ee1 = aa + String.valueOf(Long.parseLong(ee.substring(1, ee.length())) - 1);
-                            table.setValueAt(ee1, i, 0);
-                        }
-                    }
-                }
-//                table.revalidate();
-            }
+                new DelFrame();
 
+                int rowNum = table.getSelectedRow();
+
+                if (rowNum != -1) {
+                    String aa = table.getValueAt(rowNum, 0).toString();
+                    String aa1 = aa.substring(0, 1);
+                    String aa2 = aa.substring(1, aa.length());
+
+                    long bb = Long.parseLong(aa2) + 1;
+
+                    String cc = aa1 + String.valueOf(bb);
+                    idText.setText(cc);
+                }
+
+
+
+
+            }
         });
 
         // 修改
+        change.addActionListener(new ActionListener() {
 
+
+
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                new ChangeFrame();
+
+                int rowNum = table.getSelectedRow();
+
+                if (rowNum != -1) {
+                    String aa = table.getValueAt(rowNum, 0).toString();
+                    String aa1 = aa.substring(0, 1);
+                    String aa2 = aa.substring(1, aa.length());
+
+                    long bb = Long.parseLong(aa2) + 1;
+
+                    String cc = aa1 + String.valueOf(bb);
+                    idText.setText(cc);
+                }
+
+
+
+
+            }
+        });
 
         // 查找
         find.addActionListener(new ActionListener() {
@@ -390,6 +571,7 @@ public class AdminStorageFrame extends JFrame {
 
         });
     }
+
 
     public void refresh() {
         data = bookDaoImpl.getBookInfo();
