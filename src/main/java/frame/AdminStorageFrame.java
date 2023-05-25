@@ -116,6 +116,9 @@ public class AdminStorageFrame extends JFrame {
        this.dispose();
         //父窗口变可见
         setVisible(true);
+
+        //窗口大小不可变
+        setResizable(false);
     }
 
     /*添加单元格的内部类*/

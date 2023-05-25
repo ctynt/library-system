@@ -110,6 +110,8 @@ public class AdminBorrowFrame extends JFrame {
         this.dispose();
         //父窗口变可见
         setVisible(true);
+//        窗口大小不可变
+        setResizable(false);
 
         this.setLocationRelativeTo(null);//窗口在屏幕中间显示
     }
