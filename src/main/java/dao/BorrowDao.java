@@ -15,4 +15,6 @@ public interface BorrowDao {
     int delBorrow(int borrowId);
 
     int changeBorrow(Borrow borrow);
+
+    Object[][] getBorrowInfo();
 }

@@ -169,19 +169,4 @@ public class BookDaoImpl implements BookDao {
 
         return objects;
     }
-public Integer add(Connection con,Book book) throws SQLException {
-String sql = "insert into book values (null,?,?,?,?)";
-PreparedStatement pstmt = con.prepareStatement(sql);
-pstmt.setString(1,book.getBookName());
-pstmt.setString(2, book.getAuthor());
-pstmt.setString(3,book.getCategory());
-pstmt.setString(4, book.getState());
-return pstmt.executeUpdate();
-//Object[] params = {book.getBookId(),book.getBookName(),book.getAuthor(),book.getCategory(),book.getState()};
-//    try{
-//    return queryRunner.update(sql,params);
-//    }catch (SQLException e){
-//        e.printStackTrace();
-//    }
-    }
 }
