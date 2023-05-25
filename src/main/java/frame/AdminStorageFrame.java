@@ -13,6 +13,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Vector;
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import dao.BookDao;
 import dao.impl.BookDaoImpl;
@@ -79,7 +80,7 @@ public class AdminStorageFrame extends JFrame {
         data = bookDaoImpl.getBookInfo();
         tableModel = new DefaultTableModel(data,header);
         table = new JTable(tableModel);
-        // 创建表格
+//        // 创建表格
         table.getTableHeader().setFont(new Font(null, Font.BOLD, 14));
         // 设置表头名称字体样式
         table.getTableHeader().setForeground(Color.black);
@@ -88,10 +89,14 @@ public class AdminStorageFrame extends JFrame {
         // 设置不允许手动改变列宽
         table.getTableHeader().setReorderingAllowed(false);
         // 设置表头不允许拖动
+        DefaultTableCellRenderer r = new DefaultTableCellRenderer();
+        r.setHorizontalAlignment(JLabel.CENTER);
+        table.setDefaultRenderer(Object.class, r);
+        //单元格居中
         int v = ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED;
         // 水平滚动条
         int h = ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED;
-        // 垂直滚动条
+//         垂直滚动条
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -99,8 +104,9 @@ public class AdminStorageFrame extends JFrame {
                 new AdminMainFrame().setVisible(true);
             }
         });
+        System.out.println(h);
         JScrollPane jsp = new JScrollPane(table, v, h);
-        jsp.setBounds(26, 105, 778, 131);
+        jsp.setBounds(0, 36, 850, 400);
         this.add(jsp);
 //         新建表格
         tableModel = new DefaultTableModel(rowData, columnNames);
@@ -193,10 +199,9 @@ public class AdminStorageFrame extends JFrame {
             this.add(panelSouth, BorderLayout.SOUTH);
             this.add(panel);
             MyEvent();
-            this.setVisible(true);
-            this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            this.dispose();//子窗口销毁
+            setVisible(true);//父窗口变可见
         }
-
 
         public void refresh() {
             Object[][] data = bookDaoImpl.getBookInfo();
@@ -307,6 +312,12 @@ public class AdminStorageFrame extends JFrame {
             }
 
         });
+    }
+
+    public void refresh() {
+        data = bookDaoImpl.getBookInfo();
+        tableModel.setDataVector(data, header);
+
     }
 
     public static void main(String[] args) {

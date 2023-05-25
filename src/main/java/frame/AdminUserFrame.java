@@ -5,6 +5,7 @@ import dao.impl.ReaderDaoImpl;
 import domain.Reader;
 import storage.PutinStorage;
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -76,6 +77,10 @@ public class AdminUserFrame extends JFrame {
         // 设置不允许手动改变列宽
         table.getTableHeader().setReorderingAllowed(false);
         // 设置表头不允许拖动
+        DefaultTableCellRenderer r = new DefaultTableCellRenderer();
+        r.setHorizontalAlignment(JLabel.CENTER);
+        table.setDefaultRenderer(Object.class, r);
+        //单元格居中
         int v = ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED;
         // 水平滚动条
         int h = ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED;
@@ -88,7 +93,7 @@ public class AdminUserFrame extends JFrame {
             }
         });
         JScrollPane jsp = new JScrollPane(table, v, h);
-        jsp.setBounds(26, 105, 778, 131);
+        jsp.setBounds(0, 36, 850, 500);
         this.add(jsp);
 //         新建表格
         tableModel = new DefaultTableModel(rowData, columnNames);
@@ -102,8 +107,8 @@ public class AdminUserFrame extends JFrame {
 
         MyEvent();
 
-        this.setVisible(true);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();//子窗口销毁
+        setVisible(true);//父窗口变可见
     }
 
     // 添加单元格的内部类
@@ -170,8 +175,8 @@ public class AdminUserFrame extends JFrame {
             this.add(panelSouth, BorderLayout.SOUTH);
             this.add(panel);
             MyEvent();
-            this.setVisible(true);
-            this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            this.dispose();//子窗口销毁
+            setVisible(true);//父窗口变可见
         }
 
 
