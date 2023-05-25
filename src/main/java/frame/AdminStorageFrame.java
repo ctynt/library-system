@@ -119,14 +119,13 @@ public class AdminStorageFrame extends JFrame {
         this.add(s);
 
         MyEvent();
-
-//        this.setVisible(true);
-//        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();//子窗口销毁
-        setVisible(true);//父窗口变可见
+        //子窗口销毁
+        this.dispose();
+        //父窗口变可见
+        setVisible(true);
     }
 
-    // 添加单元格的内部类
+    /*添加单元格的内部类*/
     class AddFrame extends JFrame {
 
 

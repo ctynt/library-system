@@ -68,9 +68,10 @@ public class AdminBorrowFrame extends JFrame {
         this.add(s);
 
         MyEvent();
-
-        this.setVisible(true);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //子窗口销毁
+        this.dispose();
+        //父窗口变可见
+        setVisible(true);
     }
     class AddFrame extends JFrame{
 
@@ -141,13 +142,7 @@ public class AdminBorrowFrame extends JFrame {
             bg.add(stateRadio1);
             bg.add(stateRadio2);
 
-//            year = new JLabel("年");
-//            mon = new JLabel("月");
-//            day = new JLabel("日");
-//
-//            yearText = new JComboBox(years);
-//            monText = new JComboBox(month);
-//            dayText = new JComboBox(days);
+
 
             panelRight = new JPanel[5];
             panelLeft = new JPanel[5];

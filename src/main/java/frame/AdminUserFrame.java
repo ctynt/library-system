@@ -290,8 +290,8 @@ public class AdminUserFrame extends JFrame {
                 // TODO Auto-generated method stub
                 System.exit(0);
             }
-
         });
+
     }
     public static void main(String[] args) {
         new AdminUserFrame("读者信息管理");
