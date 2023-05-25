@@ -200,8 +200,8 @@ public class AdminStorageFrame extends JFrame {
             this.add(panelSouth, BorderLayout.SOUTH);
             this.add(panel);
             MyEvent();
-            this.setVisible(true);
-            this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            this.dispose();//子窗口销毁
+            setVisible(true);//父窗口变可见
         }
 
 

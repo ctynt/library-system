@@ -100,8 +100,8 @@ public class AdminUserFrame extends JFrame {
 
         MyEvent();
 
-        this.setVisible(true);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();//子窗口销毁
+        setVisible(true);//父窗口变可见
     }
 
     // 添加单元格的内部类
@@ -168,8 +168,8 @@ public class AdminUserFrame extends JFrame {
             this.add(panelSouth, BorderLayout.SOUTH);
             this.add(panel);
             MyEvent();
-            this.setVisible(true);
-            this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            this.dispose();//子窗口销毁
+            setVisible(true);//父窗口变可见
         }
 
         public void MyEvent() {
