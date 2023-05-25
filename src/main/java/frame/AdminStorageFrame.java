@@ -29,6 +29,8 @@ import static java.lang.Integer.parseInt;
 
 public class AdminStorageFrame extends JFrame {
 
+
+
     BookDao bookDao = new BookDaoImpl();
 
     DefaultTableModel tableModel;
@@ -61,6 +63,8 @@ public class AdminStorageFrame extends JFrame {
     BookDaoImpl bookDaoImpl = new BookDaoImpl();
 
     public AdminStorageFrame(String title) {
+
+
         this.setBounds(300, 200, 850, 450);
         this.setLocationRelativeTo(null);
         this.setTitle(title);
@@ -120,7 +124,6 @@ public class AdminStorageFrame extends JFrame {
         this.add(s);
 
         MyEvent();
-
 //        this.setVisible(true);
 //        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.dispose();//子窗口销毁
@@ -202,6 +205,8 @@ public class AdminStorageFrame extends JFrame {
             MyEvent();
             this.dispose();//子窗口销毁
             setVisible(true);//父窗口变可见
+
+
         }
 
 
