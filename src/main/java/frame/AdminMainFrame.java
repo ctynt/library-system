@@ -5,34 +5,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * @Author ctynt
- * @Date 2023/5/22
- * @Description
- */
-
 public class AdminMainFrame extends JFrame {
     JPanel panel;
     JButton storage, borrowInfo, userInfo;
 
     public AdminMainFrame() {
-//        this.setTitle("管理员");
-//        this.setBounds(500,200,400,400);
-//        this.setLayout(new FlowLayout(FlowLayout.CENTER));
-//
-//        storage = new JButton("图书信息管理");
-//        lendInfo = new JButton("借阅信息管理");
-//        user = new JButton("用户信息管理");
-//
-//
-//        this.add(user);
-//        this.add(storage);
-//        this.add(lendInfo);
-//
-//        MyEvent();
-//
-//        this.setVisible(true);
-//        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         super("图书管理系统--管理员后台");
         setFont(new Font("宋体", Font.PLAIN, 35));
