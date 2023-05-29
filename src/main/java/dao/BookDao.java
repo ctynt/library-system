@@ -19,7 +19,7 @@ public interface BookDao {
 
     int changeBook(Book book);
 
-    int delBook(int bookId);
+    int delBook(int bookId,String bookName);
     Object[][] getBookInfo();
 
     }
