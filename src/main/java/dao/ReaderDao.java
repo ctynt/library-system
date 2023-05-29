@@ -17,4 +17,6 @@ public interface ReaderDao {
 
     int delReader(int readerId);
     Object[][] getReaderInfo();
+
+    Reader findReader(int readerId);
 }

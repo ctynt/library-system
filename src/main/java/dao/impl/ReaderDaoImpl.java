@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 /**
@@ -21,7 +22,7 @@ public  class ReaderDaoImpl implements ReaderDao {
     private Connection conn;
     private PreparedStatement ps;
     private ResultSet resultSet;
-    private JDBCUtil db = new JDBCUtil();
+    private JDBCUtil jdbcUtil = new JDBCUtil();
 
     @Override
     public boolean checkLogin(Reader user) {
@@ -196,5 +197,32 @@ public  class ReaderDaoImpl implements ReaderDao {
             }
         }
         return result;
+    }
+
+    //    查询借阅
+    public Reader findReader(int readerId) {
+        Reader reader=new Reader();
+        String sql = "select * from reader where readerId=?";
+        Object[] params = {readerId};
+        ArrayList<HashMap> list = jdbcUtil.executeQuery(sql, params);
+        System.out.println(list.size());
+        System.out.println(list);
+        if(list.size()>0){
+            HashMap map = list.get(0);
+            Integer readerId0=Integer.parseInt(map.get("readerId").toString());
+            String readerName=map.get("readerName").toString();
+            Integer readerLimit=Integer.parseInt(map.get("readerLimit").toString());
+            String readerPassword=map.get("readerPassword").toString();
+            Integer readerLend=Integer.parseInt(map.get("readerLend").toString());
+            reader.setReaderName(readerName);
+            reader.setReaderLimit(readerLimit);
+            reader.setReaderId(readerId0);
+            reader.setReaderPassword(readerPassword);
+            reader.setReaderLend(readerLend);
+            System.out.println(reader);
+        }
+
+        return reader;
+
     }
 }

@@ -46,4 +46,9 @@ ReaderDao readerDao = new ReaderDaoImpl();
         reader.setReaderPassword("777");
         int i = readerDao.changeReader(reader);
     }
+
+    @Test
+    void findReader() {
+        readerDao.findReader(3);
+    }
 }

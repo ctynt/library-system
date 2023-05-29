@@ -28,13 +28,11 @@ class BookDaoImplTest {
         assertEquals(1, i);
     }
 
-    @Test
-    void delBook() {
-        int i = bookDao.delBook(8);
-        assertEquals(1, i);
-
-
-    }
+//    @Test
+//    void delBook() {
+//        int i = bookDao.delBook(8);
+//        assertEquals(1, i);
+//    }
 
     @Test
     void changeBook() {

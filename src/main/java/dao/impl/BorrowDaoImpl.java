@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * @Author ctynt
@@ -21,7 +22,7 @@ public class BorrowDaoImpl implements BorrowDao {
     private Connection conn;
     private PreparedStatement ps;
     private ResultSet resultSet;
-    private JDBCUtil db = new JDBCUtil();
+    private JDBCUtil jdbcUtil = new JDBCUtil();
     @Override
     public int addBorrow(Borrow borrow){
 
@@ -165,5 +166,6 @@ public class BorrowDaoImpl implements BorrowDao {
 
         return objects;
     }
+
 
 }
