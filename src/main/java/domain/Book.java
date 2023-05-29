@@ -63,4 +63,13 @@ public class Book {
     public Book(){
 
     }
+
+    @Override
+    public String toString() {
+        return  "图书编号：" + bookId +
+                ", 图书名称：" + bookName +
+                ", 作者：" + author +
+                ", 类别：" + category  +
+                ", 状态：" + state +"。" ;
+    }
 }
