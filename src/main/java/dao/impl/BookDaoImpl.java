@@ -67,7 +67,7 @@ public class BookDaoImpl implements BookDao {
      * 删除图书信息
      */
     @Override
-    public int delBook(int bookId) {
+    public int delBook(int bookId,String bookName) {
         int result = 0;
         try {
             // 取得数据库连接
@@ -76,12 +76,13 @@ public class BookDaoImpl implements BookDao {
             String sql = "" +
                     "DELETE FROM book " +
                     // 参数用?表示，相当于占位符
-                    "WHERE bookId = ?";
+                    "WHERE bookId = ? AND bookName = ?";
 
             // 创建查询的PreparedStatement类
             ps = conn.prepareStatement(sql);
             // 设置查询类的1个参数
             ps.setInt(1, bookId);
+            ps.setString(2,bookName);
             // 执行查询操作
             result = ps.executeUpdate();
         } catch (Exception e) {

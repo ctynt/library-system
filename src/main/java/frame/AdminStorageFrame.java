@@ -9,9 +9,11 @@ import java.util.Vector;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+
 import dao.BookDao;
 import dao.impl.BookDaoImpl;
 import domain.Book;
+
 import static java.lang.Integer.parseInt;
 
 public class AdminStorageFrame extends JFrame {
@@ -22,9 +24,16 @@ public class AdminStorageFrame extends JFrame {
     JMenuBar menuBar;
     JButton add, del, exit, find, change;
     JTable table;
-    /*增加信息的面板*/
-    JPanel panelUP, panelDown;
+
+    /**
+     * 增加信息的面板
+     */
+    JPanel panelUP;
+    /* *
+     *内部类中的变量*/
+
     /*内部类中的变量*/
+
     JLabel[] label;
     JComboBox typeBox;
     JRadioButton stateRadio1, stateRadio2;
@@ -36,7 +45,7 @@ public class AdminStorageFrame extends JFrame {
     String[] str = null;
     JPanel[] panelLeft, panelRight;
 
-    Object[] header = {"图书编号","书名","作者","类型","状态"};
+    Object[] header = {"图书编号", "书名", "作者", "类型", "状态"};
 
     Object[][] data;
 
@@ -68,7 +77,7 @@ public class AdminStorageFrame extends JFrame {
         Vector columnNames = null;
 
         data = bookDaoImpl.getBookInfo();
-        tableModel = new DefaultTableModel(data,header);
+        tableModel = new DefaultTableModel(data, header);
         table = new JTable(tableModel);
 //        // 创建表格
         table.getTableHeader().setFont(new Font(null, Font.BOLD, 14));
@@ -110,7 +119,7 @@ public class AdminStorageFrame extends JFrame {
 
         MyEvent();
         //子窗口销毁
-       this.dispose();
+        this.dispose();
         //父窗口变可见
         setVisible(true);
 
@@ -212,21 +221,21 @@ public class AdminStorageFrame extends JFrame {
                     String bookName = nameText.getText();
                     String author = authorText.getText();
                     String category = (String) typeBox.getSelectedItem();
-                    String state =null;
+                    String state = null;
                     if (stateRadio1.isSelected()) {
                         state = stateRadio1.getText();
                     } else if (stateRadio2.isSelected()) {
-                        state= stateRadio2.getText();
+                        state = stateRadio2.getText();
                     }
-                    Book book  = new Book(bookId,bookName,author, category, state);
+                    Book book = new Book(bookId, bookName, author, category, state);
                     int i = bookDao.addBook(book);
-                if (i > 0) {
-                    JOptionPane.showMessageDialog(null, "添加成功！");
-                    refresh();
-                    dispose();
-                } else {
-                    JOptionPane.showMessageDialog(null, "添加失败！");
-                }
+                    if (i > 0) {
+                        JOptionPane.showMessageDialog(null, "添加成功！");
+                        refresh();
+                        dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "添加失败！");
+                    }
                 }
             });
         }
@@ -236,77 +245,36 @@ public class AdminStorageFrame extends JFrame {
 
 
         public DelFrame() {
+            setLayout(null);
             this.setTitle("删除图书");
             this.setLocationRelativeTo(null);
             this.setBounds(300, 200, 500, 350);
-            this.setLocationRelativeTo(null);
-            panel = new JPanel();
-            panel.setLayout(new GridLayout(8, 2));
-            panelSouth = new JPanel();
-            panelSouth.setLayout(new FlowLayout(FlowLayout.CENTER));
-            button = new JButton("OK");
-            panelSouth.add(button);
-            label = new JLabel[5];
+
+            label = new JLabel[2];
             label[0] = new JLabel("图书编号：");
             label[1] = new JLabel("图书名称：");
-            label[2] = new JLabel("图书作者：");
-            label[3] = new JLabel("图书类型：");
-            label[4] = new JLabel("借阅状态：");
+            label[0].setBounds(new Rectangle(140, 30, 70, 30));
+            label[1].setBounds(new Rectangle(140, 60, 70, 30));
 
-            idText = new JTextField(10);
-            nameText = new JTextField(10);
-            authorText = new JTextField(10);
-            String[] types = {"外国文学", "哲学", "历史", "中国文学"};
+            idText = new JTextField();
+            nameText = new JTextField();
 
-            typeBox = new JComboBox(types);
-            cg = new CheckboxGroup();
-            stateRadio1 = new JRadioButton("借阅");
-            stateRadio2 = new JRadioButton("在馆");
-            bg = new ButtonGroup();
-            bg.add(stateRadio1);
-            bg.add(stateRadio2);
+            idText.setBounds(new Rectangle(210, 35, 140, 20));
+            nameText.setBounds(new Rectangle(210, 65, 140, 20));
 
-            panelRight = new JPanel[5];
-            panelLeft = new JPanel[5];
-            for (int i = 0; i < panelRight.length; i++) {
-                panelRight[i] = new JPanel();
-                panelRight[i].setLayout(new FlowLayout(FlowLayout.LEFT));
-            }
+            button = new JButton("OK");
+            button.setBounds(new Rectangle(210, 120, 100, 20));
 
-            for (int i = 0; i < panelLeft.length; i++) {
-                panelLeft[i] = new JPanel();
-                panelLeft[i].setLayout(new FlowLayout(FlowLayout.RIGHT));
-            }
+            this.add(label[0]);
+            this.add(label[1]);
 
-            for (int i = 0; i < panelLeft.length; i++) {
-                for (int j = i; j < label.length; j++) {
-                    panelLeft[i].add(label[j]);
-                }
-            }
+            this.add(idText);
+            this.add(button);
+            this.add(nameText);
 
-            panelRight[0].add(idText);
-            panelRight[1].add(nameText);
-            panelRight[2].add(authorText);
-            panelRight[3].add(typeBox);
-            panelRight[4].add(stateRadio1);
-            panelRight[4].add(stateRadio2);
-
-            panel.add(panelLeft[0]);
-            panel.add(panelRight[0]);
-            panel.add(panelLeft[1]);
-            panel.add(panelRight[1]);
-            panel.add(panelLeft[2]);
-            panel.add(panelRight[2]);
-            panel.add(panelLeft[3]);
-            panel.add(panelRight[3]);
-            panel.add(panelLeft[4]);
-            panel.add(panelRight[4]);
-            this.add(panelSouth, BorderLayout.SOUTH);
-            this.add(panel);
             MyEvent();
             this.dispose();//子窗口销毁
             setVisible(true);//父窗口变可见
-
         }
 
         public void MyEvent() {
@@ -318,24 +286,24 @@ public class AdminStorageFrame extends JFrame {
 
                     int bookId = parseInt(idText.getText());
                     String bookName = nameText.getText();
-                    String author = authorText.getText();
-                    String category = (String) typeBox.getSelectedItem();
-                    String state =null;
-                    if (stateRadio1.isSelected()) {
-                        state = stateRadio1.getText();
-                    } else if (stateRadio2.isSelected()) {
-                        state= stateRadio2.getText();
-                    }
+//                    String author = authorText.getText();
+//                    String category = (String) typeBox.getSelectedItem();
+//                    String state =null;
+//                    if (stateRadio1.isSelected()) {
+//                        state = stateRadio1.getText();
+//                    } else if (stateRadio2.isSelected()) {
+//                        state= stateRadio2.getText();
+//                    }
+//
+//                    Book book  = new Book(bookId,bookName,author, category, state);
 
-                    Book book  = new Book(bookId,bookName,author, category, state);
-
-                    int i = bookDao.delBook(bookId);
+                    int i = bookDao.delBook(bookId, bookName);
                     if (i > 0) {
                         JOptionPane.showMessageDialog(null, "删除成功！");
                         refresh();
                         dispose();
                     } else {
-                        JOptionPane.showMessageDialog(null, "删除失败！");
+                        JOptionPane.showMessageDialog(null, "该图书不存在，删除失败！");
                     }
                 }
 
@@ -431,13 +399,15 @@ public class AdminStorageFrame extends JFrame {
                     String bookName = nameText.getText();
                     String author = authorText.getText();
                     String category = (String) typeBox.getSelectedItem();
-                    String state =null;
+                    String state = null;
                     if (stateRadio1.isSelected()) {
                         state = stateRadio1.getText();
                     } else if (stateRadio2.isSelected()) {
-                        state= stateRadio2.getText();
+                        state = stateRadio2.getText();
                     }
+
                     Book book  = new Book(bookId,bookName,author, category, state);
+
                     int i = bookDao.changeBook(book);
                     if (i > 0) {
                         JOptionPane.showMessageDialog(null, "修改成功！");
@@ -589,11 +559,9 @@ public class AdminStorageFrame extends JFrame {
         // 删除
 
         del.addActionListener(new ActionListener() {
-
-
-
             @Override
             public void actionPerformed(ActionEvent arg0) {
+
                 new DelFrame();
 
                 int rowNum = table.getSelectedRow();
@@ -610,14 +578,11 @@ public class AdminStorageFrame extends JFrame {
                 }
 
 
-
-
             }
         });
 
         // 修改
         change.addActionListener(new ActionListener() {
-
 
 
             @Override
@@ -636,8 +601,6 @@ public class AdminStorageFrame extends JFrame {
                     String cc = aa1 + String.valueOf(bb);
                     idText.setText(cc);
                 }
-
-
 
 
             }
