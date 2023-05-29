@@ -29,7 +29,7 @@ class BookDaoImplTest {
 
     @Test
     void delBook() {
-        int i = bookDao.delBook(8);
+        int i = bookDao.delBook(8,"66");
         assertEquals(1,i);
 
 
