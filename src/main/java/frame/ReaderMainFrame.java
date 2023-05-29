@@ -23,7 +23,7 @@ public class ReaderMainFrame extends JFrame {
 
         JLabel lblxxx = new JLabel("你好,读者,欢迎使用图书借阅系统！");
         lblxxx.setFont(new Font("宋体", Font.PLAIN, 35));
-        lblxxx.setBounds(44, 35, 726, 91);
+        lblxxx.setBounds(100, 35, 726, 91);
         this.add(lblxxx);
 
         storage = new JButton("图书信息浏览");

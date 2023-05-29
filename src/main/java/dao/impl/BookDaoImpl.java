@@ -173,6 +173,7 @@ public class BookDaoImpl implements BookDao {
     }
 
 //    查询图书
+    @Override
 public Book findBook(int bookId) {
     Book book=new Book();
     String sql = "select * from book where bookId=?";

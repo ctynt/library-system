@@ -32,7 +32,7 @@ ReaderDao readerDao = new ReaderDaoImpl();
 
     @Test
     void delReader() {
-        int i = readerDao.delReader(6);
+        int i = readerDao.delReader(6,"王大炮");
 //        assertEquals(1,i);
 
     }

@@ -1,5 +1,7 @@
 package utils;
 
+import domain.Reader;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -84,8 +86,6 @@ public class JDBCUtil {
             affectedline = preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-
         }
         return affectedline;
     }
@@ -143,4 +143,7 @@ public class JDBCUtil {
         }
         return list;
     }
+
 }
+
+

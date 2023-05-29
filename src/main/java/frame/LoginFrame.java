@@ -31,7 +31,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 	private ReaderDao readerDao = new ReaderDaoImpl();
 	private AdminDao adminDAO = new AdminDaoImpl();
 
-	public LoginFrame() {
+	public LoginFrame(String text) {
 		// 取得窗口面板
 		contentPane = (JPanel) this.getContentPane();
 		// 定义窗口面板的布局
@@ -134,8 +134,8 @@ public class LoginFrame extends JFrame implements ActionListener {
 	}
 
 	public static void main(String[] args) throws Exception {
-		new LoginFrame();
-
+		Label exit = null;
+		new LoginFrame(exit.getText());
 	}
 }
 
