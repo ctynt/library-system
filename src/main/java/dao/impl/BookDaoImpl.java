@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * @Author ctynt
@@ -20,7 +21,7 @@ public class BookDaoImpl implements BookDao {
     private Connection conn;
     private PreparedStatement ps;
     private ResultSet resultSet;
-    private JDBCUtil db = new JDBCUtil();
+    private JDBCUtil jdbcUtil =JDBCUtil.getInitJDBCUtil();
 
     @Override
 
@@ -169,4 +170,31 @@ public class BookDaoImpl implements BookDao {
 
         return objects;
     }
+
+//    查询图书
+public Book findBook(int bookId) {
+    Book book=new Book();
+    String sql = "select * from book where bookId=?";
+    Object[] params = {bookId};
+    ArrayList<HashMap> list = jdbcUtil.executeQuery(sql, params);
+    System.out.println(list.size());
+    System.out.println(list);
+    if(list.size()>0){
+        HashMap map = list.get(0);
+        Integer bookId0=Integer.parseInt(map.get("bookId").toString());
+        String bookName=map.get("bookName").toString();
+        String author=map.get("author").toString();
+        String  category=map.get("category").toString();
+        String state=map.get("state").toString();
+        book.setBookName(bookName);
+        book.setAuthor(author);
+        book.setCategory(category);
+        book.setBookId(bookId0);
+        book.setState(state);
+        System.out.println(book);
+    }
+
+    return book;
+
+}
 }

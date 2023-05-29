@@ -415,6 +415,8 @@ public class AdminUserFrame extends JFrame {
         }
     }
 
+
+
     public void MyEvent() {
         // 增加
         add.addActionListener(new ActionListener() {
