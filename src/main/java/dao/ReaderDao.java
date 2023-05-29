@@ -15,6 +15,6 @@ public interface ReaderDao {
     int addReader(Reader reader);
     int changeReader(Reader reader);
 
-    int delReader(int readerId);
+    int delReader(int readerId,String readerName);
     Object[][] getReaderInfo();
 }

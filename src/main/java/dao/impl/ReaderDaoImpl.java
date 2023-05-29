@@ -101,7 +101,7 @@ public  class ReaderDaoImpl implements ReaderDao {
      * 删除读者信息
      */
     @Override
-    public int delReader(int readerId) {
+    public int delReader(int readerId,String readerName) {
         int result = 0;
         try {
             // 取得数据库连接
@@ -109,12 +109,13 @@ public  class ReaderDaoImpl implements ReaderDao {
             // 创建数据表的查询SQL语句
             String sql = "" + "DELETE FROM reader " +
                     // 参数用?表示，相当于占位符
-                    "WHERE readerId = ?";
+                    "WHERE readerId = ? AND readerName = ?";
 
             // 创建查询的PreparedStatement类
             ps = conn.prepareStatement(sql);
             // 设置查询类的1个参数
             ps.setInt(1, readerId);
+            ps.setString(2,readerName);
             // 执行查询操作
             result = ps.executeUpdate();
         } catch (Exception e) {

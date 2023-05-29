@@ -219,64 +219,33 @@ public class AdminUserFrame extends JFrame {
 
 
         public DelFrame() {
+            setLayout(null);
             this.setTitle("删除读者信息");
-            this.setBounds(300, 200, 500, 350);
             this.setLocationRelativeTo(null);
-            panel = new JPanel();
-            panel.setLayout(new GridLayout(8, 2));
-            panelSouth = new JPanel();
-            panelSouth.setLayout(new FlowLayout(FlowLayout.CENTER));
-            button = new JButton("OK");
-            panelSouth.add(button);
-            label = new JLabel[5];
+            this.setBounds(300, 200, 500, 350);
+
+            label = new JLabel[2];
             label[0] = new JLabel("读者编号：");
-            label[1] = new JLabel("读者姓名：");
-            label[2] = new JLabel("借书限额：");
-            label[3] = new JLabel("用户密码：");
-            label[4] = new JLabel("已借图书编号：");
+            label[1] = new JLabel("读者名称：");
+            label[0].setBounds(new Rectangle(140, 30, 70, 30));
+            label[1].setBounds(new Rectangle(140, 60, 70, 30));
 
-            idText = new JTextField(10);
-            nameText = new JTextField(10);
-            limitText = new JTextField(10);
-            passwordText = new JTextField(10);
-            lendText = new JTextField(10);
+            idText = new JTextField();
+            nameText = new JTextField();
 
-            panelRight = new JPanel[5];
-            panelLeft = new JPanel[5];
-            for (int i = 0; i < panelRight.length; i++) {
-                panelRight[i] = new JPanel();
-                panelRight[i].setLayout(new FlowLayout(FlowLayout.LEFT));
-            }
+            idText.setBounds(new Rectangle(210, 35, 140, 20));
+            nameText.setBounds(new Rectangle(210, 65, 140, 20));
 
-            for (int i = 0; i < panelLeft.length; i++) {
-                panelLeft[i] = new JPanel();
-                panelLeft[i].setLayout(new FlowLayout(FlowLayout.RIGHT));
-            }
+            button = new JButton("OK");
+            button.setBounds(new Rectangle(210, 120, 100, 20));
 
-            for (int i = 0; i < panelLeft.length; i++) {
-                for (int j = i; j < label.length; j++) {
-                    panelLeft[i].add(label[j]);
-                }
-            }
+            this.add(label[0]);
+            this.add(label[1]);
 
-            panelRight[0].add(idText);
-            panelRight[1].add(nameText);
-            panelRight[2].add(limitText);
-            panelRight[3].add(passwordText);
-            panelRight[4].add(lendText);
+            this.add(idText);
+            this.add(button);
+            this.add(nameText);
 
-            panel.add(panelLeft[0]);
-            panel.add(panelRight[0]);
-            panel.add(panelLeft[1]);
-            panel.add(panelRight[1]);
-            panel.add(panelLeft[2]);
-            panel.add(panelRight[2]);
-            panel.add(panelLeft[3]);
-            panel.add(panelRight[3]);
-            panel.add(panelLeft[4]);
-            panel.add(panelRight[4]);
-            this.add(panelSouth, BorderLayout.SOUTH);
-            this.add(panel);
             MyEvent();
             this.dispose();//子窗口销毁
             setVisible(true);//父窗口变可见
@@ -295,18 +264,13 @@ public class AdminUserFrame extends JFrame {
                     // TODO Auto-generated method stub
                     int readerId = parseInt(idText.getText());
                     String readerName = nameText.getText();
-                    int readerLimit = Integer.parseInt(limitText.getText());
-                    String readerPassword = passwordText.getText();
-                    int readerLend = parseInt(lendText.getText());
-                    Reader reader = new Reader(readerId, readerName, readerLimit, readerPassword, readerLend);
-
-                    int i = readerDao.delReader(readerId);
+                    int i = readerDao.delReader(readerId, readerName);
                     if (i > 0) {
                         JOptionPane.showMessageDialog(null, "删除成功！");
                         refresh();
                         dispose();
                     } else {
-                        JOptionPane.showMessageDialog(null, "删除失败！");
+                        JOptionPane.showMessageDialog(null, "该读者不存在，删除失败！");
                     }
                 }
 
@@ -414,6 +378,8 @@ public class AdminUserFrame extends JFrame {
             });
         }
     }
+
+
 
     public void MyEvent() {
         // 增加
