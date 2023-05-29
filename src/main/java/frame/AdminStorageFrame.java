@@ -24,12 +24,16 @@ public class AdminStorageFrame extends JFrame {
     JMenuBar menuBar;
     JButton add, del, exit, find, change;
     JTable table;
+
     /**
      * 增加信息的面板
      */
     JPanel panelUP;
     /* *
      *内部类中的变量*/
+
+    /*内部类中的变量*/
+
     JLabel[] label;
     JComboBox typeBox;
     JRadioButton stateRadio1, stateRadio2;
@@ -391,7 +395,6 @@ public class AdminStorageFrame extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     // TODO Auto-generated method stub
-
                     int bookId = parseInt(idText.getText());
                     String bookName = nameText.getText();
                     String author = authorText.getText();
@@ -403,7 +406,7 @@ public class AdminStorageFrame extends JFrame {
                         state = stateRadio2.getText();
                     }
 
-                    Book book = new Book(bookId, bookName, author, category, state);
+                    Book book  = new Book(bookId,bookName,author, category, state);
 
                     int i = bookDao.changeBook(book);
                     if (i > 0) {

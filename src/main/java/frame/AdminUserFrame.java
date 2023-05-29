@@ -4,6 +4,7 @@ import dao.ReaderDao;
 import dao.impl.ReaderDaoImpl;
 import domain.Reader;
 import storage.PutinStorage;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -13,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Vector;
+
 import static java.lang.Integer.parseInt;
 
 public class AdminUserFrame extends JFrame {
@@ -22,26 +24,23 @@ public class AdminUserFrame extends JFrame {
     JMenuBar menuBar;
     JButton add, del, exit, find, change;
     JTable table;
-    /**
-     * 增加信息的面板
-     */
+    /*增加信息的面板*/
     JPanel panelUP, panelDown;
-    /* *
-     *内部类中的变量*/
+    /*内部类中的变量*/
     JLabel[] label;
-    JTextField idText, nameText, limitText,passwordText,lendText;
+    JTextField idText, nameText, limitText, passwordText, lendText;
     JPanel panel, panelSouth;
     JButton button;
     String[] str = null;
     JPanel[] panelLeft, panelRight;
 
-    Object[] header = {"读者编号","读者姓名","借书限额","用户密码","已借图书编号"};
+    Object[] header = {"读者编号", "读者姓名", "借书限额", "用户密码", "已借图书编号"};
 
-    Object[][] data = null;
+    Object[][] data;
 
     ReaderDaoImpl readerDaoImpl = new ReaderDaoImpl();
 
-    public  AdminUserFrame(String title) {
+    public AdminUserFrame(String title) {
         this.setBounds(300, 200, 850, 450);
         this.setLocationRelativeTo(null);
         this.setTitle(title);
@@ -65,7 +64,7 @@ public class AdminUserFrame extends JFrame {
         Vector columnNames = null;
 
         data = readerDaoImpl.getReaderInfo();
-        tableModel = new DefaultTableModel(data,header);
+        tableModel = new DefaultTableModel(data, header);
         table = new JTable(tableModel);
 
         // 创建表格
@@ -114,7 +113,7 @@ public class AdminUserFrame extends JFrame {
         setResizable(false);
     }
 
-    // 添加单元格的内部类
+    /*增加读者信息*/
     class AddFrame extends JFrame {
 
 
@@ -139,7 +138,7 @@ public class AdminUserFrame extends JFrame {
             nameText = new JTextField(10);
             limitText = new JTextField(10);
             passwordText = new JTextField(10);
-            lendText= new JTextField(10);
+            lendText = new JTextField(10);
 
             panelRight = new JPanel[5];
             panelLeft = new JPanel[5];
@@ -197,9 +196,9 @@ public class AdminUserFrame extends JFrame {
                     int readerId = parseInt(idText.getText());
                     String readerName = nameText.getText();
                     int readerLimit = Integer.parseInt(limitText.getText());
-                   String readerPassword = passwordText.getText();
-                   int readerLend = parseInt(lendText.getText());
-                    Reader reader  = new Reader(readerId,readerName,readerLimit,readerPassword,readerLend);
+                    String readerPassword = passwordText.getText();
+                    int readerLend = parseInt(lendText.getText());
+                    Reader reader = new Reader(readerId, readerName, readerLimit, readerPassword, readerLend);
 
                     int i = readerDao.addReader(reader);
                     if (i > 0) {
@@ -215,11 +214,12 @@ public class AdminUserFrame extends JFrame {
         }
     }
 
+    /*删除读者信息*/
     class DelFrame extends JFrame {
 
 
         public DelFrame() {
-            this.setTitle("删除读者");
+            this.setTitle("删除读者信息");
             this.setBounds(300, 200, 500, 350);
             this.setLocationRelativeTo(null);
             panel = new JPanel();
@@ -239,7 +239,7 @@ public class AdminUserFrame extends JFrame {
             nameText = new JTextField(10);
             limitText = new JTextField(10);
             passwordText = new JTextField(10);
-            lendText= new JTextField(10);
+            lendText = new JTextField(10);
 
             panelRight = new JPanel[5];
             panelLeft = new JPanel[5];
@@ -282,7 +282,6 @@ public class AdminUserFrame extends JFrame {
             setVisible(true);//父窗口变可见
         }
 
-
         public void refresh() {
             Object[][] data = readerDaoImpl.getReaderInfo();
             tableModel.setDataVector(data, header);
@@ -299,7 +298,7 @@ public class AdminUserFrame extends JFrame {
                     int readerLimit = Integer.parseInt(limitText.getText());
                     String readerPassword = passwordText.getText();
                     int readerLend = parseInt(lendText.getText());
-                    Reader reader  = new Reader(readerId,readerName,readerLimit,readerPassword,readerLend);
+                    Reader reader = new Reader(readerId, readerName, readerLimit, readerPassword, readerLend);
 
                     int i = readerDao.delReader(readerId);
                     if (i > 0) {
@@ -315,11 +314,12 @@ public class AdminUserFrame extends JFrame {
         }
     }
 
+    /*修改读者信息*/
     class ChangeFrame extends JFrame {
 
 
         public ChangeFrame() {
-            this.setTitle("修改读者");
+            this.setTitle("修改读者信息");
             this.setBounds(300, 200, 500, 350);
             this.setLocationRelativeTo(null);
             panel = new JPanel();
@@ -339,7 +339,7 @@ public class AdminUserFrame extends JFrame {
             nameText = new JTextField(10);
             limitText = new JTextField(10);
             passwordText = new JTextField(10);
-            lendText= new JTextField(10);
+            lendText = new JTextField(10);
 
             panelRight = new JPanel[5];
             panelLeft = new JPanel[5];
@@ -399,7 +399,7 @@ public class AdminUserFrame extends JFrame {
                     int readerLimit = Integer.parseInt(limitText.getText());
                     String readerPassword = passwordText.getText();
                     int readerLend = parseInt(lendText.getText());
-                    Reader reader  = new Reader(readerId,readerName,readerLimit,readerPassword,readerLend);
+                    Reader reader = new Reader(readerId, readerName, readerLimit, readerPassword, readerLend);
 
                     int i = readerDao.changeReader(reader);
                     if (i > 0) {
@@ -505,6 +505,7 @@ public class AdminUserFrame extends JFrame {
         });
 
     }
+
     public static void main(String[] args) {
         new AdminUserFrame("读者信息管理");
     }
