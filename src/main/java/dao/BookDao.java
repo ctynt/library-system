@@ -22,5 +22,7 @@ public interface BookDao {
     int delBook(int bookId,String bookName);
     Object[][] getBookInfo();
 
+    Book findBook(int bookId);
+
     }
 
