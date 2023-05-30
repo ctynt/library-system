@@ -1,8 +1,6 @@
 package frame;
 
-import dao.BookDao;
 import dao.impl.BookDaoImpl;
-import dao.impl.BorrowDaoImpl;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -16,20 +14,18 @@ import java.util.Vector;
  * @version 1.0.0
  * @Author zhy
  * @Date 2023/5/29 8:08
- * @Description
+ * @Description 读者--图书借阅系统--图书信息浏览
  */
 public class ReaderStorageFrame extends JFrame {
 
     DefaultTableModel tableModel;
     JTable table;
-    /*增加信息的面板*/
     JPanel panelUP;
-
-    Object[] header = {"图书编号","书名","作者","类别","状态"};
-
+    Object[] header = {"图书编号", "书名", "作者", "类别", "状态"};
     Object[][] data;
 
     BookDaoImpl bookDaoImpl = new BookDaoImpl();
+
     public ReaderStorageFrame(String title) {
         super("图书借阅系统--图书信息浏览");
         this.setBounds(300, 200, 850, 450);
@@ -43,9 +39,9 @@ public class ReaderStorageFrame extends JFrame {
         Vector columnNames = null;
 
         data = bookDaoImpl.getBookInfo();
-        tableModel = new DefaultTableModel(data,header);
+        tableModel = new DefaultTableModel(data, header);
         table = new JTable(tableModel);
-//        // 创建表格
+        // 创建表格
         table.getTableHeader().setFont(new Font(null, Font.BOLD, 14));
         // 设置表头名称字体样式
         table.getTableHeader().setForeground(Color.black);
@@ -61,7 +57,7 @@ public class ReaderStorageFrame extends JFrame {
         int v = ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED;
         // 水平滚动条
         int h = ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED;
-//         垂直滚动条
+        //垂直滚动条
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -73,7 +69,7 @@ public class ReaderStorageFrame extends JFrame {
         JScrollPane jsp = new JScrollPane(table, v, h);
         jsp.setBounds(0, 0, 850, 400);
         this.add(jsp);
-//         新建表格
+        //新建表格
         tableModel = new DefaultTableModel(rowData, columnNames);
         table = new JTable(tableModel);
         table.setRowHeight(22);
@@ -86,7 +82,6 @@ public class ReaderStorageFrame extends JFrame {
         this.dispose();
         //父窗口变可见
         setVisible(true);
-
         //窗口大小不可变
         setResizable(false);
     }

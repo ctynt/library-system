@@ -17,24 +17,27 @@ import java.util.Vector;
 
 import static java.lang.Integer.parseInt;
 
+/**
+ * @author zhuhuiyu
+ * 管理员--读者信息管理
+ */
+
 public class AdminUserFrame extends JFrame {
     ReaderDao readerDao = new ReaderDaoImpl();
     DefaultTableModel tableModel;
-    Vector vector;
-    JMenuBar menuBar;
     JButton add, del, exit, find, change;
     JTable table;
-    /*增加信息的面板*/
-    JPanel panelUP, panelDown;
-    /*内部类中的变量*/
+    /**
+     * 增加信息的面板
+     */
+    JPanel panelUP;
+    /**
+     * 内部类中的变量
+     */
     JLabel[] label;
     JTextField idText, nameText, passwordText, lendText;
-    JPanel panel, panelSouth;
     JButton button;
-    String[] str = null;
-    JPanel[] panelLeft, panelRight;
-
-    Object[] header = {"读者编号", "读者姓名",  "用户密码", "已借图书编号"};
+    Object[] header = {"读者编号", "读者姓名", "用户密码", "已借图书编号"};
 
     Object[][] data;
 
@@ -71,8 +74,6 @@ public class AdminUserFrame extends JFrame {
         table.getTableHeader().setFont(new Font(null, Font.BOLD, 14));
         // 设置表头名称字体样式
         table.getTableHeader().setForeground(Color.black);
-        // 设置表头名称字体颜色
-        // jTable.getTableHeader().setResizingAllowed(false);
         // 设置不允许手动改变列宽
         table.getTableHeader().setReorderingAllowed(false);
         // 设置表头不允许拖动
@@ -94,7 +95,7 @@ public class AdminUserFrame extends JFrame {
         JScrollPane jsp = new JScrollPane(table, v, h);
         jsp.setBounds(0, 36, 850, 500);
         this.add(jsp);
-//         新建表格
+        //新建表格
         tableModel = new DefaultTableModel(rowData, columnNames);
         table = new JTable(tableModel);
         table.setRowHeight(22);
@@ -113,7 +114,9 @@ public class AdminUserFrame extends JFrame {
         setResizable(false);
     }
 
-    /*增加读者信息*/
+    /**
+     * 增加读者信息
+     */
     class AddFrame extends JFrame {
 
 
@@ -163,7 +166,6 @@ public class AdminUserFrame extends JFrame {
         }
 
 
-
         public void MyEvent() {
             button.addActionListener(new ActionListener() {
 
@@ -175,7 +177,7 @@ public class AdminUserFrame extends JFrame {
 
                     String readerPassword = passwordText.getText();
                     int readerLend = parseInt(lendText.getText());
-                    Reader reader = new Reader(readerId, readerName,  readerPassword, readerLend);
+                    Reader reader = new Reader(readerId, readerName, readerPassword, readerLend);
 
                     int i = readerDao.addReader(reader);
                     if (i > 0) {
@@ -191,7 +193,9 @@ public class AdminUserFrame extends JFrame {
         }
     }
 
-    /*删除读者信息*/
+    /**
+     * 删除读者信息
+     */
     class DelFrame extends JFrame {
 
 
@@ -303,7 +307,6 @@ public class AdminUserFrame extends JFrame {
         }
 
 
-
         public void MyEvent() {
             button.addActionListener(new ActionListener() {
 
@@ -363,7 +366,6 @@ public class AdminUserFrame extends JFrame {
         }
 
 
-
         public void MyEvent() {
             button.addActionListener(new ActionListener() {
 
@@ -373,7 +375,7 @@ public class AdminUserFrame extends JFrame {
                     int readerId = parseInt(idText.getText());
                     Reader i = readerDao.findReader(readerId);
                     if (i != null) {
-                        JOptionPane.showMessageDialog(null, "查找成功！"+i);
+                        JOptionPane.showMessageDialog(null, "查找成功！" + i);
                         refresh();
                         dispose();
                     } else {
@@ -431,6 +433,7 @@ public class AdminUserFrame extends JFrame {
         });
 
     }
+
     public void refresh() {
         Object[][] data = readerDaoImpl.getReaderInfo();
         tableModel.setDataVector(data, header);

@@ -5,8 +5,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * 管理员--主页面
+ */
 public class AdminMainFrame extends JFrame {
-    JPanel panel;
     JButton storage, borrowInfo, userInfo;
 
     public AdminMainFrame() {
@@ -69,7 +71,7 @@ public class AdminMainFrame extends JFrame {
             }
 
         });
-//用户信息管理
+        //用户信息管理
         userInfo.addActionListener(new ActionListener() {
 
             @Override
@@ -77,7 +79,6 @@ public class AdminMainFrame extends JFrame {
                 new AdminUserFrame(userInfo.getText());
                 dispose();
             }
-
         });
     }
 

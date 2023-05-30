@@ -16,24 +16,16 @@ import domain.Book;
 
 import static java.lang.Integer.parseInt;
 
+/**
+ * 管理员--图书信息管理
+ */
 public class AdminStorageFrame extends JFrame {
 
     BookDao bookDao = new BookDaoImpl();
     DefaultTableModel tableModel;
-    Vector vector;
-    JMenuBar menuBar;
     JButton add, del, exit, find, change;
     JTable table;
-
-    /**
-     * 增加信息的面板
-     */
     JPanel panelUP;
-    /* *
-     *内部类中的变量*/
-
-    /*内部类中的变量*/
-
     JLabel[] label;
     JComboBox typeBox;
     JRadioButton stateRadio1, stateRadio2;
@@ -42,7 +34,6 @@ public class AdminStorageFrame extends JFrame {
     ButtonGroup bg;
     JPanel panel, panelSouth;
     JButton button;
-    String[] str = null;
     JPanel[] panelLeft, panelRight;
 
     Object[] header = {"图书编号", "书名", "作者", "类型", "状态"};
@@ -126,7 +117,6 @@ public class AdminStorageFrame extends JFrame {
         setResizable(false);
     }
 
-    /*添加单元格的内部类*/
     class AddFrame extends JFrame {
 
 
@@ -247,7 +237,7 @@ public class AdminStorageFrame extends JFrame {
             setLayout(null);
             this.setTitle("删除图书");
             this.setLocationRelativeTo(null);
-            this.setBounds(500, 230,500, 350);
+            this.setBounds(500, 230, 500, 350);
 
             label = new JLabel[2];
             label[0] = new JLabel("图书编号：");
@@ -373,8 +363,8 @@ public class AdminStorageFrame extends JFrame {
             this.add(panelSouth, BorderLayout.SOUTH);
             this.add(panel);
             MyEvent();
-            this.dispose();//子窗口销毁
-            setVisible(true);//父窗口变可见
+            this.dispose();
+            setVisible(true);
 
         }
 
@@ -395,7 +385,7 @@ public class AdminStorageFrame extends JFrame {
                         state = stateRadio2.getText();
                     }
 
-                    Book book  = new Book(bookId,bookName,author, category, state);
+                    Book book = new Book(bookId, bookName, author, category, state);
 
                     int i = bookDao.changeBook(book);
                     if (i > 0) {
@@ -422,29 +412,21 @@ public class AdminStorageFrame extends JFrame {
 
             label = new JLabel[2];
             label[0] = new JLabel("图书编号：");
-//            label[1] = new JLabel("图书名称：");
             label[0].setBounds(new Rectangle(140, 30, 70, 30));
-//            label[1].setBounds(new Rectangle(140, 60, 70, 30));
 
             idText = new JTextField();
-//            nameText = new JTextField();
-
             idText.setBounds(new Rectangle(210, 35, 140, 20));
-//            nameText.setBounds(new Rectangle(210, 65, 140, 20));
 
             button = new JButton("OK");
             button.setBounds(new Rectangle(210, 120, 100, 20));
 
             this.add(label[0]);
-//            this.add(label[1]);
-
             this.add(idText);
             this.add(button);
-//            this.add(nameText);
 
             MyEvent();
-            this.dispose();//子窗口销毁
-            setVisible(true);//父窗口变可见
+            this.dispose();
+            setVisible(true);
         }
 
         public void MyEvent() {
@@ -457,7 +439,7 @@ public class AdminStorageFrame extends JFrame {
 
                     Book i = bookDao.findBook(bookId);
                     if (i != null) {
-                        JOptionPane.showMessageDialog(null, "查找成功！"+i);
+                        JOptionPane.showMessageDialog(null, "查找成功！" + i);
                         refresh();
                         dispose();
                     } else {

@@ -17,8 +17,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Vector;
+
 import static java.lang.Integer.parseInt;
 
+/**
+ * 管理员--借阅信息管理
+ */
 public class AdminBorrowFrame extends JFrame {
 
     BorrowDao borrowDao = new BorrowDaoImpl();
@@ -27,28 +31,28 @@ public class AdminBorrowFrame extends JFrame {
     Vector vector;
     JMenuBar menuBar;
     BorrowDaoImpl borrowDaoImpl = new BorrowDaoImpl();
-    JButton add,del,exit,find,change;
+    JButton add, del, exit, find, change;
     JTable table;
     /*增加信息的面板*/
-    JPanel panelUP,panelDown;
+    JPanel panelUP;
 
 
-    // 内部类中的变量
+    /* 内部类中的变量*/
     JLabel[] label;
-    JTextField borrowIdText,bookIdText,bookNameText,readerIdText,readerNameText;
+    JTextField borrowIdText, bookIdText, bookNameText, readerIdText, readerNameText;
     CheckboxGroup cg;
     ButtonGroup bg;
 
-    JPanel panel,panelSouth;
+    JPanel panel, panelSouth;
     JButton button;
-    String[] str=null;
-    JPanel[] panelLeft,panelRight;
+    String[] str = null;
+    JPanel[] panelLeft, panelRight;
 
-    Object[] header = {"借阅编号","图书编号","图书名称","读者编号","读者姓名"};
+    Object[] header = {"借阅编号", "图书编号", "图书名称", "读者编号", "读者姓名"};
 
     Object[][] data;
 
-    public AdminBorrowFrame(String title){
+    public AdminBorrowFrame(String title) {
         this.setBounds(300, 200, 600, 450);
         this.setTitle(title);
         this.setLayout(new BorderLayout());
@@ -71,14 +75,12 @@ public class AdminBorrowFrame extends JFrame {
         Vector columnNames = null;
 
         data = borrowDaoImpl.getBorrowInfo();
-        tableModel = new DefaultTableModel(data,header);
+        tableModel = new DefaultTableModel(data, header);
         table = new JTable(tableModel);
-//        // 创建表格
+        // 创建表格
         table.getTableHeader().setFont(new Font(null, Font.BOLD, 14));
         // 设置表头名称字体样式
         table.getTableHeader().setForeground(Color.black);
-        // 设置表头名称字体颜色
-        // jTable.getTableHeader().setResizingAllowed(false);
         // 设置不允许手动改变列宽
         table.getTableHeader().setReorderingAllowed(false);
         // 设置表头不允许拖动
@@ -89,7 +91,7 @@ public class AdminBorrowFrame extends JFrame {
         int v = ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED;
         // 水平滚动条
         int h = ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED;
-//         垂直滚动条
+        //垂直滚动条
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -101,13 +103,13 @@ public class AdminBorrowFrame extends JFrame {
         jsp.setBounds(0, 36, 590, 400);
         this.add(jsp);
         // 新建表格
-        tableModel = new DefaultTableModel(rowData,columnNames);
+        tableModel = new DefaultTableModel(rowData, columnNames);
         table = new JTable(tableModel);
         table.setRowHeight(22);
 
         JScrollPane s = new JScrollPane(table);
 
-        this.add(panelUP,BorderLayout.NORTH);
+        this.add(panelUP, BorderLayout.NORTH);
         this.add(s);
 
         MyEvent();
@@ -115,23 +117,23 @@ public class AdminBorrowFrame extends JFrame {
         this.dispose();
         //父窗口变可见
         setVisible(true);
-//        窗口大小不可变
+        //窗口大小不可变
         setResizable(false);
-
-        this.setLocationRelativeTo(null);//窗口在屏幕中间显示
+        //窗口在屏幕中间显示
+        this.setLocationRelativeTo(null);
     }
 
     /*增加借阅信息*/
-    class AddFrame extends JFrame{
+    class AddFrame extends JFrame {
 
 
-        public AddFrame(){
+        public AddFrame() {
             this.setTitle("添加借阅信息");
             this.setLocationRelativeTo(null);
-            this.setBounds(300,200,500,350);
+            this.setBounds(300, 200, 500, 350);
             this.setLocationRelativeTo(null);
             panel = new JPanel();
-            panel.setLayout(new GridLayout(8,2));
+            panel.setLayout(new GridLayout(8, 2));
             panelSouth = new JPanel();
             panelSouth.setLayout(new FlowLayout(FlowLayout.CENTER));
             button = new JButton("OK");
@@ -152,18 +154,18 @@ public class AdminBorrowFrame extends JFrame {
 
             panelRight = new JPanel[5];
             panelLeft = new JPanel[5];
-            for(int i = 0; i < panelRight.length; i++){
+            for (int i = 0; i < panelRight.length; i++) {
                 panelRight[i] = new JPanel();
                 panelRight[i].setLayout(new FlowLayout(FlowLayout.LEFT));
             }
 
-            for(int i = 0; i < panelLeft.length; i++){
+            for (int i = 0; i < panelLeft.length; i++) {
                 panelLeft[i] = new JPanel();
                 panelLeft[i].setLayout(new FlowLayout(FlowLayout.RIGHT));
             }
 
-            for(int i = 0; i < panelLeft.length; i++) {
-                for(int j = i; j < label.length; j++) {
+            for (int i = 0; i < panelLeft.length; i++) {
+                for (int j = i; j < label.length; j++) {
                     panelLeft[i].add(label[j]);
                 }
             }
@@ -184,7 +186,7 @@ public class AdminBorrowFrame extends JFrame {
             panel.add(panelRight[3]);
             panel.add(panelLeft[4]);
             panel.add(panelRight[4]);
-            this.add(panelSouth,BorderLayout.SOUTH);
+            this.add(panelSouth, BorderLayout.SOUTH);
             this.add(panel);
             MyEvent();
 //			this.setVisible(true);
@@ -193,8 +195,8 @@ public class AdminBorrowFrame extends JFrame {
             setVisible(true);//父窗口变可见
         }
 
-        public void MyEvent(){
-            button.addActionListener(new ActionListener(){
+        public void MyEvent() {
+            button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     // TODO Auto-generated method stub
@@ -203,7 +205,7 @@ public class AdminBorrowFrame extends JFrame {
                     String bookName = bookNameText.getText();
                     int readerId = parseInt(readerIdText.getText());
                     String readerName = readerNameText.getText();
-                    Borrow borrow = new Borrow(borrowId,bookId,bookName,readerId,readerName);
+                    Borrow borrow = new Borrow(borrowId, bookId, bookName, readerId, readerName);
                     int i = borrowDao.addBorrow(borrow);
                     bookDao.changeBookBorrow(borrow);
                     if (i > 0) {
@@ -220,10 +222,10 @@ public class AdminBorrowFrame extends JFrame {
 
     }
 
-    class DelFrame extends JFrame{
+    class DelFrame extends JFrame {
 
 
-        public DelFrame(){
+        public DelFrame() {
             setLayout(null);
             this.setTitle("删除借阅信息");
             this.setLocationRelativeTo(null);
@@ -247,24 +249,24 @@ public class AdminBorrowFrame extends JFrame {
             this.add(label[0]);
             this.add(label[1]);
 
-            this.add(borrowIdText );
+            this.add(borrowIdText);
             this.add(button);
-            this.add( bookNameText );
+            this.add(bookNameText);
 
             MyEvent();
             this.dispose();//子窗口销毁
             setVisible(true);//父窗口变可见
         }
 
-        public void MyEvent(){
-            button.addActionListener(new ActionListener(){
+        public void MyEvent() {
+            button.addActionListener(new ActionListener() {
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     // TODO Auto-generated method stub
                     int borrowId = parseInt(borrowIdText.getText());
                     String bookName = bookNameText.getText();
-                    int i = borrowDao.delBorrow(borrowId,bookName);
+                    int i = borrowDao.delBorrow(borrowId, bookName);
                     if (i > 0) {
                         JOptionPane.showMessageDialog(null, "删除成功！");
                         refresh();
@@ -275,20 +277,17 @@ public class AdminBorrowFrame extends JFrame {
                 }
             });
         }
-
-
     }
 
-    class ChangeFrame extends JFrame{
+    class ChangeFrame extends JFrame {
 
-
-        public ChangeFrame(){
+        public ChangeFrame() {
             this.setTitle("修改借阅信息");
             this.setLocationRelativeTo(null);
-            this.setBounds(300,200,500,350);
+            this.setBounds(300, 200, 500, 350);
             this.setLocationRelativeTo(null);
             panel = new JPanel();
-            panel.setLayout(new GridLayout(8,2));
+            panel.setLayout(new GridLayout(8, 2));
             panelSouth = new JPanel();
             panelSouth.setLayout(new FlowLayout(FlowLayout.CENTER));
             button = new JButton("OK");
@@ -309,18 +308,18 @@ public class AdminBorrowFrame extends JFrame {
 
             panelRight = new JPanel[5];
             panelLeft = new JPanel[5];
-            for(int i = 0; i < panelRight.length; i++){
+            for (int i = 0; i < panelRight.length; i++) {
                 panelRight[i] = new JPanel();
                 panelRight[i].setLayout(new FlowLayout(FlowLayout.LEFT));
             }
 
-            for(int i = 0; i < panelLeft.length; i++){
+            for (int i = 0; i < panelLeft.length; i++) {
                 panelLeft[i] = new JPanel();
                 panelLeft[i].setLayout(new FlowLayout(FlowLayout.RIGHT));
             }
 
-            for(int i = 0; i < panelLeft.length; i++) {
-                for(int j = i; j < label.length; j++) {
+            for (int i = 0; i < panelLeft.length; i++) {
+                for (int j = i; j < label.length; j++) {
                     panelLeft[i].add(label[j]);
                 }
             }
@@ -341,18 +340,15 @@ public class AdminBorrowFrame extends JFrame {
             panel.add(panelRight[3]);
             panel.add(panelLeft[4]);
             panel.add(panelRight[4]);
-            this.add(panelSouth,BorderLayout.SOUTH);
+            this.add(panelSouth, BorderLayout.SOUTH);
             this.add(panel);
             MyEvent();
-//			this.setVisible(true);
-//			this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             this.dispose();//子窗口销毁
             setVisible(true);//父窗口变可见
         }
 
-        public void MyEvent(){
-            button.addActionListener(new ActionListener(){
-
+        public void MyEvent() {
+            button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     // TODO Auto-generated method stub
@@ -361,7 +357,7 @@ public class AdminBorrowFrame extends JFrame {
                     String bookName = bookNameText.getText();
                     int readerId = parseInt(readerIdText.getText());
                     String readerName = readerNameText.getText();
-                    Borrow borrow = new Borrow(borrowId,bookId,bookName,readerId,readerName);
+                    Borrow borrow = new Borrow(borrowId, bookId, bookName, readerId, readerName);
                     int i = borrowDao.changeBorrow(borrow);
                     if (i > 0) {
                         JOptionPane.showMessageDialog(null, "修改成功！");
@@ -373,12 +369,9 @@ public class AdminBorrowFrame extends JFrame {
                 }
             });
         }
-
-
     }
 
     class FindFrame extends JFrame {
-
 
         public FindFrame() {
             setLayout(null);
@@ -388,25 +381,18 @@ public class AdminBorrowFrame extends JFrame {
 
             label = new JLabel[2];
             label[0] = new JLabel("借阅编号：");
-//            label[1] = new JLabel("图书名称：");
             label[0].setBounds(new Rectangle(140, 30, 70, 30));
-//            label[1].setBounds(new Rectangle(140, 60, 70, 30));
 
             borrowIdText = new JTextField();
-//            nameText = new JTextField();
-
             borrowIdText.setBounds(new Rectangle(210, 35, 140, 20));
-//            nameText.setBounds(new Rectangle(210, 65, 140, 20));
 
             button = new JButton("OK");
             button.setBounds(new Rectangle(210, 120, 100, 20));
 
             this.add(label[0]);
-//            this.add(label[1]);
-
             this.add(borrowIdText);
             this.add(button);
-//            this.add(nameText);
+
 
             MyEvent();
             this.dispose();//子窗口销毁
@@ -423,23 +409,22 @@ public class AdminBorrowFrame extends JFrame {
 
                     Borrow i = borrowDao.findBorrow(bookId);
                     if (i != null) {
-                        JOptionPane.showMessageDialog(null, "查找成功！"+i);
+                        JOptionPane.showMessageDialog(null, "查找成功！" + i);
                         refresh();
                         dispose();
                     } else {
                         JOptionPane.showMessageDialog(null, "查找失败！");
                     }
                 }
-
             });
         }
     }
 
 
-    public void MyEvent(){
+    public void MyEvent() {
 
         // 增加
-        add.addActionListener(new ActionListener(){
+        add.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent arg0) {
@@ -449,7 +434,7 @@ public class AdminBorrowFrame extends JFrame {
         });
 
         // 删除
-        del.addActionListener(new ActionListener(){
+        del.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent arg0) {
@@ -459,7 +444,7 @@ public class AdminBorrowFrame extends JFrame {
         });
 
         // 修改
-        change.addActionListener(new ActionListener(){
+        change.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent arg0) {
@@ -469,7 +454,7 @@ public class AdminBorrowFrame extends JFrame {
         });
 
         // 查找
-        find.addActionListener(new ActionListener(){
+        find.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent arg0) {
@@ -479,7 +464,7 @@ public class AdminBorrowFrame extends JFrame {
         });
 
         // 退出
-        exit.addActionListener(new ActionListener(){
+        exit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
@@ -495,7 +480,7 @@ public class AdminBorrowFrame extends JFrame {
     }
 
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         new AdminBorrowFrame("借阅信息管理");
     }
 }

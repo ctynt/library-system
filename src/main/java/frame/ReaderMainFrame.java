@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 /**
  * @author zhuhuiyu
+ * @description 读者--主页面
  */
 public class ReaderMainFrame extends JFrame {
     JButton storage, borrowInfo, userInfo;
@@ -57,7 +58,6 @@ public class ReaderMainFrame extends JFrame {
                 new ReaderStorageFrame(storage.getText());
                 dispose();
             }
-
         });
 
         // 图书借阅服务
@@ -68,7 +68,6 @@ public class ReaderMainFrame extends JFrame {
                 new ReaderBorrowFrame(borrowInfo.getText());
                 dispose();
             }
-
         });
 //个人信息管理
         userInfo.addActionListener(new ActionListener() {
