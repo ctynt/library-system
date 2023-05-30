@@ -28,11 +28,23 @@ class BookDaoImplTest {
         assertEquals(1, i);
     }
 
+<<<<<<< HEAD
 //    @Test
 //    void delBook() {
 //        int i = bookDao.delBook(8);
 //        assertEquals(1, i);
 //    }
+=======
+    @Test
+    void delBook() {
+
+        int i = bookDao.delBook(8,"66");
+        assertEquals(1,i);
+
+
+
+    }
+>>>>>>> 28417887ff8086b2b846559904fc46f68c8a9038
 
     @Test
     void changeBook() {

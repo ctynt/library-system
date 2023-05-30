@@ -9,7 +9,7 @@ package domain;
 public class Reader {
     private int readerId;
     private String readerName;
-    private int readerLimit;
+
     private String readerPassword;
     private int readerLend;
 
@@ -21,10 +21,10 @@ public class Reader {
     public Reader() {
     }
 
-    public Reader(int readerId, String readerName, int readerLimit, String readerPassword, int readerLend) {
+    public Reader(int readerId, String readerName,  String readerPassword, int readerLend) {
         this.readerId = readerId;
         this.readerName = readerName;
-        this.readerLimit = readerLimit;
+
         this.readerPassword = readerPassword;
         this.readerLend = readerLend;
     }
@@ -45,13 +45,6 @@ public class Reader {
         this.readerName = readerName;
     }
 
-    public int getReaderLimit() {
-        return readerLimit;
-    }
-
-    public void setReaderLimit(int readerLimit) {
-        this.readerLimit = readerLimit;
-    }
 
     public String getReaderPassword() {
         return readerPassword;

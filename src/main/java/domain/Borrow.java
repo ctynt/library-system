@@ -63,4 +63,14 @@ public class Borrow {
     public void setReaderName(String readerName) {
         this.readerName = readerName;
     }
+
+    @Override
+    public String toString() {
+        return "借阅编号：" + borrowId +
+                ", 图书编号：" + bookId +
+                ", 图书名称：" + bookName  +
+                ", 读者编号：" + readerId +
+                ", 读者姓名：" + readerName  +
+                '。';
+    }
 }

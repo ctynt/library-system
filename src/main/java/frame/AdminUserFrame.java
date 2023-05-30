@@ -27,13 +27,13 @@ public class AdminUserFrame extends JFrame {
     JPanel panelUP, panelDown;
     /*内部类中的变量*/
     JLabel[] label;
-    JTextField idText, nameText, limitText, passwordText, lendText;
+    JTextField idText, nameText, passwordText, lendText;
     JPanel panel, panelSouth;
     JButton button;
     String[] str = null;
     JPanel[] panelLeft, panelRight;
 
-    Object[] header = {"读者编号", "读者姓名", "借书限额", "用户密码", "已借图书编号"};
+    Object[] header = {"读者编号", "读者姓名",  "用户密码", "已借图书编号"};
 
     Object[][] data;
 
@@ -129,13 +129,13 @@ public class AdminUserFrame extends JFrame {
             label = new JLabel[5];
             label[0] = new JLabel("读者编号：");
             label[1] = new JLabel("读者姓名：");
-            label[2] = new JLabel("借书限额：");
+
             label[3] = new JLabel("用户密码：");
             label[4] = new JLabel("已借图书编号：");
 
             idText = new JTextField(10);
             nameText = new JTextField(10);
-            limitText = new JTextField(10);
+
             passwordText = new JTextField(10);
             lendText = new JTextField(10);
 
@@ -159,7 +159,7 @@ public class AdminUserFrame extends JFrame {
 
             panelRight[0].add(idText);
             panelRight[1].add(nameText);
-            panelRight[2].add(limitText);
+
             panelRight[3].add(passwordText);
             panelRight[4].add(lendText);
 
@@ -194,10 +194,10 @@ public class AdminUserFrame extends JFrame {
                     // TODO Auto-generated method stub
                     int readerId = parseInt(idText.getText());
                     String readerName = nameText.getText();
-                    int readerLimit = Integer.parseInt(limitText.getText());
+
                     String readerPassword = passwordText.getText();
                     int readerLend = parseInt(lendText.getText());
-                    Reader reader = new Reader(readerId, readerName, readerLimit, readerPassword, readerLend);
+                    Reader reader = new Reader(readerId, readerName,  readerPassword, readerLend);
 
                     int i = readerDao.addReader(reader);
                     if (i > 0) {
@@ -294,13 +294,13 @@ public class AdminUserFrame extends JFrame {
             label = new JLabel[5];
             label[0] = new JLabel("读者编号：");
             label[1] = new JLabel("读者姓名：");
-            label[2] = new JLabel("借书限额：");
+
             label[3] = new JLabel("用户密码：");
             label[4] = new JLabel("已借图书编号：");
 
             idText = new JTextField(10);
             nameText = new JTextField(10);
-            limitText = new JTextField(10);
+
             passwordText = new JTextField(10);
             lendText = new JTextField(10);
 
@@ -324,7 +324,7 @@ public class AdminUserFrame extends JFrame {
 
             panelRight[0].add(idText);
             panelRight[1].add(nameText);
-            panelRight[2].add(limitText);
+
             panelRight[3].add(passwordText);
             panelRight[4].add(lendText);
 
@@ -359,10 +359,10 @@ public class AdminUserFrame extends JFrame {
                     // TODO Auto-generated method stub
                     int readerId = parseInt(idText.getText());
                     String readerName = nameText.getText();
-                    int readerLimit = Integer.parseInt(limitText.getText());
+
                     String readerPassword = passwordText.getText();
                     int readerLend = parseInt(lendText.getText());
-                    Reader reader = new Reader(readerId, readerName, readerLimit, readerPassword, readerLend);
+                    Reader reader = new Reader(readerId, readerName, readerPassword, readerLend);
 
                     int i = readerDao.changeReader(reader);
                     if (i > 0) {
@@ -396,13 +396,13 @@ public class AdminUserFrame extends JFrame {
             label = new JLabel[5];
             label[0] = new JLabel("读者编号：");
             label[1] = new JLabel("读者姓名：");
-            label[2] = new JLabel("借书限额：");
+
             label[3] = new JLabel("用户密码：");
             label[4] = new JLabel("已借图书编号：");
 
             idText = new JTextField(10);
             nameText = new JTextField(10);
-            limitText = new JTextField(10);
+
             passwordText = new JTextField(10);
             lendText = new JTextField(10);
 
@@ -426,7 +426,7 @@ public class AdminUserFrame extends JFrame {
 
             panelRight[0].add(idText);
             panelRight[1].add(nameText);
-            panelRight[2].add(limitText);
+
             panelRight[3].add(passwordText);
             panelRight[4].add(lendText);
 
@@ -461,10 +461,10 @@ public class AdminUserFrame extends JFrame {
                     // TODO Auto-generated method stub
                     int readerId = parseInt(idText.getText());
                     String readerName = nameText.getText();
-                    int readerLimit = Integer.parseInt(limitText.getText());
+
                     String readerPassword = passwordText.getText();
                     int readerLend = parseInt(lendText.getText());
-                    Reader reader = new Reader(readerId, readerName, readerLimit, readerPassword, readerLend);
+                    Reader reader = new Reader(readerId, readerName, readerPassword, readerLend);
 
                     Reader i = readerDao.findReader(readerId);
 //                    if (i > 0) {
@@ -487,24 +487,8 @@ public class AdminUserFrame extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                // 增加一行空白区域
-                tableModel.addRow(new Vector());
                 new AdminUserFrame.AddFrame();
-
-                int rowNum = table.getSelectedRow();
-
-                if (rowNum != -1) {
-                    String aa = table.getValueAt(rowNum, 0).toString();
-                    String aa1 = aa.substring(0, 1);
-                    String aa2 = aa.substring(1, aa.length());
-
-                    long bb = Long.parseLong(aa2) + 1;
-
-                    String cc = aa1 + String.valueOf(bb);
-                    idText.setText(cc);
-                }
             }
-
         });
 
         // 删除
@@ -513,19 +497,6 @@ public class AdminUserFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 new AdminUserFrame.DelFrame();
-
-                int rowNum = table.getSelectedRow();
-
-                if (rowNum != -1) {
-                    String aa = table.getValueAt(rowNum, 0).toString();
-                    String aa1 = aa.substring(0, 1);
-                    String aa2 = aa.substring(1, aa.length());
-
-                    long bb = Long.parseLong(aa2) + 1;
-
-                    String cc = aa1 + String.valueOf(bb);
-                    idText.setText(cc);
-                }
             }
         });
 
@@ -535,19 +506,6 @@ public class AdminUserFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 new AdminUserFrame.ChangeFrame();
-
-                int rowNum = table.getSelectedRow();
-
-                if (rowNum != -1) {
-                    String aa = table.getValueAt(rowNum, 0).toString();
-                    String aa1 = aa.substring(0, 1);
-                    String aa2 = aa.substring(1, aa.length());
-
-                    long bb = Long.parseLong(aa2) + 1;
-
-                    String cc = aa1 + String.valueOf(bb);
-                    idText.setText(cc);
-                }
             }
         });
 
@@ -557,24 +515,8 @@ public class AdminUserFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 // 增加一行空白区域
-                tableModel.addRow(new Vector());
                 new AdminUserFrame.FindFrame();
-
-                int rowNum = table.getSelectedRow();
-
-                if (rowNum != -1) {
-                    String aa = table.getValueAt(rowNum, 0).toString();
-                    String aa1 = aa.substring(0, 1);
-                    String aa2 = aa.substring(1, aa.length());
-
-                    long bb = Long.parseLong(aa2) + 1;
-
-                    String cc = aa1 + String.valueOf(bb);
-                    idText.setText(cc);
-                }
             }
-
-
         });
 
         // 退出
