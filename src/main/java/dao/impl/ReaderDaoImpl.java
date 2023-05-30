@@ -217,7 +217,35 @@ public  class ReaderDaoImpl implements ReaderDao {
         }
 
         return reader;
-
-
     }
+    @Override
+    public int changeReaderPassword(int readerId,String readerPassword) {
+        int result = 0;
+        try {
+            // 取得数据库连接
+            conn = JDBCUtil.getConnection();
+            // 创建数据表的查询SQL语句
+            String sql = "update reader set" + "  readerPassword = ?"
+                    // 参数用?表示，相当于占位符
+                    + "where readerId = ?";
+            // 创建查询的PreparedStatement类
+            ps = conn.prepareStatement(sql);
+            // 设置查询类的5个参数
+            ps.setInt(2,readerId);
+            ps.setString(1, readerPassword);
+
+            // 执行查询操作
+            result = ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (Exception e) {
+            }
+        }
+        return result;
+    }
+
+
 }
