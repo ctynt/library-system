@@ -87,8 +87,8 @@ public class ReaderUserFrame extends JFrame {
 
     class UpdatePasswordFrame extends JFrame {
 
-        public UpdatePasswordFrame(String text) {
-// 取得窗口面板
+        public UpdatePasswordFrame() {
+            // 取得窗口面板
             contentPane = (JPanel) this.getContentPane();
             // 定义窗口面板的布局
             contentPane.setLayout(null);
@@ -158,14 +158,13 @@ public class ReaderUserFrame extends JFrame {
 
     }
 
-<<<<<<< HEAD
         public void MyEvent() {
             // 更改密码
             update.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
-                    new UpdatePasswordFrame(update.getText());
-                    dispose();
+                    new UpdatePasswordFrame();
+
                 }
 
             });
@@ -175,18 +174,15 @@ public class ReaderUserFrame extends JFrame {
             exit.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
-                    new LoginFrame(exit.getText());
-                    dispose();
+                    System.exit(0);
                 }
 
             });
         }
 
-        public static void main(String[] args) {
-            new ReaderUserFrame("个人信息管理");
-        }
-=======
+
+
     public static void main(String[] args) {
         new ReaderUserFrame("图书借阅系统--读者个人信息管理");
->>>>>>> 173e33e75b1188933044ea1c868a506896ccb667
-    }
+
+    }}
