@@ -42,7 +42,7 @@ public class ReaderUserFrame extends JFrame {
     private ReaderDao readerDao = new ReaderDaoImpl();
 
     public ReaderUserFrame(String title) {
-        this.setTitle(title);
+        super("图书借阅系统--读者个人信息管理");
         setFont(new Font("宋体", Font.PLAIN, 35));
         this.setBounds(0, 0, 760, 400);
         this.setLocationRelativeTo(null);
@@ -158,6 +158,7 @@ public class ReaderUserFrame extends JFrame {
 
     }
 
+<<<<<<< HEAD
         public void MyEvent() {
             // 更改密码
             update.addActionListener(new ActionListener() {
@@ -184,4 +185,8 @@ public class ReaderUserFrame extends JFrame {
         public static void main(String[] args) {
             new ReaderUserFrame("个人信息管理");
         }
+=======
+    public static void main(String[] args) {
+        new ReaderUserFrame("图书借阅系统--读者个人信息管理");
+>>>>>>> 173e33e75b1188933044ea1c868a506896ccb667
     }
