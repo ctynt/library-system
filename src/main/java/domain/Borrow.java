@@ -24,6 +24,9 @@ public class Borrow {
 
     public Borrow(){}
 
+    public Borrow(int bookId, String bookName, int readerId, String readerName) {
+    }
+
     public int getBorrowId() {
         return borrowId;
     }

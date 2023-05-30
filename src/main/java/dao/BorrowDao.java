@@ -20,5 +20,7 @@ public interface BorrowDao {
 
     Borrow findBorrow(int borrowId);
 
+    boolean checkBorrowState(int bookId);
+
 
 }

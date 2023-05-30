@@ -1,6 +1,7 @@
 package dao.impl;
 
 import dao.BorrowDao;
+import domain.Admin;
 import domain.Book;
 import domain.Borrow;
 import utils.JDBCUtil;
@@ -194,5 +195,34 @@ public class BorrowDaoImpl implements BorrowDao {
 
     }
 
+    @Override
+    public boolean checkBorrowState(int bookId) {
+        boolean message = false;
+        try {
+            // 取得数据库连接
+            conn = JDBCUtil.getConnection();
+            // 创建数据表的查询SQL语句
+            String sql = "select * from book where state= '在馆' and bookId = ? ";
+
+            // 创建查询的PreparedStatement类
+            ps = conn.prepareStatement(sql);
+            // 设置查询类的2个参数
+
+            ps.setString(1, String.valueOf(bookId));
+            // 执行查询操作
+            resultSet = ps.executeQuery();
+            if (resultSet.next()) {
+                message = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (Exception e) {
+            }
+        }
+        return message;
+    }
 
 }

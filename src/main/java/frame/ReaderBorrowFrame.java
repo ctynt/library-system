@@ -76,7 +76,7 @@ public class ReaderBorrowFrame extends JFrame{
 
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                new BorrowBookFrame(borrowInfo.getText());
+                new BorrowBookFrame();
                 dispose();
             }
 
