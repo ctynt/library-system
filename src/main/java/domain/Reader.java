@@ -62,4 +62,11 @@ public class Reader {
         this.readerLend = readerLend;
     }
 
+    @Override
+    public String toString() {
+        return  "读者编号：" + readerId +
+                ", 读者姓名：" + readerName  +
+                ", 读者密码：" + readerPassword  +
+                ", 已借图书编号：" + readerLend ;
+    }
 }

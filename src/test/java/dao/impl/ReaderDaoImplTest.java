@@ -21,7 +21,6 @@ ReaderDao readerDao = new ReaderDaoImpl();
         Reader reader = new Reader();
         reader.setReaderId(6);
         reader.setReaderName("血小板");
-        reader.setReaderLimit(2);
         reader.setReaderLend(1);
         reader.setReaderPassword("888");
 
@@ -41,7 +40,6 @@ ReaderDao readerDao = new ReaderDaoImpl();
         Reader reader = new Reader();
         reader.setReaderId(6);
         reader.setReaderName("血小板");
-        reader.setReaderLimit(2);
         reader.setReaderLend(1);
         reader.setReaderPassword("777");
         int i = readerDao.changeReader(reader);
@@ -49,6 +47,6 @@ ReaderDao readerDao = new ReaderDaoImpl();
 
     @Test
     void findReader() {
-        readerDao.findReader(3);
+        readerDao.findReader(1);
     }
 }

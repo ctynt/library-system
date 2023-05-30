@@ -2,6 +2,7 @@ package frame;
 
 import dao.ReaderDao;
 import dao.impl.ReaderDaoImpl;
+import domain.Book;
 import domain.Reader;
 
 import javax.swing.*;
@@ -117,74 +118,51 @@ public class AdminUserFrame extends JFrame {
 
 
         public AddFrame() {
-            this.setTitle("添加读者");
-            this.setBounds(300, 200, 500, 350);
+            setLayout(null);
+            this.setTitle("添加读者信息");
             this.setLocationRelativeTo(null);
-            panel = new JPanel();
-            panel.setLayout(new GridLayout(8, 2));
-            panelSouth = new JPanel();
-            panelSouth.setLayout(new FlowLayout(FlowLayout.CENTER));
-            button = new JButton("OK");
-            panelSouth.add(button);
+            this.setBounds(500, 230, 500, 350);
+
             label = new JLabel[5];
             label[0] = new JLabel("读者编号：");
+            label[0].setBounds(new Rectangle(140, 30, 70, 30));
             label[1] = new JLabel("读者姓名：");
-
-            label[3] = new JLabel("用户密码：");
-            label[4] = new JLabel("已借图书编号：");
+            label[1].setBounds(new Rectangle(140, 60, 70, 30));
+            label[2] = new JLabel("用户密码：");
+            label[2].setBounds(new Rectangle(140, 90, 70, 30));
+            label[3] = new JLabel("已借编号：");
+            label[3].setBounds(new Rectangle(140, 120, 70, 30));
 
             idText = new JTextField(10);
+            idText.setBounds(new Rectangle(210, 35, 140, 20));
             nameText = new JTextField(10);
-
+            nameText.setBounds(new Rectangle(210, 65, 140, 20));
             passwordText = new JTextField(10);
-            lendText = new JTextField(10);
+            passwordText.setBounds(new Rectangle(210, 95, 140, 20));
+            lendText = new JTextField(12);
+            lendText.setBounds(new Rectangle(210, 125, 140, 20));
 
-            panelRight = new JPanel[5];
-            panelLeft = new JPanel[5];
-            for (int i = 0; i < panelRight.length; i++) {
-                panelRight[i] = new JPanel();
-                panelRight[i].setLayout(new FlowLayout(FlowLayout.LEFT));
-            }
 
-            for (int i = 0; i < panelLeft.length; i++) {
-                panelLeft[i] = new JPanel();
-                panelLeft[i].setLayout(new FlowLayout(FlowLayout.RIGHT));
-            }
+            button = new JButton("OK");
+            button.setBounds(new Rectangle(230, 155, 100, 20));
 
-            for (int i = 0; i < panelLeft.length; i++) {
-                for (int j = i; j < label.length; j++) {
-                    panelLeft[i].add(label[j]);
-                }
-            }
+            this.add(label[0]);
+            this.add(label[1]);
+            this.add(label[2]);
+            this.add(label[3]);
 
-            panelRight[0].add(idText);
-            panelRight[1].add(nameText);
+            this.add(idText);
+            this.add(button);
+            this.add(nameText);
+            this.add(passwordText);
+            this.add(lendText);
 
-            panelRight[3].add(passwordText);
-            panelRight[4].add(lendText);
-
-            panel.add(panelLeft[0]);
-            panel.add(panelRight[0]);
-            panel.add(panelLeft[1]);
-            panel.add(panelRight[1]);
-            panel.add(panelLeft[2]);
-            panel.add(panelRight[2]);
-            panel.add(panelLeft[3]);
-            panel.add(panelRight[3]);
-            panel.add(panelLeft[4]);
-            panel.add(panelRight[4]);
-            this.add(panelSouth, BorderLayout.SOUTH);
-            this.add(panel);
             MyEvent();
             this.dispose();//子窗口销毁
             setVisible(true);//父窗口变可见
         }
 
 
-        public void refresh() {
-            Object[][] data = readerDaoImpl.getReaderInfo();
-            tableModel.setDataVector(data, header);
-        }
 
         public void MyEvent() {
             button.addActionListener(new ActionListener() {
@@ -221,12 +199,14 @@ public class AdminUserFrame extends JFrame {
             setLayout(null);
             this.setTitle("删除读者信息");
             this.setLocationRelativeTo(null);
-            this.setBounds(300, 200, 500, 350);
+            this.setBounds(500, 230, 500, 350);
 
             label = new JLabel[2];
             label[0] = new JLabel("读者编号：");
             label[1] = new JLabel("读者名称：");
+
             label[0].setBounds(new Rectangle(140, 30, 70, 30));
+
             label[1].setBounds(new Rectangle(140, 60, 70, 30));
 
             idText = new JTextField();
@@ -250,10 +230,6 @@ public class AdminUserFrame extends JFrame {
             setVisible(true);//父窗口变可见
         }
 
-        public void refresh() {
-            Object[][] data = readerDaoImpl.getReaderInfo();
-            tableModel.setDataVector(data, header);
-        }
 
         public void MyEvent() {
             button.addActionListener(new ActionListener() {
@@ -282,74 +258,51 @@ public class AdminUserFrame extends JFrame {
 
 
         public ChangeFrame() {
+            setLayout(null);
             this.setTitle("修改读者信息");
-            this.setBounds(300, 200, 500, 350);
             this.setLocationRelativeTo(null);
-            panel = new JPanel();
-            panel.setLayout(new GridLayout(8, 2));
-            panelSouth = new JPanel();
-            panelSouth.setLayout(new FlowLayout(FlowLayout.CENTER));
-            button = new JButton("OK");
-            panelSouth.add(button);
+            this.setBounds(500, 230, 500, 350);
+
             label = new JLabel[5];
             label[0] = new JLabel("读者编号：");
+            label[0].setBounds(new Rectangle(140, 30, 70, 30));
             label[1] = new JLabel("读者姓名：");
-
-            label[3] = new JLabel("用户密码：");
-            label[4] = new JLabel("已借图书编号：");
+            label[1].setBounds(new Rectangle(140, 60, 70, 30));
+            label[2] = new JLabel("用户密码：");
+            label[2].setBounds(new Rectangle(140, 90, 70, 30));
+            label[3] = new JLabel("已借编号：");
+            label[3].setBounds(new Rectangle(140, 120, 70, 30));
 
             idText = new JTextField(10);
+            idText.setBounds(new Rectangle(210, 35, 140, 20));
             nameText = new JTextField(10);
-
+            nameText.setBounds(new Rectangle(210, 65, 140, 20));
             passwordText = new JTextField(10);
-            lendText = new JTextField(10);
+            passwordText.setBounds(new Rectangle(210, 95, 140, 20));
+            lendText = new JTextField(12);
+            lendText.setBounds(new Rectangle(210, 125, 140, 20));
 
-            panelRight = new JPanel[5];
-            panelLeft = new JPanel[5];
-            for (int i = 0; i < panelRight.length; i++) {
-                panelRight[i] = new JPanel();
-                panelRight[i].setLayout(new FlowLayout(FlowLayout.LEFT));
-            }
 
-            for (int i = 0; i < panelLeft.length; i++) {
-                panelLeft[i] = new JPanel();
-                panelLeft[i].setLayout(new FlowLayout(FlowLayout.RIGHT));
-            }
+            button = new JButton("OK");
+            button.setBounds(new Rectangle(230, 155, 100, 20));
 
-            for (int i = 0; i < panelLeft.length; i++) {
-                for (int j = i; j < label.length; j++) {
-                    panelLeft[i].add(label[j]);
-                }
-            }
+            this.add(label[0]);
+            this.add(label[1]);
+            this.add(label[2]);
+            this.add(label[3]);
 
-            panelRight[0].add(idText);
-            panelRight[1].add(nameText);
+            this.add(idText);
+            this.add(button);
+            this.add(nameText);
+            this.add(passwordText);
+            this.add(lendText);
 
-            panelRight[3].add(passwordText);
-            panelRight[4].add(lendText);
-
-            panel.add(panelLeft[0]);
-            panel.add(panelRight[0]);
-            panel.add(panelLeft[1]);
-            panel.add(panelRight[1]);
-            panel.add(panelLeft[2]);
-            panel.add(panelRight[2]);
-            panel.add(panelLeft[3]);
-            panel.add(panelRight[3]);
-            panel.add(panelLeft[4]);
-            panel.add(panelRight[4]);
-            this.add(panelSouth, BorderLayout.SOUTH);
-            this.add(panel);
             MyEvent();
             this.dispose();//子窗口销毁
             setVisible(true);//父窗口变可见
         }
 
 
-        public void refresh() {
-            Object[][] data = readerDaoImpl.getReaderInfo();
-            tableModel.setDataVector(data, header);
-        }
 
         public void MyEvent() {
             button.addActionListener(new ActionListener() {
@@ -381,77 +334,35 @@ public class AdminUserFrame extends JFrame {
 
     /*查找读者信息*/
     class FindFrame extends JFrame {
-
-
         public FindFrame() {
+            setLayout(null);
             this.setTitle("查询读者信息");
-            this.setBounds(300, 200, 500, 350);
             this.setLocationRelativeTo(null);
-            panel = new JPanel();
-            panel.setLayout(new GridLayout(8, 2));
-            panelSouth = new JPanel();
-            panelSouth.setLayout(new FlowLayout(FlowLayout.CENTER));
-            button = new JButton("OK");
-            panelSouth.add(button);
-            label = new JLabel[5];
+            this.setBounds(500, 230, 500, 350);
+
+            label = new JLabel[1];
             label[0] = new JLabel("读者编号：");
-            label[1] = new JLabel("读者姓名：");
+            label[0].setBounds(new Rectangle(140, 30, 70, 30));
 
-            label[3] = new JLabel("用户密码：");
-            label[4] = new JLabel("已借图书编号：");
+            idText = new JTextField();
+            idText.setBounds(new Rectangle(210, 35, 140, 20));
 
-            idText = new JTextField(10);
-            nameText = new JTextField(10);
+            button = new JButton("OK");
+            button.setBounds(new Rectangle(210, 120, 100, 20));
 
-            passwordText = new JTextField(10);
-            lendText = new JTextField(10);
+            this.add(label[0]);
 
-            panelRight = new JPanel[5];
-            panelLeft = new JPanel[5];
-            for (int i = 0; i < panelRight.length; i++) {
-                panelRight[i] = new JPanel();
-                panelRight[i].setLayout(new FlowLayout(FlowLayout.LEFT));
-            }
 
-            for (int i = 0; i < panelLeft.length; i++) {
-                panelLeft[i] = new JPanel();
-                panelLeft[i].setLayout(new FlowLayout(FlowLayout.RIGHT));
-            }
+            this.add(idText);
+            this.add(button);
 
-            for (int i = 0; i < panelLeft.length; i++) {
-                for (int j = i; j < label.length; j++) {
-                    panelLeft[i].add(label[j]);
-                }
-            }
-
-            panelRight[0].add(idText);
-            panelRight[1].add(nameText);
-
-            panelRight[3].add(passwordText);
-            panelRight[4].add(lendText);
-
-            panel.add(panelLeft[0]);
-            panel.add(panelRight[0]);
-            panel.add(panelLeft[1]);
-            panel.add(panelRight[1]);
-            panel.add(panelLeft[2]);
-            panel.add(panelRight[2]);
-            panel.add(panelLeft[3]);
-            panel.add(panelRight[3]);
-            panel.add(panelLeft[4]);
-            panel.add(panelRight[4]);
-            this.add(panelSouth, BorderLayout.SOUTH);
-            this.add(panel);
             MyEvent();
             this.dispose();//子窗口销毁
             setVisible(true);//父窗口变可见
+
         }
 
 
-        public void refresh() {
-            Object[][] data = readerDaoImpl.getReaderInfo();
-            tableModel.setDataVector(data, header);
-        }
 
         public void MyEvent() {
             button.addActionListener(new ActionListener() {
@@ -460,20 +371,14 @@ public class AdminUserFrame extends JFrame {
                 public void actionPerformed(ActionEvent e) {
                     // TODO Auto-generated method stub
                     int readerId = parseInt(idText.getText());
-                    String readerName = nameText.getText();
-
-                    String readerPassword = passwordText.getText();
-                    int readerLend = parseInt(lendText.getText());
-                    Reader reader = new Reader(readerId, readerName, readerPassword, readerLend);
-
                     Reader i = readerDao.findReader(readerId);
-//                    if (i > 0) {
-//                        JOptionPane.showMessageDialog(null, "修改成功！");
-//                        refresh();
-//                        dispose();
-//                    } else {
-//                        JOptionPane.showMessageDialog(null, "修改失败！");
-//                    }
+                    if (i != null) {
+                        JOptionPane.showMessageDialog(null, "查找成功！"+i);
+                        refresh();
+                        dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "查找失败！");
+                    }
                 }
 
             });
@@ -484,28 +389,25 @@ public class AdminUserFrame extends JFrame {
     public void MyEvent() {
         // 增加
         add.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                new AdminUserFrame.AddFrame();
+                new AddFrame();
             }
         });
 
         // 删除
         del.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                new AdminUserFrame.DelFrame();
+                new DelFrame();
             }
         });
 
         // 修改
         change.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                new AdminUserFrame.ChangeFrame();
+                new ChangeFrame();
             }
         });
 
@@ -515,7 +417,7 @@ public class AdminUserFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 // 增加一行空白区域
-                new AdminUserFrame.FindFrame();
+                new FindFrame();
             }
         });
 
@@ -528,6 +430,10 @@ public class AdminUserFrame extends JFrame {
             }
         });
 
+    }
+    public void refresh() {
+        Object[][] data = readerDaoImpl.getReaderInfo();
+        tableModel.setDataVector(data, header);
     }
 
     public static void main(String[] args) {
