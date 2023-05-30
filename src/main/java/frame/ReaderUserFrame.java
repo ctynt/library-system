@@ -3,23 +3,19 @@ package frame;
 
 import dao.ReaderDao;
 import dao.impl.ReaderDaoImpl;
-import domain.Reader;
-
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
 import static java.lang.Integer.parseInt;
 
 /**
  * @version 1.0.0
  * @Author zhy
  * @Date 2023/5/29 8:08
- * @Description
+ * @Description 读者--图书借阅系统--读者个人信息管理
  */
 public class ReaderUserFrame extends JFrame {
     JButton update, exit;
@@ -31,9 +27,6 @@ public class ReaderUserFrame extends JFrame {
     private JPasswordField passwordField = new JPasswordField();
     private JButton checkBtn = new JButton();
     private JButton exitBtn = new JButton();
-    DefaultTableModel tableModel;
-    JTextField idText, nameText, passwordText, lendText;
-    JButton button;
 
 
     private JComboBox<String> stateComboBox = new JComboBox<String>();
@@ -46,10 +39,8 @@ public class ReaderUserFrame extends JFrame {
         setFont(new Font("宋体", Font.PLAIN, 35));
         this.setBounds(0, 0, 760, 400);
         this.setLocationRelativeTo(null);
-        // 让窗口在屏幕中间显示
         this.setResizable(false);
         this.setLayout(null);
-        // 用户单击窗口的关闭按钮时程序执行的操作
 
         JLabel lblxxx = new JLabel("你好,读者！");
         lblxxx.setFont(new Font("宋体", Font.PLAIN, 48));
@@ -80,13 +71,11 @@ public class ReaderUserFrame extends JFrame {
         this.dispose();
         //父窗口变可见
         setVisible(true);
-
         //窗口大小不可变
         setResizable(false);
     }
 
     class UpdatePasswordFrame extends JFrame {
-
 
         public UpdatePasswordFrame() {
 
@@ -99,10 +88,9 @@ public class ReaderUserFrame extends JFrame {
             this.setTitle("修改密码");
             // 定义标签的标题、字符大小和位置
             nameLabel.setText("读者编号：");
-
             nameLabel.setBounds(new Rectangle(65, 67, 81, 16));
-            passwordLabel.setText("新密码：");
 
+            passwordLabel.setText("新密码：");
             passwordLabel.setBounds(new Rectangle(65, 112, 79, 16));
             // 定义编辑框的位置
             nameTextField.setBounds(new Rectangle(194, 67, 118, 22));
@@ -129,6 +117,8 @@ public class ReaderUserFrame extends JFrame {
             setResizable(false); // JFrame不可以改变大小
             setLocationRelativeTo(getOwner()); // JFrame打开后居中
             this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+<<<<<<< HEAD
+=======
 
             //子窗口销毁
             this.dispose();
@@ -136,17 +126,17 @@ public class ReaderUserFrame extends JFrame {
             setVisible(true);
 
 
+>>>>>>> 8c0a72ba9efb7d8caed42dc9846cc5805573359f
         }
 
         public void MyEvent() {
             checkBtn.addActionListener(new ActionListener() {
-
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     // TODO Auto-generated method stub
                     int readerId = parseInt(nameTextField.getText());
                     String readerPassword = passwordField.getText();
-                    int i = readerDao.changeReaderPassword(readerId,readerPassword);
+                    int i = readerDao.changeReaderPassword(readerId, readerPassword);
                     if (i > 0) {
                         JOptionPane.showMessageDialog(null, "修改成功！");
                         dispose();
@@ -163,12 +153,26 @@ public class ReaderUserFrame extends JFrame {
                     new ReaderUserFrame(getTitle());
                     dispose();
                 }
-
             });
         }
 
     }
 
+<<<<<<< HEAD
+    public void MyEvent() {
+        // 更改密码
+        update.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                new UpdatePasswordFrame();
+            }
+        });
+
+        // 退出登录
+        exit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+=======
         public void MyEvent() {
             // 更改密码
             update.addActionListener(new ActionListener() {
@@ -192,11 +196,16 @@ public class ReaderUserFrame extends JFrame {
 
 
         }
+>>>>>>> 8c0a72ba9efb7d8caed42dc9846cc5805573359f
 
+                System.exit(0);
+            }
+        });
+    }
 
 
     public static void main(String[] args) {
         new ReaderUserFrame("图书借阅系统--读者个人信息管理");
-
-    }}
+    }
+}
 

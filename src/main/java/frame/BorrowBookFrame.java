@@ -20,7 +20,7 @@ import static java.lang.Integer.parseInt;
  * @version 1.0.0
  * @Author zhy
  * @Date 2023/5/30 10:57
- * @Description
+ * @Description 读者--图书借阅系统--图书借阅服务--借阅图书
  */
 public class BorrowBookFrame extends JFrame {
     JLabel[] label;

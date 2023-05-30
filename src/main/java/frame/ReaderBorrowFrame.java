@@ -1,4 +1,5 @@
 package frame;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -10,10 +11,11 @@ import java.awt.event.WindowEvent;
  * @version 1.0.0
  * @Author zhy
  * @Date 2023/5/29 8:09
- * @Description
+ * @Description 读者--图书借阅系统--图书借阅服务
  */
-public class ReaderBorrowFrame extends JFrame{
+public class ReaderBorrowFrame extends JFrame {
     JButton storage, borrowInfo, returnInfo;
+
     public ReaderBorrowFrame(String title) {
         super("图书借阅系统--图书借阅服务");
         setFont(new Font("宋体", Font.PLAIN, 35));
@@ -31,13 +33,11 @@ public class ReaderBorrowFrame extends JFrame{
         storage = new JButton("借阅信息");
         storage.setFont(new Font("宋体", Font.BOLD, 20));
         storage.setBounds(80, 192, 166, 59);
-
         this.add(storage);
 
         borrowInfo = new JButton("借阅图书");
         borrowInfo.setFont(new Font("宋体", Font.BOLD, 20));
         borrowInfo.setBounds(292, 192, 166, 59);
-
         this.add(borrowInfo);
 
         returnInfo = new JButton("归还图书");
@@ -60,6 +60,7 @@ public class ReaderBorrowFrame extends JFrame{
         //窗口大小不可变
         setResizable(false);
     }
+
     public void MyEvent() {
         // 借阅信息
         storage.addActionListener(new ActionListener() {
@@ -79,7 +80,6 @@ public class ReaderBorrowFrame extends JFrame{
                 new BorrowBookFrame();
                 dispose();
             }
-
         });
         //归还图书
         returnInfo.addActionListener(new ActionListener() {
@@ -90,11 +90,10 @@ public class ReaderBorrowFrame extends JFrame{
                 new ReturnBookFrame(returnInfo.getText());
                 dispose();
             }
-
         });
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         new ReaderBorrowFrame("图书借阅系统--图书借阅服务");
     }
 }
