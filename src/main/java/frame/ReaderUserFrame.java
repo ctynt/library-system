@@ -42,7 +42,7 @@ public class ReaderUserFrame extends JFrame {
     private ReaderDao readerDao = new ReaderDaoImpl();
 
     public ReaderUserFrame(String title) {
-        super("图书借阅系统--读者个人信息管理");
+        this.setTitle(title);
         setFont(new Font("宋体", Font.PLAIN, 35));
         this.setBounds(0, 0, 760, 400);
         this.setLocationRelativeTo(null);
@@ -56,7 +56,7 @@ public class ReaderUserFrame extends JFrame {
         lblxxx.setBounds(245, 35, 726, 91);
         this.add(lblxxx);
 
-        update = new JButton("更改密码");
+        update = new JButton("修改密码");
         update.setFont(new Font("宋体", Font.BOLD, 20));
         update.setBounds(130, 192, 166, 59);
 
@@ -88,7 +88,7 @@ public class ReaderUserFrame extends JFrame {
     class UpdatePasswordFrame extends JFrame {
 
         public UpdatePasswordFrame(String text) {
-// 取得窗口面板
+            // 取得窗口面板
             contentPane = (JPanel) this.getContentPane();
             // 定义窗口面板的布局
             contentPane.setLayout(null);
@@ -132,17 +132,14 @@ public class ReaderUserFrame extends JFrame {
         }
 
         public void MyEvent() {
-            button.addActionListener(new ActionListener() {
+            checkBtn.addActionListener(new ActionListener() {
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     // TODO Auto-generated method stub
                     int readerId = parseInt(idText.getText());
-                    String readerName = nameText.getText();
-
                     String readerPassword = passwordText.getText();
-                    int readerLend = parseInt(lendText.getText());
-                    Reader reader = new Reader(readerId, readerName, readerPassword, readerLend);
+                    Reader reader = new Reader(readerId, readerPassword);
 
                     int i = readerDao.changeReader(reader);
                     if (i > 0) {
@@ -158,13 +155,22 @@ public class ReaderUserFrame extends JFrame {
 
     }
 
-<<<<<<< HEAD
         public void MyEvent() {
             // 更改密码
             update.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
                     new UpdatePasswordFrame(update.getText());
+                    dispose();
+                }
+
+            });
+
+            // 确认修改
+            checkBtn.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent arg0) {
+                    new UpdatePasswordFrame(checkBtn.getText());
                     dispose();
                 }
 
@@ -180,13 +186,20 @@ public class ReaderUserFrame extends JFrame {
                 }
 
             });
+
+            // 取消修改
+            exitBtn.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent arg0) {
+                    new ReaderUserFrame(exitBtn.getText());
+                    dispose();
+                }
+
+            });
         }
+
 
         public static void main(String[] args) {
             new ReaderUserFrame("个人信息管理");
         }
-=======
-    public static void main(String[] args) {
-        new ReaderUserFrame("图书借阅系统--读者个人信息管理");
->>>>>>> 173e33e75b1188933044ea1c868a506896ccb667
     }
