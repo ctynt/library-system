@@ -103,7 +103,6 @@ public class AdminStorageFrame extends JFrame {
                 new AdminMainFrame().setVisible(true);
             }
         });
-        System.out.println(h);
         JScrollPane jsp = new JScrollPane(table, v, h);
         jsp.setBounds(0, 36, 850, 400);
         this.add(jsp);
@@ -286,16 +285,6 @@ public class AdminStorageFrame extends JFrame {
 
                     int bookId = parseInt(idText.getText());
                     String bookName = nameText.getText();
-//                    String author = authorText.getText();
-//                    String category = (String) typeBox.getSelectedItem();
-//                    String state =null;
-//                    if (stateRadio1.isSelected()) {
-//                        state = stateRadio1.getText();
-//                    } else if (stateRadio2.isSelected()) {
-//                        state= stateRadio2.getText();
-//                    }
-//
-//                    Book book  = new Book(bookId,bookName,author, category, state);
 
                     int i = bookDao.delBook(bookId, bookName);
                     if (i > 0) {
@@ -486,7 +475,6 @@ public class AdminStorageFrame extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                // 增加一行空白区域
 
                 new AddFrame();
 
@@ -500,12 +488,7 @@ public class AdminStorageFrame extends JFrame {
         del.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-
                 new DelFrame();
-
-
-
-
             }
         });
 
@@ -516,10 +499,6 @@ public class AdminStorageFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 new ChangeFrame();
-
-
-
-
             }
         });
 
