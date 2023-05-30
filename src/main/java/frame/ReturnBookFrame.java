@@ -22,7 +22,8 @@ public class ReturnBookFrame extends JFrame {
             @Override
             public void windowClosing(WindowEvent e) {
                 super.windowClosing(e);
-//                new ReaderBorrowFrame().setVisible(true);
+                new ReaderBorrowFrame("");
+                setVisible(true);
             }
         });
 

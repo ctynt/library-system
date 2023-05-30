@@ -2,6 +2,7 @@ package frame;
 
 import dao.BookDao;
 import dao.impl.BookDaoImpl;
+import dao.impl.BorrowDaoImpl;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -18,18 +19,18 @@ import java.util.Vector;
  * @Description
  */
 public class ReaderStorageFrame extends JFrame {
-    BookDao bookDao = new BookDaoImpl();
+
     DefaultTableModel tableModel;
 //    Vector vector;
     JTable table;
     /*增加信息的面板*/
     JPanel panelUP;
 
-    Object[] header = {"图书编号","书名","作者","类型","状态"};
+    Object[] header = {"借阅编号","图书编号","图书名称","读者编号","读者姓名"};
 
     Object[][] data;
 
-    BookDaoImpl bookDaoImpl = new BookDaoImpl();
+    BorrowDaoImpl borrowDaoImpl = new BorrowDaoImpl();
     public ReaderStorageFrame(String title) {
         super("图书借阅系统--图书信息浏览");
         this.setBounds(300, 200, 850, 450);
@@ -42,7 +43,7 @@ public class ReaderStorageFrame extends JFrame {
         Vector rowData = null;
         Vector columnNames = null;
 
-        data = bookDaoImpl.getBookInfo();
+        data = borrowDaoImpl.getBorrowInfo();
         tableModel = new DefaultTableModel(data,header);
         table = new JTable(tableModel);
 //        // 创建表格
