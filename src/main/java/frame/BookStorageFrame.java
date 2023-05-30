@@ -64,7 +64,8 @@ public class BookStorageFrame extends JFrame {
             @Override
             public void windowClosing(WindowEvent e) {
                 super.windowClosing(e);
-                new ReaderMainFrame().setVisible(true);
+                new ReaderBorrowFrame("");
+                setVisible(true);
             }
         });
         System.out.println(h);
