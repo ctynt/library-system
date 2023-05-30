@@ -19,4 +19,7 @@ public interface ReaderDao {
     Object[][] getReaderInfo();
 
     Reader findReader(int readerId);
+    
+    int changeReaderPassword(int readerId, String readerPassword);
+
 }

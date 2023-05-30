@@ -42,7 +42,7 @@ public class ReaderUserFrame extends JFrame {
     private ReaderDao readerDao = new ReaderDaoImpl();
 
     public ReaderUserFrame(String title) {
-        super("图书借阅系统--读者个人信息管理");
+        this.setTitle(title);
         setFont(new Font("宋体", Font.PLAIN, 35));
         this.setBounds(0, 0, 760, 400);
         this.setLocationRelativeTo(null);
@@ -56,7 +56,7 @@ public class ReaderUserFrame extends JFrame {
         lblxxx.setBounds(245, 35, 726, 91);
         this.add(lblxxx);
 
-        update = new JButton("更改密码");
+        update = new JButton("修改密码");
         update.setFont(new Font("宋体", Font.BOLD, 20));
         update.setBounds(130, 192, 166, 59);
 
@@ -87,7 +87,9 @@ public class ReaderUserFrame extends JFrame {
 
     class UpdatePasswordFrame extends JFrame {
 
+
         public UpdatePasswordFrame() {
+
             // 取得窗口面板
             contentPane = (JPanel) this.getContentPane();
             // 定义窗口面板的布局
@@ -97,17 +99,16 @@ public class ReaderUserFrame extends JFrame {
             this.setTitle("修改密码");
             // 定义标签的标题、字符大小和位置
             nameLabel.setText("读者编号：");
-            nameLabel.setFont(new Font("Dialog", 0, 15));
+
             nameLabel.setBounds(new Rectangle(65, 67, 81, 16));
             passwordLabel.setText("新密码：");
-            passwordLabel.setFont(new Font("Dialog", 0, 15));
+
             passwordLabel.setBounds(new Rectangle(65, 112, 79, 16));
             // 定义编辑框的位置
             nameTextField.setBounds(new Rectangle(194, 67, 118, 22));
             passwordField.setBounds(new Rectangle(194, 112, 118, 22));
             // 定义按钮的标题、动作字符串、字符大小、位置和加入动作接收器
             checkBtn.setText("确定");
-            checkBtn.setActionCommand("login");
             checkBtn.setFont(new Font("Dialog", 0, 15));
             checkBtn.setBounds(new Rectangle(65, 204, 109, 25));
             exitBtn.setText("取消");
@@ -123,6 +124,7 @@ public class ReaderUserFrame extends JFrame {
             contentPane.add(stateComboBox, null);
             contentPane.add(checkBtn, null);
             contentPane.add(exitBtn, null);
+            MyEvent();
             setVisible(true);
             setResizable(false); // JFrame不可以改变大小
             setLocationRelativeTo(getOwner()); // JFrame打开后居中
@@ -132,25 +134,29 @@ public class ReaderUserFrame extends JFrame {
         }
 
         public void MyEvent() {
-            button.addActionListener(new ActionListener() {
+            checkBtn.addActionListener(new ActionListener() {
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     // TODO Auto-generated method stub
-                    int readerId = parseInt(idText.getText());
-                    String readerName = nameText.getText();
-
-                    String readerPassword = passwordText.getText();
-                    int readerLend = parseInt(lendText.getText());
-                    Reader reader = new Reader(readerId, readerName, readerPassword, readerLend);
-
-                    int i = readerDao.changeReader(reader);
+                    int readerId = parseInt(nameTextField.getText());
+                    String readerPassword = passwordField.getText();
+                    int i = readerDao.changeReaderPassword(readerId,readerPassword);
                     if (i > 0) {
                         JOptionPane.showMessageDialog(null, "修改成功！");
                         dispose();
                     } else {
-                        JOptionPane.showMessageDialog(null, "修改失败！");
+                        JOptionPane.showMessageDialog(null, "修改失败！该用户可能不存在");
                     }
+                }
+            });
+
+            // 取消修改
+            exitBtn.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent arg0) {
+                    new ReaderUserFrame(getTitle());
+                    dispose();
                 }
 
             });
@@ -166,8 +172,8 @@ public class ReaderUserFrame extends JFrame {
                     new UpdatePasswordFrame();
 
                 }
-
             });
+
 
 
             // 退出登录
@@ -178,6 +184,8 @@ public class ReaderUserFrame extends JFrame {
                 }
 
             });
+
+
         }
 
 
@@ -186,3 +194,4 @@ public class ReaderUserFrame extends JFrame {
         new ReaderUserFrame("图书借阅系统--读者个人信息管理");
 
     }}
+
