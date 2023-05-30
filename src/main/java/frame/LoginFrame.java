@@ -134,8 +134,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 	}
 
 	public static void main(String[] args) throws Exception {
-		Label exit = null;
-		new LoginFrame(exit.getText());
+		new LoginFrame("登录页面");
 	}
 }
 
