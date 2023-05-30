@@ -70,7 +70,7 @@ public class ReaderMainFrame extends JFrame {
             }
 
         });
-//个人信息管理
+        //个人信息管理
         userInfo.addActionListener(new ActionListener() {
 
             @Override

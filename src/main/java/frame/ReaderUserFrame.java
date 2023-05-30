@@ -130,6 +130,11 @@ public class ReaderUserFrame extends JFrame {
             setLocationRelativeTo(getOwner()); // JFrame打开后居中
             this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+            //子窗口销毁
+            this.dispose();
+            //父窗口变可见
+            setVisible(true);
+
 
         }
 
@@ -170,7 +175,6 @@ public class ReaderUserFrame extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
                     new UpdatePasswordFrame();
-
                 }
             });
 
@@ -180,7 +184,8 @@ public class ReaderUserFrame extends JFrame {
             exit.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
-                    System.exit(0);
+                    setVisible(false);
+                    new LoginFrame(getTitle());
                 }
 
             });
