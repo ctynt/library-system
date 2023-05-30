@@ -1,6 +1,7 @@
 package dao.impl;
 
 import dao.BorrowDao;
+import domain.Admin;
 import domain.Book;
 import domain.Borrow;
 import utils.JDBCUtil;
@@ -67,7 +68,7 @@ public class BorrowDaoImpl implements BorrowDao {
      * 删除图书信息
      */
     @Override
-    public int delBorrow(int borrowId,String bookName) {
+    public int delBorrow(int bookId,int readerId) {
         int result = 0;
         try {
             // 取得数据库连接
@@ -76,13 +77,13 @@ public class BorrowDaoImpl implements BorrowDao {
             String sql = "" +
                     "DELETE FROM borrow " +
                     // 参数用?表示，相当于占位符
-                    "WHERE borrowId = ? AND bookName = ?";
+                    "WHERE bookId = ? AND readerId = ?";
 
             // 创建查询的PreparedStatement类
             ps = conn.prepareStatement(sql);
             // 设置查询类的1个参数
-            ps.setInt(1, borrowId);
-            ps.setString(2,bookName);
+            ps.setInt(1, bookId);
+            ps.setInt(2,readerId);
             // 执行查询操作
             result = ps.executeUpdate();
         } catch (Exception e) {
@@ -193,6 +194,37 @@ public class BorrowDaoImpl implements BorrowDao {
         return borrow;
 
     }
+
+    @Override
+    public boolean checkBorrowState(int bookId) {
+        boolean message = false;
+        try {
+            // 取得数据库连接
+            conn = JDBCUtil.getConnection();
+            // 创建数据表的查询SQL语句
+            String sql = "select * from book where state= '在馆' and bookId = ? ";
+
+            // 创建查询的PreparedStatement类
+            ps = conn.prepareStatement(sql);
+            // 设置查询类的2个参数
+
+            ps.setInt(1, bookId);
+            // 执行查询操作
+            resultSet = ps.executeQuery();
+            if (resultSet.next()) {
+                message = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (Exception e) {
+            }
+        }
+        return message;
+    }
+
 
 
 }

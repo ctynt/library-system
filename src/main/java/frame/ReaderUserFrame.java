@@ -157,14 +157,19 @@ public class ReaderUserFrame extends JFrame {
             }
         });
 
+
+
         // 退出登录
         exit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-
-                System.exit(0);
+                setVisible(false);
+                new LoginFrame(getTitle());
             }
+
         });
+
+
     }
 
 

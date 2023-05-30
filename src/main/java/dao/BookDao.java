@@ -25,7 +25,7 @@ public interface BookDao {
 
     Book findBook(int bookId);
 
-    int changeBookBorrow(Borrow borrow);
+    int changeBookBorrow(String state,int bookId);
 
     }
 

@@ -2,8 +2,10 @@ package frame;
 
 import dao.BookDao;
 import dao.BorrowDao;
+import dao.ReaderDao;
 import dao.impl.BookDaoImpl;
 import dao.impl.BorrowDaoImpl;
+import dao.impl.ReaderDaoImpl;
 import domain.Book;
 import domain.Borrow;
 import domain.Reader;
@@ -18,6 +20,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Vector;
 
+import static java.lang.Integer.compare;
 import static java.lang.Integer.parseInt;
 
 /**
@@ -27,6 +30,7 @@ public class AdminBorrowFrame extends JFrame {
 
     BorrowDao borrowDao = new BorrowDaoImpl();
     BookDao bookDao = new BookDaoImpl();
+    ReaderDao readerDao = new ReaderDaoImpl();
     DefaultTableModel tableModel;
     BorrowDaoImpl borrowDaoImpl = new BorrowDaoImpl();
     JButton add, del, exit, find, change;
@@ -203,10 +207,13 @@ public class AdminBorrowFrame extends JFrame {
                     String bookName = bookNameText.getText();
                     int readerId = parseInt(readerIdText.getText());
                     String readerName = readerNameText.getText();
+
                     Borrow borrow = new Borrow(borrowId, bookId, bookName, readerId, readerName);
                     int i = borrowDao.addBorrow(borrow);
-                    bookDao.changeBookBorrow(borrow);
                     if (i > 0) {
+                        String state = "借阅";
+                        bookDao.changeBookBorrow(state,bookId);
+                        readerDao.changeReaderLend(bookId,readerId);
                         JOptionPane.showMessageDialog(null, "添加成功！");
                         refresh();
                         dispose();
@@ -229,27 +236,33 @@ public class AdminBorrowFrame extends JFrame {
             this.setLocationRelativeTo(null);
             this.setBounds(520, 230, 500, 350);
 
-            label = new JLabel[2];
+            label = new JLabel[3];
             label[0] = new JLabel("借阅编号：");
-            label[1] = new JLabel("图书名称：");
+            label[1] = new JLabel("图书编号：");
+            label[2] = new JLabel("读者编号：");
             label[0].setBounds(new Rectangle(140, 30, 70, 30));
             label[1].setBounds(new Rectangle(140, 60, 70, 30));
+            label[2].setBounds(new Rectangle(140, 90, 70, 30));
 
             borrowIdText = new JTextField();
-            bookNameText = new JTextField();
+            bookIdText = new JTextField();
+            readerIdText = new JTextField();
 
             borrowIdText.setBounds(new Rectangle(210, 35, 140, 20));
-            bookNameText.setBounds(new Rectangle(210, 65, 140, 20));
+            bookIdText.setBounds(new Rectangle(210, 65, 140, 20));
+            readerIdText.setBounds(new Rectangle(210, 95, 140, 20));
 
             button = new JButton("OK");
-            button.setBounds(new Rectangle(210, 120, 100, 20));
+            button.setBounds(new Rectangle(230, 120, 100, 20));
 
             this.add(label[0]);
             this.add(label[1]);
+            this.add(label[2]);
 
             this.add(borrowIdText);
             this.add(button);
-            this.add(bookNameText);
+            this.add(readerIdText);
+            this.add(bookIdText);
 
             MyEvent();
             this.dispose();//子窗口销毁
@@ -263,9 +276,13 @@ public class AdminBorrowFrame extends JFrame {
                 public void actionPerformed(ActionEvent e) {
                     // TODO Auto-generated method stub
                     int borrowId = parseInt(borrowIdText.getText());
-                    String bookName = bookNameText.getText();
-                    int i = borrowDao.delBorrow(borrowId, bookName);
+                    int readerId = parseInt(readerIdText.getText());
+                    int bookId = parseInt(bookIdText.getText());
+                    int i = borrowDao.delBorrow(bookId,readerId);
                     if (i > 0) {
+                        String state = "在馆";
+                        bookDao.changeBookBorrow(state,bookId);
+                        readerDao.changeReaderLend(0,readerId);
                         JOptionPane.showMessageDialog(null, "删除成功！");
                         refresh();
                         dispose();
@@ -358,6 +375,10 @@ public class AdminBorrowFrame extends JFrame {
                     Borrow borrow = new Borrow(borrowId, bookId, bookName, readerId, readerName);
                     int i = borrowDao.changeBorrow(borrow);
                     if (i > 0) {
+                        readerDao.changeReaderLend(bookId,readerId);
+                        if(bookId == 0) {
+                            bookDao.changeBookBorrow("在馆",bookId);
+                        }
                         JOptionPane.showMessageDialog(null, "修改成功！");
                         refresh();
                         dispose();

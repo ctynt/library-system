@@ -1,9 +1,21 @@
 package frame;
 
+import dao.BookDao;
+import dao.BorrowDao;
+import dao.ReaderDao;
+import dao.impl.BookDaoImpl;
+import dao.impl.BorrowDaoImpl;
+import dao.impl.ReaderDaoImpl;
+import domain.Borrow;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+
+import static java.lang.Integer.parseInt;
 
 /**
  * @version 1.0.0
@@ -12,32 +24,89 @@ import java.awt.event.WindowEvent;
  * @Description  读者--图书借阅系统--图书借阅服务-归还图书
  */
 public class ReturnBookFrame extends JFrame {
-    public ReturnBookFrame(String title) {
-        super("图书借阅服务-归还图书");
-        this.setBounds(300, 200, 850, 450);
+    JLabel[] label;
+    JTextField bookIdText, readerIdText,bookNameText,readerNameText,lendIdText;
+    JButton button;
+    BorrowDao borrowDao = new BorrowDaoImpl();
+    BookDao bookDao = new BookDaoImpl();
+    ReaderDao readerDao = new ReaderDaoImpl();
+    public ReturnBookFrame() {
+        setLayout(null);
+        this.setTitle("借阅图书");
         this.setLocationRelativeTo(null);
-        this.setTitle(title);
-        this.setLayout(new BorderLayout());
-        this.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                super.windowClosing(e);
-                new ReaderBorrowFrame("");
-                setVisible(true);
-            }
-        });
+        this.setBounds(500, 230, 500, 350);
 
-        //子窗口销毁
-        this.dispose();
-        //父窗口变可见
-        setVisible(true);
+        label = new JLabel[5];
+        label[0] = new JLabel("图书编号：");
+        label[0].setBounds(new Rectangle(140, 30, 70, 30));
+        label[1] = new JLabel("图书姓名：");
+        label[1].setBounds(new Rectangle(140, 60, 70, 30));
+        label[2] = new JLabel("读者编号：");
+        label[2].setBounds(new Rectangle(140, 90, 70, 30));
+        label[3] = new JLabel("读者姓名：");
+        label[3].setBounds(new Rectangle(140, 120, 70, 30));
+        label[4] = new JLabel("借阅编号：");
+        label[4].setBounds(new Rectangle(140, 150, 70, 30));
 
-        //窗口大小不可变
+        bookIdText = new JTextField(10);
+        bookIdText .setBounds(new Rectangle(210, 35, 140, 20));
+        bookNameText = new JTextField(10);
+        bookNameText.setBounds(new Rectangle(210, 65, 140, 20));
+        readerIdText = new JTextField(10);
+        readerIdText .setBounds(new Rectangle(210, 95, 140, 20));
+        readerNameText = new JTextField(10);
+        readerNameText .setBounds(new Rectangle(210, 125, 140, 20));
+        lendIdText = new JTextField(10);
+        lendIdText .setBounds(new Rectangle(210, 155, 140, 20));
+
+        button = new JButton("OK");
+        button.setBounds(new Rectangle(230, 185, 100, 20));
+
+        this.add(label[0]);
+        this.add(label[1]);
+        this.add(label[2]);
+        this.add(label[3]);
+        this.add(label[4]);
+
+        this.add(bookIdText );
+        this.add(button);
+        this.add(bookNameText);
+        this.add(readerIdText );
+        this.add(readerNameText);
+        this.add(lendIdText);
+
+        MyEvent();
+        this.dispose();//子窗口销毁
+        setVisible(true);//父窗口变可见
         setResizable(false);
     }
 
+    public void MyEvent() {
+        button.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+                int bookId = parseInt(bookIdText.getText());
+                int readerId = parseInt(readerIdText.getText());
+                boolean message = borrowDao.checkBorrowState(bookId);
+                if (message) {
+                    JOptionPane.showMessageDialog(null, "该图书未被借阅，归还失败！");
+                } else {
+                    borrowDao.delBorrow(bookId,readerId);
+                    String state = "在馆";
+                    bookDao.changeBookBorrow(state,bookId);
+                    readerDao.changeReaderLend(0,readerId);
+                    JOptionPane.showMessageDialog(null, "归还成功！");
+                    dispose();
+                }
+            }
+
+        });
+    }
+    
     public static void main(String[] args) {
-        new ReturnBookFrame("图书借阅服务-归还图书");
+        new ReturnBookFrame();
     }
 
 }

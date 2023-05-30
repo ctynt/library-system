@@ -22,4 +22,6 @@ public interface ReaderDao {
     
     int changeReaderPassword(int readerId, String readerPassword);
 
+    int changeReaderLend(int readerLend,int readerId);
+
 }
