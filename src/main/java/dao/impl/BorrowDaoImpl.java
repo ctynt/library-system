@@ -174,8 +174,6 @@ public class BorrowDaoImpl implements BorrowDao {
         String sql = "select * from borrow where bookId=?";
         Object[] params = {borrowId};
         ArrayList<HashMap> list = jdbcUtil.executeQuery(sql, params);
-        System.out.println(list.size());
-        System.out.println(list);
         if(list.size()>0){
             HashMap map = list.get(0);
             Integer borrowId0=Integer.parseInt(map.get("borrowId").toString());

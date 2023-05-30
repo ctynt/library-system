@@ -204,8 +204,6 @@ public  class ReaderDaoImpl implements ReaderDao {
         String sql = "select * from reader where readerId = ?";
         Object[] params = {readerId};
         ArrayList<HashMap> list = jdbcUtil.executeQuery(sql, params);
-        System.out.println(list.size());
-        System.out.println(list);
         if(list.size()>0){
             HashMap map = list.get(0);
             String readerName=map.get("readerName").toString();

@@ -140,7 +140,6 @@ public class ReaderUserFrame extends JFrame {
                     int readerId = parseInt(idText.getText());
                     String readerPassword = passwordText.getText();
                     Reader reader = new Reader(readerId, readerPassword);
-
                     int i = readerDao.changeReader(reader);
                     if (i > 0) {
                         JOptionPane.showMessageDialog(null, "修改成功！");
@@ -149,7 +148,6 @@ public class ReaderUserFrame extends JFrame {
                         JOptionPane.showMessageDialog(null, "修改失败！");
                     }
                 }
-
             });
         }
 
@@ -163,15 +161,13 @@ public class ReaderUserFrame extends JFrame {
                     new UpdatePasswordFrame(update.getText());
                     dispose();
                 }
-
             });
 
             // 确认修改
             checkBtn.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
-                    new UpdatePasswordFrame(checkBtn.getText());
-                    dispose();
+
                 }
 
             });
