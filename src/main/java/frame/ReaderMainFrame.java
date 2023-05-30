@@ -12,7 +12,7 @@ public class ReaderMainFrame extends JFrame {
     JButton storage, borrowInfo, userInfo;
 
     public ReaderMainFrame() {
-        super("图书借阅系统--读者服务");
+        super("图书借阅系统--面向读者");
         setFont(new Font("宋体", Font.PLAIN, 35));
         this.setBounds(0, 0, 760, 400);
         this.setLocationRelativeTo(null);

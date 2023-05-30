@@ -31,6 +31,7 @@ public class ReaderStorageFrame extends JFrame {
 
     BookDaoImpl bookDaoImpl = new BookDaoImpl();
     public ReaderStorageFrame(String title) {
+        super("图书借阅系统--图书信息浏览");
         this.setBounds(300, 200, 850, 450);
         this.setLocationRelativeTo(null);
         this.setTitle(title);
@@ -91,6 +92,6 @@ public class ReaderStorageFrame extends JFrame {
     }
 
     public static void main(String[] args) {
-        new ReaderStorageFrame("图书信息浏览");
+        new ReaderStorageFrame("图书借阅系统--图书信息浏览");
     }
 }
