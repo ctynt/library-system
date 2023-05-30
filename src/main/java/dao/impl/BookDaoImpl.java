@@ -179,8 +179,6 @@ public Book findBook(int bookId) {
     String sql = "select * from book where bookId=?";
     Object[] params = {bookId};
     ArrayList<HashMap> list = jdbcUtil.executeQuery(sql, params);
-    System.out.println(list.size());
-    System.out.println(list);
     if(list.size()>0){
         HashMap map = list.get(0);
         Integer bookId0=Integer.parseInt(map.get("bookId").toString());

@@ -61,29 +61,48 @@ public class ReaderUserFrame extends JFrame {
         setResizable(false);
     }
 
-    public void MyEvent() {
-        // 更改密码
-        update.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                new UpdatePasswordFrame(update.getText());
-                dispose();
-            }
+    class UpdatePasswordFrame extends JFrame {
 
-        });
+        public UpdatePasswordFrame(String text) {
 
-        // 退出登录
-        exit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                new LoginFrame(exit.getText());
-                dispose();
-            }
+            setTitle("更改密码");// 设置窗体标题
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// 默认关闭方式
+            setSize(400, 400);// 设置窗体大小
+            new JPanel();// 创建内容面板
+            setLayout(new BorderLayout(0, 0));
+//            setContentPane();// 设置内容面板
+            JLabel label = new JLabel("宽度：250，高度：250");// 创建标签控件
+            add(label, BorderLayout.CENTER);// 添加标签控件到窗体
+            this.setLocationRelativeTo(null);//窗口在屏幕中间显示
+            setVisible(true);
+        }
 
-        });
     }
 
-    public static void main(String[] args) {
-        new ReaderUserFrame("个人信息管理");
+        public void MyEvent() {
+            // 更改密码
+            update.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent arg0) {
+                    new UpdatePasswordFrame(update.getText());
+                    dispose();
+                }
+
+            });
+
+
+            // 退出登录
+            exit.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent arg0) {
+                    new LoginFrame(exit.getText());
+                    dispose();
+                }
+
+            });
+        }
+
+        public static void main(String[] args) {
+            new ReaderUserFrame("个人信息管理");
+        }
     }
-}
