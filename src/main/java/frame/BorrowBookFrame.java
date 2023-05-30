@@ -29,46 +29,8 @@ public class BorrowBookFrame extends JFrame {
 
     BorrowDao borrowDao = new BorrowDaoImpl();
     public BorrowBookFrame() {
-//        setLayout(null);
-//        this.setTitle("图书借阅服务-借阅图书");
-//        this.setLocationRelativeTo(null);
-//        this.setBounds(500, 230,500, 350);
-//
-//        label = new JLabel[2];
-//        label[0] = new JLabel("图书编号：");
-//        label[1] = new JLabel("读者编号：");
-//        label[0].setBounds(new Rectangle(140, 30, 70, 30));
-//        label[1].setBounds(new Rectangle(140, 60, 70, 30));
-//
-//        bookIdText = new JTextField();
-//        readerIdText = new JTextField();
-//
-//        bookIdText.setBounds(new Rectangle(210, 35, 140, 20));
-//        readerIdText.setBounds(new Rectangle(210, 65, 140, 20));
-//
-//        button = new JButton("OK");
-//        button.setBounds(new Rectangle(230, 120, 100, 20));
-//
-//        this.add(label[0]);
-//        this.add(label[1]);
-//
-//        this.add(bookIdText);
-//        this.add(button);
-//        this.add(readerIdText);
-//
-//        MyEvent();
-//
-//        //子窗口销毁
-//        this.dispose();
-//        //父窗口变可见
-//        setVisible(true);
-//
-//        //窗口大小不可变
-//        setResizable(false);
-
-
         setLayout(null);
-        this.setTitle("添加读者信息");
+        this.setTitle("借阅图书");
         this.setLocationRelativeTo(null);
         this.setBounds(500, 230, 500, 350);
 
@@ -114,6 +76,7 @@ public class BorrowBookFrame extends JFrame {
         MyEvent();
         this.dispose();//子窗口销毁
         setVisible(true);//父窗口变可见
+        setResizable(false);
 
     }
 
