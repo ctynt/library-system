@@ -1,8 +1,12 @@
 package frame;
 
 import com.mysql.cj.protocol.x.XMessage;
+import dao.BookDao;
 import dao.BorrowDao;
+import dao.ReaderDao;
+import dao.impl.BookDaoImpl;
 import dao.impl.BorrowDaoImpl;
+import dao.impl.ReaderDaoImpl;
 import domain.Admin;
 import domain.Borrow;
 
@@ -28,6 +32,8 @@ public class BorrowBookFrame extends JFrame {
     JButton button;
 
     BorrowDao borrowDao = new BorrowDaoImpl();
+    BookDao bookDao = new BookDaoImpl();
+    ReaderDao readerDao = new ReaderDaoImpl();
     public BorrowBookFrame() {
         setLayout(null);
         this.setTitle("借阅图书");
@@ -95,6 +101,9 @@ public class BorrowBookFrame extends JFrame {
                 if (message) {
                     Borrow borrow = new Borrow(lendId,bookId,bookName,readerId,readerName);
                     borrowDao.addBorrow(borrow);
+                    String state = "借阅";
+                    bookDao.changeBookBorrow(state,bookId);
+                    readerDao.changeReaderLend(bookId,readerId);
                     JOptionPane.showMessageDialog(null, "借阅成功！");
                     dispose();
                 } else {

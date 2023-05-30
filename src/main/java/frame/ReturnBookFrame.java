@@ -1,7 +1,11 @@
 package frame;
 
+import dao.BookDao;
 import dao.BorrowDao;
+import dao.ReaderDao;
+import dao.impl.BookDaoImpl;
 import dao.impl.BorrowDaoImpl;
+import dao.impl.ReaderDaoImpl;
 import domain.Borrow;
 
 import javax.swing.*;
@@ -24,6 +28,8 @@ public class ReturnBookFrame extends JFrame {
     JTextField bookIdText, readerIdText,bookNameText,readerNameText,lendIdText;
     JButton button;
     BorrowDao borrowDao = new BorrowDaoImpl();
+    BookDao bookDao = new BookDaoImpl();
+    ReaderDao readerDao = new ReaderDaoImpl();
     public ReturnBookFrame() {
         setLayout(null);
         this.setTitle("借阅图书");
@@ -82,15 +88,15 @@ public class ReturnBookFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
                 int bookId = parseInt(bookIdText.getText());
-                String bookName = bookNameText.getText();
                 int readerId = parseInt(readerIdText.getText());
-                String readerName = readerNameText.getText();
-                int lendId = parseInt(lendIdText.getText());
                 boolean message = borrowDao.checkBorrowState(bookId);
                 if (message) {
                     JOptionPane.showMessageDialog(null, "该图书未被借阅，归还失败！");
                 } else {
-                    borrowDao.delBorrow(bookId,bookName);
+                    borrowDao.delBorrow(bookId,readerId);
+                    String state = "在馆";
+                    bookDao.changeBookBorrow(state,bookId);
+                    readerDao.changeReaderLend(0,readerId);
                     JOptionPane.showMessageDialog(null, "归还成功！");
                     dispose();
                 }

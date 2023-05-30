@@ -199,7 +199,7 @@ public Book findBook(int bookId) {
 
 }
     @Override
-    public int changeBookBorrow(Borrow borrow){
+    public int changeBookBorrow(String state,int bookId){
         int result = 0;
 
         try {
@@ -207,11 +207,12 @@ public Book findBook(int bookId) {
             conn = JDBCUtil.getConnection();
             // 创建数据表的查询SQL语句
             String sql="UPDATE book SET"
-                    + "  state = '借阅'  WHERE bookName= ?";
+                    + "  state = ?  WHERE bookId= ?";
             // 创建查询的PreparedStatement类
             ps = conn.prepareStatement(sql);
 
-            ps.setString(1, borrow.getBookName());
+            ps.setString(1, state);
+            ps.setInt(2,bookId);
 
             result = ps.executeUpdate();
         } catch (Exception e) {
