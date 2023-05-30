@@ -75,16 +75,15 @@ public  class ReaderDaoImpl implements ReaderDao {
                     /*
                      * 参数用?表示，相当于占位符，然后在对参数进行赋值。当真正执行时，
                      * 这些参数会加载在SQL语句中，把SQL语句拼接完整才去执行。这样就会减少对数据库的操作
-                     */ + "(?,?,?,?,?);";
+                     */ + "(?,?,?,?);";
 
             // 创建查询的PreparedStatement类
             ps = conn.prepareStatement(sql);
             // 设置查询类的5个参数
             ps.setInt(1, user.getReaderId());
             ps.setString(2, user.getReaderName());
-            ps.setInt(3, user.getReaderLimit());
-            ps.setString(4, user.getReaderPassword());
-            ps.setInt(5, user.getReaderLend());
+            ps.setString(3, user.getReaderPassword());
+            ps.setInt(4, user.getReaderLend());
             // 执行查询操作
             result = ps.executeUpdate();
         } catch (Exception e) {
@@ -140,8 +139,8 @@ public  class ReaderDaoImpl implements ReaderDao {
             ps = conn.prepareStatement(sql);
             resultSet = ps.executeQuery();
             while (resultSet.next()) {
-                Reader reader = new Reader(resultSet.getInt(1), resultSet.getString(2), resultSet.getInt(3), resultSet.getString(4),
-                        resultSet.getInt(5));
+                Reader reader = new Reader(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3),
+                        resultSet.getInt(4));
                 list.add(reader);
             }
 
@@ -154,13 +153,12 @@ public  class ReaderDaoImpl implements ReaderDao {
                 e.printStackTrace();
             }
         }
-        Object[][] objects = new Object[list.size()][5];
+        Object[][] objects = new Object[list.size()][4];
         for (int i = 0; i < list.size(); i++) {
             objects[i][0] = list.get(i).getReaderId();
             objects[i][1] = list.get(i).getReaderName();
-            objects[i][2] = list.get(i).getReaderLimit();
-            objects[i][3] = list.get(i).getReaderPassword();
-            objects[i][4] = list.get(i).getReaderLend();
+            objects[i][2] = list.get(i).getReaderPassword();
+            objects[i][3] = list.get(i).getReaderLend();
         }
 
         return objects;
@@ -176,17 +174,16 @@ public  class ReaderDaoImpl implements ReaderDao {
             // 取得数据库连接
             conn = JDBCUtil.getConnection();
             // 创建数据表的查询SQL语句
-            String sql = "update reader set" + " readerName = ?, readerLimit= ?,readerPassword = ?" + ",readerLend = ? "
+            String sql = "update reader set" + " readerName = ?, readerPassword = ?" + ",readerLend = ? "
                     // 参数用?表示，相当于占位符
                     + "where readerId = ?";
             // 创建查询的PreparedStatement类
             ps = conn.prepareStatement(sql);
             // 设置查询类的5个参数
-            ps.setInt(5, user.getReaderId());
+            ps.setInt(4, user.getReaderId());
             ps.setString(1, user.getReaderName());
-            ps.setInt(2, user.getReaderLimit());
-            ps.setString(3, user.getReaderPassword());
-            ps.setInt(4, user.getReaderLend());
+            ps.setString(2, user.getReaderPassword());
+            ps.setInt(3, user.getReaderLend());
             // 执行查询操作
             result = ps.executeUpdate();
         } catch (Exception e) {
@@ -201,6 +198,7 @@ public  class ReaderDaoImpl implements ReaderDao {
     }
 
     //    查询借阅
+    @Override
     public Reader findReader(int readerId) {
         Reader reader=new Reader();
         String sql = "select * from reader where readerId=?";
@@ -212,11 +210,9 @@ public  class ReaderDaoImpl implements ReaderDao {
             HashMap map = list.get(0);
             Integer readerId0=Integer.parseInt(map.get("readerId").toString());
             String readerName=map.get("readerName").toString();
-            Integer readerLimit=Integer.parseInt(map.get("readerLimit").toString());
             String readerPassword=map.get("readerPassword").toString();
             Integer readerLend=Integer.parseInt(map.get("readerLend").toString());
             reader.setReaderName(readerName);
-            reader.setReaderLimit(readerLimit);
             reader.setReaderId(readerId0);
             reader.setReaderPassword(readerPassword);
             reader.setReaderLend(readerLend);

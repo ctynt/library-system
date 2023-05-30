@@ -9,6 +9,7 @@ package dao;
 
 
 import domain.Book;
+import domain.Borrow;
 
 public interface BookDao {
     /**
@@ -23,6 +24,8 @@ public interface BookDao {
     Object[][] getBookInfo();
 
     Book findBook(int bookId);
+
+    int changeBookBorrow(Borrow borrow);
 
     }
 

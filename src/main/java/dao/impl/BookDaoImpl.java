@@ -2,6 +2,7 @@ package dao.impl;
 
 import dao.BookDao;
 import domain.Book;
+import domain.Borrow;
 import utils.JDBCUtil;
 
 import java.sql.Connection;
@@ -199,4 +200,31 @@ public Book findBook(int bookId) {
     return book;
 
 }
+    @Override
+    public int changeBookBorrow(Borrow borrow){
+        int result = 0;
+
+        try {
+            // 取得数据库连接
+            conn = JDBCUtil.getConnection();
+            // 创建数据表的查询SQL语句
+            String sql="UPDATE book SET"
+                    + "  state = '借阅'  WHERE bookName= ?";
+            // 创建查询的PreparedStatement类
+            ps = conn.prepareStatement(sql);
+
+            ps.setString(1, borrow.getBookName());
+
+            result = ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (Exception e) {
+            }
+        }
+        return result;
+
+    }
 }

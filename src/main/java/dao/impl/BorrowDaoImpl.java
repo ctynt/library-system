@@ -31,7 +31,7 @@ public class BorrowDaoImpl implements BorrowDao {
             // 取得数据库连接
             conn = JDBCUtil.getConnection();
             // 创建数据表的查询SQL语句
-            String sql = "insert into book values "
+            String sql = "insert into borrow values "
                     // 编号、书名、作者、分类、借阅状态
 
                     /*
@@ -67,7 +67,7 @@ public class BorrowDaoImpl implements BorrowDao {
      * 删除图书信息
      */
     @Override
-    public int delBorrow(int borrowId) {
+    public int delBorrow(int borrowId,String bookName) {
         int result = 0;
         try {
             // 取得数据库连接
@@ -76,12 +76,13 @@ public class BorrowDaoImpl implements BorrowDao {
             String sql = "" +
                     "DELETE FROM borrow " +
                     // 参数用?表示，相当于占位符
-                    "WHERE borrowId = ?";
+                    "WHERE borrowId = ? AND bookName = ?";
 
             // 创建查询的PreparedStatement类
             ps = conn.prepareStatement(sql);
             // 设置查询类的1个参数
             ps.setInt(1, borrowId);
+            ps.setString(2,bookName);
             // 执行查询操作
             result = ps.executeUpdate();
         } catch (Exception e) {
@@ -165,6 +166,34 @@ public class BorrowDaoImpl implements BorrowDao {
         }
 
         return objects;
+    }
+
+    @Override
+    public Borrow findBorrow(int borrowId) {
+        Borrow borrow=new Borrow();
+        String sql = "select * from borrow where bookId=?";
+        Object[] params = {borrowId};
+        ArrayList<HashMap> list = jdbcUtil.executeQuery(sql, params);
+        System.out.println(list.size());
+        System.out.println(list);
+        if(list.size()>0){
+            HashMap map = list.get(0);
+            Integer borrowId0=Integer.parseInt(map.get("borrowId").toString());
+            Integer bookId=Integer.parseInt(map.get("bookId").toString());
+            String bookName=map.get("bookName").toString();
+            Integer readerId=Integer.parseInt(map.get("readerId").toString());
+            String readerName=map.get("readerName").toString();
+            borrow.setBorrowId(borrowId);
+            borrow.setBookId(bookId);
+            borrow.setBookName(bookName);
+            borrow.setReaderId(readerId);
+            borrow.setReaderName(readerName);
+
+            System.out.println(borrow);
+        }
+
+        return borrow;
+
     }
 
 
