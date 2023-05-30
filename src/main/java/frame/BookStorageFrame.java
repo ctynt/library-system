@@ -1,7 +1,5 @@
 package frame;
 
-import dao.BookDao;
-import dao.impl.BookDaoImpl;
 import dao.impl.BorrowDaoImpl;
 
 import javax.swing.*;
@@ -15,23 +13,23 @@ import java.util.Vector;
 /**
  * @version 1.0.0
  * @Author zhy
- * @Date 2023/5/29 8:08
+ * @Date 2023/5/30 14:19
  * @Description
  */
-public class ReaderStorageFrame extends JFrame {
-
+public class BookStorageFrame extends JFrame {
     DefaultTableModel tableModel;
+    //    Vector vector;
     JTable table;
     /*增加信息的面板*/
     JPanel panelUP;
 
-    Object[] header = {"图书编号","书名","作者","类别","状态"};
+    Object[] header = {"借阅编号","图书编号","图书名称","读者编号","读者姓名"};
 
     Object[][] data;
 
-    BookDaoImpl bookDaoImpl = new BookDaoImpl();
-    public ReaderStorageFrame(String title) {
-        super("图书借阅系统--图书信息浏览");
+    BorrowDaoImpl borrowDaoImpl = new BorrowDaoImpl();
+    public BookStorageFrame(String title) {
+        super("图书借阅服务--借阅信息");
         this.setBounds(300, 200, 850, 450);
         this.setLocationRelativeTo(null);
         this.setTitle(title);
@@ -42,7 +40,7 @@ public class ReaderStorageFrame extends JFrame {
         Vector rowData = null;
         Vector columnNames = null;
 
-        data = bookDaoImpl.getBookInfo();
+        data = borrowDaoImpl.getBorrowInfo();
         tableModel = new DefaultTableModel(data,header);
         table = new JTable(tableModel);
 //        // 创建表格
@@ -92,6 +90,7 @@ public class ReaderStorageFrame extends JFrame {
     }
 
     public static void main(String[] args) {
-        new ReaderStorageFrame("图书借阅系统--图书信息浏览");
+        new BookStorageFrame("图书借阅服务--借阅信息");
     }
+
 }

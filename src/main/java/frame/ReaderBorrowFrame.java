@@ -65,7 +65,7 @@ public class ReaderBorrowFrame extends JFrame{
         storage.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                new ReaderStorageFrame(storage.getText());
+                new BookStorageFrame(storage.getText());
                 dispose();
             }
 
