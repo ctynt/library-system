@@ -117,16 +117,6 @@ public class ReaderUserFrame extends JFrame {
             setResizable(false); // JFrame不可以改变大小
             setLocationRelativeTo(getOwner()); // JFrame打开后居中
             this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-<<<<<<< HEAD
-=======
-
-            //子窗口销毁
-            this.dispose();
-            //父窗口变可见
-            setVisible(true);
-
-
->>>>>>> 8c0a72ba9efb7d8caed42dc9846cc5805573359f
         }
 
         public void MyEvent() {
@@ -158,7 +148,6 @@ public class ReaderUserFrame extends JFrame {
 
     }
 
-<<<<<<< HEAD
     public void MyEvent() {
         // 更改密码
         update.addActionListener(new ActionListener() {
@@ -172,31 +161,6 @@ public class ReaderUserFrame extends JFrame {
         exit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-=======
-        public void MyEvent() {
-            // 更改密码
-            update.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent arg0) {
-                    new UpdatePasswordFrame();
-                }
-            });
-
-
-
-            // 退出登录
-            exit.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent arg0) {
-                    setVisible(false);
-                    new LoginFrame(getTitle());
-                }
-
-            });
-
-
-        }
->>>>>>> 8c0a72ba9efb7d8caed42dc9846cc5805573359f
 
                 System.exit(0);
             }
