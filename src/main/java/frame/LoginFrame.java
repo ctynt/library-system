@@ -117,6 +117,7 @@ public class LoginFrame extends JFrame implements ActionListener {
                     this.dispose();
                 }
 
+<<<<<<< HEAD
             } else {
                 Admin user = new Admin(parseInt(id), password);
                 message = adminDAO.checkLogin(user);
@@ -138,5 +139,40 @@ public class LoginFrame extends JFrame implements ActionListener {
     public static void main(String[] args) throws Exception {
         new LoginFrame("登录页面");
     }
+=======
+					new ReaderMainFrame();
+				}
+				else{
+					JOptionPane.showMessageDialog(null, "登录失败！");
+					this.dispose();
+					new LoginFrame(getTitle());
+				}
+
+			} else {
+				Admin user = new Admin(parseInt(id),password);
+				message = adminDAO.checkLogin(user);
+				if(message) {
+					JOptionPane.showMessageDialog(null, "登录成功！");
+					this.dispose();
+					new AdminMainFrame();
+				}
+				else{
+					JOptionPane.showMessageDialog(null, "登录失败！");
+					new LoginFrame(getTitle());
+				}
+			}
+
+		}
+
+		else if (actionCommand.equals("exit")) {
+			// 清空内存
+			System.exit(0);
+		}
+	}
+
+	public static void main(String[] args) throws Exception {
+		new LoginFrame("登录页面");
+	}
+>>>>>>> 8c0a72ba9efb7d8caed42dc9846cc5805573359f
 }
 
