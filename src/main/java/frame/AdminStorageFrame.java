@@ -247,7 +247,7 @@ public class AdminStorageFrame extends JFrame {
             setLayout(null);
             this.setTitle("删除图书");
             this.setLocationRelativeTo(null);
-            this.setBounds(300, 200, 500, 350);
+            this.setBounds(500, 230,500, 350);
 
             label = new JLabel[2];
             label[0] = new JLabel("图书编号：");
@@ -418,7 +418,7 @@ public class AdminStorageFrame extends JFrame {
             setLayout(null);
             this.setTitle("查找图书");
             this.setLocationRelativeTo(null);
-            this.setBounds(300, 200, 500, 350);
+            this.setBounds(500, 230, 500, 350);
 
             label = new JLabel[2];
             label[0] = new JLabel("图书编号：");

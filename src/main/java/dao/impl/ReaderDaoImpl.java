@@ -201,25 +201,25 @@ public  class ReaderDaoImpl implements ReaderDao {
     @Override
     public Reader findReader(int readerId) {
         Reader reader=new Reader();
-        String sql = "select * from reader where readerId=?";
+        String sql = "select * from reader where readerId = ?";
         Object[] params = {readerId};
         ArrayList<HashMap> list = jdbcUtil.executeQuery(sql, params);
         System.out.println(list.size());
         System.out.println(list);
         if(list.size()>0){
             HashMap map = list.get(0);
-            Integer readerId0=Integer.parseInt(map.get("readerId").toString());
             String readerName=map.get("readerName").toString();
             String readerPassword=map.get("readerPassword").toString();
             Integer readerLend=Integer.parseInt(map.get("readerLend").toString());
+            reader.setReaderId(readerId);
             reader.setReaderName(readerName);
-            reader.setReaderId(readerId0);
             reader.setReaderPassword(readerPassword);
             reader.setReaderLend(readerLend);
             System.out.println(reader);
         }
 
         return reader;
+
 
     }
 }

@@ -183,7 +183,7 @@ public class BorrowDaoImpl implements BorrowDao {
             String bookName=map.get("bookName").toString();
             Integer readerId=Integer.parseInt(map.get("readerId").toString());
             String readerName=map.get("readerName").toString();
-            borrow.setBorrowId(borrowId);
+            borrow.setBorrowId(borrowId0);
             borrow.setBookId(bookId);
             borrow.setBookName(bookName);
             borrow.setReaderId(readerId);

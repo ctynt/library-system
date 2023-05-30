@@ -227,7 +227,7 @@ public class AdminBorrowFrame extends JFrame {
             setLayout(null);
             this.setTitle("删除借阅信息");
             this.setLocationRelativeTo(null);
-            this.setBounds(300, 200, 500, 350);
+            this.setBounds(520, 230, 500, 350);
 
             label = new JLabel[2];
             label[0] = new JLabel("借阅编号：");
@@ -384,7 +384,7 @@ public class AdminBorrowFrame extends JFrame {
             setLayout(null);
             this.setTitle("查找借阅信息");
             this.setLocationRelativeTo(null);
-            this.setBounds(300, 200, 500, 350);
+            this.setBounds(520, 230, 500, 350);
 
             label = new JLabel[2];
             label[0] = new JLabel("借阅编号：");
