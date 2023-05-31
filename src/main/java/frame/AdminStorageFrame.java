@@ -466,7 +466,6 @@ public class AdminStorageFrame extends JFrame {
         });
 
         // 删除
-
         del.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {

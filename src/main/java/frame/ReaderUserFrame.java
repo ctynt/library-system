@@ -117,13 +117,6 @@ public class ReaderUserFrame extends JFrame {
             setResizable(false); // JFrame不可以改变大小
             setLocationRelativeTo(getOwner()); // JFrame打开后居中
             this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-
-            //子窗口销毁
-            this.dispose();
-            //父窗口变可见
-            setVisible(true);
-
         }
 
         public void MyEvent() {

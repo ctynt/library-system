@@ -32,8 +32,6 @@ public class AdminBorrowFrame extends JFrame {
     BookDao bookDao = new BookDaoImpl();
     ReaderDao readerDao = new ReaderDaoImpl();
     DefaultTableModel tableModel;
-    Vector vector;
-    JMenuBar menuBar;
     BorrowDaoImpl borrowDaoImpl = new BorrowDaoImpl();
     JButton add, del, exit, find, change;
     JTable table;

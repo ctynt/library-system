@@ -80,6 +80,14 @@ public class BorrowBookFrame extends JFrame {
         this.add(lendIdText);
 
         MyEvent();
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                new ReaderBorrowFrame("");
+                setVisible(true);
+            }
+        });
         this.dispose();//子窗口销毁
         setVisible(true);//父窗口变可见
         setResizable(false);
