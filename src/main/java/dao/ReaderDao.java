@@ -24,4 +24,6 @@ public interface ReaderDao {
 
     int changeReaderLend(int readerLend,int readerId);
 
+    boolean checkReaderBorrow(int readerId);
+
 }

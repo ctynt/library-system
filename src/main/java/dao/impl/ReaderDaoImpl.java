@@ -254,9 +254,7 @@ public  class ReaderDaoImpl implements ReaderDao {
             // 取得数据库连接
             conn = JDBCUtil.getConnection();
             // 创建数据表的查询SQL语句
-            String sql = "update reader set" + "  readerLend = ?"
-                    // 参数用?表示，相当于占位符
-                    + "where readerId = ?";
+            String sql = "UPDATE reader SET readerLend = ? WHERE readerId = ?;";
             // 创建查询的PreparedStatement类
             ps = conn.prepareStatement(sql);
             // 设置查询类的5个参数
@@ -276,6 +274,39 @@ public  class ReaderDaoImpl implements ReaderDao {
         return result;
     }
 
+    @Override
+    public boolean checkReaderBorrow(int readerId) {
+        boolean message = false;
+        try {
+            // 取得数据库连接
+            conn = JDBCUtil.getConnection();
+            // 创建数据表的查询SQL语句
+            String sql = "select * from reader where readerLend = 0 and readerId = ? ";
 
+            // 创建查询的PreparedStatement类
+            ps = conn.prepareStatement(sql);
+            // 设置查询类的2个参数
+
+            ps.setInt(1, readerId);
+            // 执行查询操作
+            resultSet = ps.executeQuery();
+            if (resultSet.next()) {
+                message = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (Exception e) {
+            }
+        }
+        return message;
+    }
 
 }
+
+
+
+
+

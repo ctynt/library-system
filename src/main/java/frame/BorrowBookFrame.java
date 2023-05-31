@@ -98,7 +98,8 @@ public class BorrowBookFrame extends JFrame {
                 String readerName = readerNameText.getText();
                 int lendId = parseInt(lendIdText.getText());
                 boolean message = borrowDao.checkBorrowState(bookId);
-                if (message) {
+                boolean message1 = readerDao.checkReaderBorrow(readerId);
+                if (message && message1) {
                     Borrow borrow = new Borrow(lendId,bookId,bookName,readerId,readerName);
                     borrowDao.addBorrow(borrow);
                     String state = "借阅";
@@ -106,8 +107,8 @@ public class BorrowBookFrame extends JFrame {
                     readerDao.changeReaderLend(bookId,readerId);
                     JOptionPane.showMessageDialog(null, "借阅成功！");
                     dispose();
-                } else {
-                    JOptionPane.showMessageDialog(null, "该图书已被借阅，借阅失败！");
+                } else  {
+                    JOptionPane.showMessageDialog(null, "该图书已被借阅或您正在借阅的书籍未归还，借阅失败！");
                 }
             }
 
