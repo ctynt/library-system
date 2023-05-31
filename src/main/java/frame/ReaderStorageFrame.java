@@ -28,7 +28,7 @@ public class ReaderStorageFrame extends JFrame {
 
     public ReaderStorageFrame(String title) {
         super("图书借阅系统--图书信息浏览");
-        this.setBounds(300, 200, 850, 450);
+        this.setBounds(300, 200, 850, 510);
         this.setLocationRelativeTo(null);
         this.setTitle(title);
         this.setLayout(new BorderLayout());
@@ -67,7 +67,7 @@ public class ReaderStorageFrame extends JFrame {
         });
         System.out.println(h);
         JScrollPane jsp = new JScrollPane(table, v, h);
-        jsp.setBounds(0, 0, 850, 400);
+        jsp.setBounds(0, 0, 850, 440);
         this.add(jsp);
         //新建表格
         tableModel = new DefaultTableModel(rowData, columnNames);

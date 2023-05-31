@@ -55,7 +55,7 @@ public class AdminBorrowFrame extends JFrame {
     Object[][] data;
 
     public AdminBorrowFrame(String title) {
-        this.setBounds(300, 200, 600, 450);
+        this.setBounds(300, 200, 600, 500);
         this.setTitle(title);
         this.setLayout(new BorderLayout());
 

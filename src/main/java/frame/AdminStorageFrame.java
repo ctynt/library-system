@@ -45,7 +45,7 @@ public class AdminStorageFrame extends JFrame {
     public AdminStorageFrame(String title) {
 
 
-        this.setBounds(300, 200, 850, 450);
+        this.setBounds(300, 200, 850, 510);
         this.setLocationRelativeTo(null);
         this.setTitle(title);
         this.setLayout(new BorderLayout());

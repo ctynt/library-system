@@ -32,7 +32,7 @@ public class BookStorageFrame extends JFrame {
 
     public BookStorageFrame(String title) {
         super("图书借阅服务--借阅信息");
-        this.setBounds(300, 200, 850, 450);
+        this.setBounds(300, 200, 850, 510);
         this.setLocationRelativeTo(null);
         this.setTitle(title);
         this.setLayout(new BorderLayout());
@@ -70,7 +70,7 @@ public class BookStorageFrame extends JFrame {
         });
         System.out.println(h);
         JScrollPane jsp = new JScrollPane(table, v, h);
-        jsp.setBounds(0, 0, 850, 400);
+        jsp.setBounds(0, 0, 850, 430);
         this.add(jsp);
         //新建表格
         tableModel = new DefaultTableModel(rowData, columnNames);

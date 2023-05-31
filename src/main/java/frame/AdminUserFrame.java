@@ -44,7 +44,7 @@ public class AdminUserFrame extends JFrame {
     ReaderDaoImpl readerDaoImpl = new ReaderDaoImpl();
 
     public AdminUserFrame(String title) {
-        this.setBounds(300, 200, 850, 450);
+        this.setBounds(300, 200, 850, 500);
         this.setLocationRelativeTo(null);
         this.setTitle(title);
         this.setLayout(new BorderLayout());
@@ -93,7 +93,7 @@ public class AdminUserFrame extends JFrame {
             }
         });
         JScrollPane jsp = new JScrollPane(table, v, h);
-        jsp.setBounds(0, 36, 850, 500);
+        jsp.setBounds(0, 36, 850, 400);
         this.add(jsp);
         //新建表格
         tableModel = new DefaultTableModel(rowData, columnNames);
