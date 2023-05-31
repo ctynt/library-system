@@ -32,7 +32,7 @@ public class ReturnBookFrame extends JFrame {
     ReaderDao readerDao = new ReaderDaoImpl();
     public ReturnBookFrame() {
         setLayout(null);
-        this.setTitle("借阅图书");
+        this.setTitle("归还图书");
         this.setLocationRelativeTo(null);
         this.setBounds(500, 230, 500, 350);
 
@@ -76,6 +76,14 @@ public class ReturnBookFrame extends JFrame {
         this.add(lendIdText);
 
         MyEvent();
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                new ReaderBorrowFrame("");
+                setVisible(true);
+            }
+        });
         this.dispose();//子窗口销毁
         setVisible(true);//父窗口变可见
         setResizable(false);
