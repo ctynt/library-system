@@ -3,6 +3,8 @@ package frame;
 
 import dao.ReaderDao;
 import dao.impl.ReaderDaoImpl;
+import domain.Reader;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -20,11 +22,13 @@ import static java.lang.Integer.parseInt;
 public class ReaderUserFrame extends JFrame {
     JButton update, exit;
     private JPanel contentPane;
-    private JLabel nameLabel = new JLabel();
-    private JLabel passwordLabel = new JLabel();
+    private JLabel idLabel = new JLabel();
+    private JLabel oldPasswordLabel = new JLabel();
+    private JLabel newPasswordLabel = new JLabel();
     private JLabel userCategoryLabel = new JLabel();
-    private JTextField nameTextField = new JTextField();
-    private JPasswordField passwordField = new JPasswordField();
+    private JTextField idTextField = new JTextField();
+    private JPasswordField oldPasswordField = new JPasswordField();
+    private JPasswordField newPasswordField = new JPasswordField();
     private JButton checkBtn = new JButton();
     private JButton exitBtn = new JButton();
 
@@ -87,14 +91,20 @@ public class ReaderUserFrame extends JFrame {
             this.setSize(new Dimension(400, 330));
             this.setTitle("修改密码");
             // 定义标签的标题、字符大小和位置
-            nameLabel.setText("读者编号：");
-            nameLabel.setBounds(new Rectangle(65, 67, 81, 16));
+            idLabel.setText("读者编号：");
+            idLabel.setBounds(new Rectangle(65, 67, 81, 16));
 
-            passwordLabel.setText("新密码：");
-            passwordLabel.setBounds(new Rectangle(65, 112, 79, 16));
+            oldPasswordLabel.setText("原密码：");
+            oldPasswordLabel.setBounds(new Rectangle(65, 112, 81, 16));
+
+            newPasswordLabel.setText("新密码：");
+            newPasswordLabel.setBounds(new Rectangle(65,157,81,16));
+
+
             // 定义编辑框的位置
-            nameTextField.setBounds(new Rectangle(194, 67, 118, 22));
-            passwordField.setBounds(new Rectangle(194, 112, 118, 22));
+            idTextField.setBounds(new Rectangle(194, 67, 118, 22));
+            oldPasswordField.setBounds(new Rectangle(194, 112, 118, 22));
+            newPasswordField.setBounds(new Rectangle(194,157,118,22));
             // 定义按钮的标题、动作字符串、字符大小、位置和加入动作接收器
             checkBtn.setText("确定");
             checkBtn.setFont(new Font("Dialog", 0, 15));
@@ -104,11 +114,13 @@ public class ReaderUserFrame extends JFrame {
             exitBtn.setFont(new Font("Dialog", 0, 15));
             exitBtn.setBounds(new Rectangle(203, 204, 109, 25));
             // 为面板加入各个控件
-            contentPane.add(nameLabel, null);
-            contentPane.add(nameTextField, null);
-            contentPane.add(passwordLabel, null);
-            contentPane.add(passwordField, null);
-            contentPane.add(userCategoryLabel, null);
+            contentPane.add(idLabel, null);
+            contentPane.add(oldPasswordLabel, null);
+            contentPane.add(newPasswordLabel, null);
+
+            contentPane.add(idTextField, null);
+            contentPane.add(oldPasswordField,null);
+            contentPane.add(newPasswordField,null);
             contentPane.add(stateComboBox, null);
             contentPane.add(checkBtn, null);
             contentPane.add(exitBtn, null);
@@ -124,15 +136,23 @@ public class ReaderUserFrame extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     // TODO Auto-generated method stub
-                    int readerId = parseInt(nameTextField.getText());
-                    String readerPassword = passwordField.getText();
-                    int i = readerDao.changeReaderPassword(readerId, readerPassword);
-                    if (i > 0) {
-                        JOptionPane.showMessageDialog(null, "修改成功！");
-                        dispose();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "修改失败！该用户可能不存在");
+                    int readerId = parseInt(idTextField.getText());
+                    String readerPassword = newPasswordField.getText();
+                    String readerPassword1 = oldPasswordField.getText();
+                    Reader user = new Reader(readerId,readerPassword1);
+                    boolean message = readerDao.checkLogin(user);
+                    if(message){
+                        int i = readerDao.changeReaderPassword(readerId, readerPassword);
+                        if (i > 0) {
+                            JOptionPane.showMessageDialog(null, "修改成功！");
+                            dispose();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "修改失败！该用户可能不存在");
+                        }
+                    } else{
+                        JOptionPane.showMessageDialog(null,"修改失败，原密码错误，请重新输入！");
                     }
+
                 }
             });
 
