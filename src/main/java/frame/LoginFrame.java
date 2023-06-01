@@ -115,6 +115,7 @@ public class LoginFrame extends JFrame implements ActionListener {
                 } else {
                     JOptionPane.showMessageDialog(null, "登录失败！");
                     this.dispose();
+                    new LoginFrame(getTitle());
                 }
             } else {
                 Admin user = new Admin(parseInt(id), password);
@@ -126,6 +127,7 @@ public class LoginFrame extends JFrame implements ActionListener {
                 } else {
                     JOptionPane.showMessageDialog(null, "登录失败！");
                     this.dispose();
+                    new LoginFrame(getTitle());
                 }
             }
         } else if (actionCommand.equals("exit")) {
