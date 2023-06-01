@@ -141,7 +141,7 @@ public class AdminStorageFrame extends JFrame {
             idText = new JTextField(10);
             nameText = new JTextField(10);
             authorText = new JTextField(10);
-            String[] types = {"外国文学", "哲学", "历史", "中国文学"};
+            String[] types = {"外国文学", "哲学", "历史", "中国文学","法律","",};
 
             typeBox = new JComboBox(types);
             cg = new CheckboxGroup();

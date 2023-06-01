@@ -43,7 +43,7 @@ public class LoginFrame extends JFrame implements ActionListener {
         this.setSize(new Dimension(400, 330));
         this.setTitle("用户登录");
         // 定义标签的标题、字符大小和位置
-        nameLabel.setText("用户名：");
+        nameLabel.setText("用户编号：");
         nameLabel.setFont(new Font("Dialog", 0, 15));
         nameLabel.setBounds(new Rectangle(65, 67, 81, 16));
         passwordLabel.setText("密码：");
