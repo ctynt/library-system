@@ -96,12 +96,14 @@ public class ReturnBookFrame extends JFrame {
                 boolean message = borrowDao.checkBorrowState(bookId);
                 if (message) {
                     JOptionPane.showMessageDialog(null, "该图书未被借阅，归还失败！");
+
                 } else {
                     borrowDao.delBorrow(bookId,readerId);
                     String state = "在馆";
                     bookDao.changeBookBorrow(state,bookId);
                     readerDao.changeReaderLend(0,readerId);
                     JOptionPane.showMessageDialog(null, "归还成功！");
+                    new ReaderBorrowFrame(getTitle());
                     dispose();
                 }
             }

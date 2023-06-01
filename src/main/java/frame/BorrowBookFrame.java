@@ -114,9 +114,11 @@ public class BorrowBookFrame extends JFrame {
                     bookDao.changeBookBorrow(state,bookId);
                     readerDao.changeReaderLend(bookId,readerId);
                     JOptionPane.showMessageDialog(null, "借阅成功！");
+                    new ReaderBorrowFrame(getTitle());
                     dispose();
                 } else  {
                     JOptionPane.showMessageDialog(null, "该图书已被借阅或您正在借阅的书籍未归还，借阅失败！");
+
                 }
             }
 
