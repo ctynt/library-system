@@ -6,15 +6,12 @@ import dao.ReaderDao;
 import dao.impl.BookDaoImpl;
 import dao.impl.BorrowDaoImpl;
 import dao.impl.ReaderDaoImpl;
-import domain.Borrow;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
 import static java.lang.Integer.parseInt;
 
 /**
@@ -58,7 +55,6 @@ public class ReturnBookFrame extends JFrame {
         readerNameText .setBounds(new Rectangle(210, 125, 140, 20));
         lendIdText = new JTextField(10);
         lendIdText .setBounds(new Rectangle(210, 155, 140, 20));
-
         button = new JButton("OK");
         button.setBounds(new Rectangle(230, 185, 100, 20));
 
